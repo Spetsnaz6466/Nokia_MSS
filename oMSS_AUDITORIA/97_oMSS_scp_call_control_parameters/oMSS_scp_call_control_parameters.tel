@@ -1,0 +1,202 @@
+function oMSS_scp_call_control_parameters()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR,TEMP[],temp;
+  integer handle,x,y;  
+  
+  Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="scp_call_control_parameters";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);  fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); //logenable(LOG_ENABLE_RX | LOG_ENABLE_SYSPRINT);
+ 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR);  
+  
+  tx("ZCPI:SCP:NCCP=DEFAULT;");  
+
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+string function LSI(integer x)
+  string LSI[];
+  
+  LSI[1]="IU064";
+  LSI[2]="IU164";
+  LSI[3]="IU264";
+  LSI[4]="IU364";
+  LSI[5]="IU464";
+  LSI[6]="IU564";
+  LSI[7]="IU664";
+  LSI[8]="IU764";
+  LSI[9]="IU864";
+  LSI[10]="IU964";
+  
+  return LSI[x];
+
+endfunction
+
+string function ZOFK(integer x)
+  string LSI[];
+  
+  LSI[1]="ZOFK:IU064,ACM,:;";
+LSI[2]="ZOFK:IU064,ANM,:;";
+LSI[3]="ZOFK:IU064,CON,:;";
+LSI[4]="ZOFK:IU064,CPG,:;";
+LSI[5]="ZOFK:IU064,FAA,:;";
+LSI[6]="ZOFK:IU064,FAR,:;";
+LSI[7]="ZOFK:IU064,IAM,:;";
+LSI[8]="ZOFK:IU064,INF,:;";
+LSI[9]="ZOFK:IU064,INR,:;";
+LSI[10]="ZOFK:IU064,REL,:;";
+LSI[11]="ZOFK:IU064,RES,:;";
+LSI[12]="ZOFK:IU064,SUS,:;";
+LSI[13]="ZOFK:IU064,USR,:;";
+LSI[14]="ZOFK:IU164,ACM,:;";
+LSI[15]="ZOFK:IU164,ANM,:;";
+LSI[16]="ZOFK:IU164,CON,:;";
+LSI[17]="ZOFK:IU164,CPG,:;";
+LSI[18]="ZOFK:IU164,FAA,:;";
+LSI[19]="ZOFK:IU164,FAR,:;";
+LSI[20]="ZOFK:IU164,IAM,:;";
+LSI[21]="ZOFK:IU164,INF,:;";
+LSI[22]="ZOFK:IU164,INR,:;";
+LSI[23]="ZOFK:IU164,REL,:;";
+LSI[24]="ZOFK:IU164,RES,:;";
+LSI[25]="ZOFK:IU164,SUS,:;";
+LSI[26]="ZOFK:IU164,USR,:;";
+LSI[27]="ZOFK:IU264,ACM,:;";
+LSI[28]="ZOFK:IU264,ANM,:;";
+LSI[29]="ZOFK:IU264,CON,:;";
+LSI[30]="ZOFK:IU264,CPG,:;";
+LSI[31]="ZOFK:IU264,IAM,:;";
+LSI[32]="ZOFK:IU264,INF,:;";
+LSI[33]="ZOFK:IU264,INR,:;";
+LSI[34]="ZOFK:IU264,REL,:;";
+LSI[35]="ZOFK:IU264,RES,:;";
+LSI[36]="ZOFK:IU264,SUS,:;";
+LSI[37]="ZOFK:IU264,USR,:;";
+LSI[38]="ZOFK:IU364,ACM,:;";
+LSI[39]="ZOFK:IU364,ANM,:;";
+LSI[40]="ZOFK:IU364,CON,:;";
+LSI[41]="ZOFK:IU364,CPG,:;";
+LSI[42]="ZOFK:IU364,FAA,:;";
+LSI[43]="ZOFK:IU364,FAR,:;";
+LSI[44]="ZOFK:IU364,IAM,:;";
+LSI[45]="ZOFK:IU364,INF,:;";
+LSI[46]="ZOFK:IU364,INR,:;";
+LSI[47]="ZOFK:IU364,REL,:;";
+LSI[48]="ZOFK:IU364,RES,:;";
+LSI[49]="ZOFK:IU364,SUS,:;";
+LSI[50]="ZOFK:IU364,USR,:;";
+LSI[51]="ZOFK:IU464,ACM,:;";
+LSI[52]="ZOFK:IU464,ANM,:;";
+LSI[53]="ZOFK:IU464,CON,:;";
+LSI[54]="ZOFK:IU464,CPG,:;";
+LSI[55]="ZOFK:IU464,IAM,:;";
+LSI[56]="ZOFK:IU464,INF,:;";
+LSI[57]="ZOFK:IU464,INR,:;";
+LSI[58]="ZOFK:IU464,REL,:;";
+LSI[59]="ZOFK:IU464,RES,:;";
+LSI[60]="ZOFK:IU464,SUS,:;";
+LSI[61]="ZOFK:IU464,USR,:;";
+LSI[62]="ZOFK:IU564,ACM,:;";
+LSI[63]="ZOFK:IU564,ANM,:;";
+LSI[64]="ZOFK:IU564,CON,:;";
+LSI[65]="ZOFK:IU564,CPG,:;";
+LSI[66]="ZOFK:IU564,FAA,:;";
+LSI[67]="ZOFK:IU564,FAR,:;";
+LSI[68]="ZOFK:IU564,IAM,:;";
+LSI[69]="ZOFK:IU564,INF,:;";
+LSI[70]="ZOFK:IU564,INR,:;";
+LSI[71]="ZOFK:IU564,REL,:;";
+LSI[72]="ZOFK:IU564,RES,:;";
+LSI[73]="ZOFK:IU564,SUS,:;";
+LSI[74]="ZOFK:IU564,USR,:;";
+LSI[75]="ZOFK:IU664,ACM,:;";
+LSI[76]="ZOFK:IU664,ANM,:;";
+LSI[77]="ZOFK:IU664,CON,:;";
+LSI[78]="ZOFK:IU664,CPG,:;";
+LSI[79]="ZOFK:IU664,FAA,:;";
+LSI[80]="ZOFK:IU664,FAC,:;";
+LSI[81]="ZOFK:IU664,FAR,:;";
+LSI[82]="ZOFK:IU664,IAM,:;";
+LSI[83]="ZOFK:IU664,IDR,:;";
+LSI[84]="ZOFK:IU664,INF,:;";
+LSI[85]="ZOFK:IU664,INR,:;";
+LSI[86]="ZOFK:IU664,IRS,:;";
+LSI[87]="ZOFK:IU664,REL,:;";
+LSI[88]="ZOFK:IU664,RES,:;";
+LSI[89]="ZOFK:IU664,SUS,:;";
+LSI[90]="ZOFK:IU664,USR,:;";
+LSI[91]="ZOFK:IU764,ACM,:;";
+LSI[92]="ZOFK:IU764,ANM,:;";
+LSI[93]="ZOFK:IU764,CON,:;";
+LSI[94]="ZOFK:IU764,CPG,:;";
+LSI[95]="ZOFK:IU764,FAA,:;";
+LSI[96]="ZOFK:IU764,FAC,:;";
+LSI[97]="ZOFK:IU764,FAR,:;";
+LSI[98]="ZOFK:IU764,IAM,:;";
+LSI[99]="ZOFK:IU764,IDR,:;";
+LSI[100]="ZOFK:IU764,INF,:;";
+LSI[101]="ZOFK:IU764,INR,:;";
+LSI[102]="ZOFK:IU764,IRS,:;";
+LSI[103]="ZOFK:IU764,REL,:;";
+LSI[104]="ZOFK:IU764,RES,:;";
+LSI[105]="ZOFK:IU764,SUS,:;";
+LSI[106]="ZOFK:IU764,USR,:;";
+LSI[107]="ZOFK:IU864,ACM,:;";
+LSI[108]="ZOFK:IU864,ANM,:;";
+LSI[109]="ZOFK:IU864,CON,:;";
+LSI[110]="ZOFK:IU864,CPG,:;";
+LSI[111]="ZOFK:IU864,FAA,:;";
+LSI[112]="ZOFK:IU864,FAC,:;";
+LSI[113]="ZOFK:IU864,FAR,:;";
+LSI[114]="ZOFK:IU864,IAM,:;";
+LSI[115]="ZOFK:IU864,IDR,:;";
+LSI[116]="ZOFK:IU864,INF,:;";
+LSI[117]="ZOFK:IU864,INR,:;";
+LSI[118]="ZOFK:IU864,IRS,:;";
+LSI[119]="ZOFK:IU864,REL,:;";
+LSI[120]="ZOFK:IU864,RES,:;";
+LSI[121]="ZOFK:IU864,SUS,:;";
+LSI[122]="ZOFK:IU864,USR,:;";
+LSI[123]="ZOFK:IU964,ACM,:;";
+LSI[124]="ZOFK:IU964,ANM,:;";
+LSI[125]="ZOFK:IU964,CON,:;";
+LSI[126]="ZOFK:IU964,CPG,:;";
+LSI[127]="ZOFK:IU964,FAA,:;";
+LSI[128]="ZOFK:IU964,FAC,:;";
+LSI[129]="ZOFK:IU964,FAR,:;";
+LSI[130]="ZOFK:IU964,IAM,:;";
+LSI[131]="ZOFK:IU964,IDR,:;";
+LSI[132]="ZOFK:IU964,INF,:;";
+LSI[133]="ZOFK:IU964,INR,:;";
+LSI[134]="ZOFK:IU964,IRS,:;";
+LSI[135]="ZOFK:IU964,REL,:;";
+LSI[136]="ZOFK:IU964,RES,:;";
+LSI[137]="ZOFK:IU964,SUS,:;";
+LSI[138]="ZOFK:IU964,USR,:;";
+
+  
+  return LSI[x];
+
+endfunction

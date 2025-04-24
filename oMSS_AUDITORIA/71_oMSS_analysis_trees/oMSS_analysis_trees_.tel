@@ -1,0 +1,262 @@
+function oMSS_analysis_trees()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR,TEMP[],TREE[],TON[];
+  string DIG[],filename2;
+  integer handle,handle2,x,y,z,z0,z1;  
+  
+  Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="analysis_trees";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE;"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);  fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  filename2= "oMSS_" + VAR + "_" + Tel + "_RESULTADOS_" + PCTime + "_.TXT" ; 
+  handle2 = fileopen(filename2,NEW);  //fileclose(handle); 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR); 
+  
+  y=198; z=0; z1=0;
+  for(x=1; x<=y; x++)
+    TEMP[x]=MML0(x);
+    TEMP[x]=strreplace(TEMP[x],"-"," "); 
+    strscan(TEMP[x],"%s %s",TREE[x],TON[x]);
+    //TEMP[x]="ZRII:TREE="+TREE[x]+",TON="+TON[x]+",ATYPE=N"+";";
+    TEMP[x]="ZRIH:TREE="+TREE[x]+",TON="+TON[x]+";";
+    tx(TEMP[x]);
+      while(getline(line,"'      0 '")) z++;
+       strscan(line,"%s",DIG[z]);
+      endwhile
+    for(z0=1; z0<=z; z0++) 
+      fileprint(handle2,"TREE %s TON: %s ATYPE=N DIG: %s\n",TREE[x],TON[x],DIG[z0]);
+    endfor
+    print("TREE %s TON: %s ATYPE=N tiene %d \n",TREE[x],TON[x],z); 
+    z1=z1+z; z=0;
+  endfor  
+  fileclose(handle2); 
+  print("Encontrados %d Comandos\n",z1); //z=0;
+  print("FIN!!!!");
+ 
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+string function MML0(integer x)
+  string TREE[],TON[];
+
+TREE[1]="2"; TON[1]="INT";
+TREE[2]="2"; TON[2]="NAT";
+TREE[3]="2"; TON[3]="SUB";
+TREE[4]="30"; TON[4]="NAT";
+TREE[5]="40"; TON[5]="INT";
+TREE[6]="40"; TON[6]="NAT";
+TREE[7]="40"; TON[7]="SUB";
+TREE[8]="40"; TON[8]="NET";
+TREE[9]="40"; TON[9]="CON";
+TREE[10]="40"; TON[10]="POR";
+TREE[11]="48"; TON[11]="UNK";
+TREE[12]="49"; TON[12]="NAT";
+TREE[13]="50"; TON[13]="INT";
+TREE[14]="50"; TON[14]="NAT";
+TREE[15]="51"; TON[15]="INT";
+TREE[16]="51"; TON[16]="NAT";
+TREE[17]="52"; TON[17]="INT";
+TREE[18]="52"; TON[18]="NAT";
+TREE[19]="52"; TON[19]="SUB";
+TREE[20]="60"; TON[20]="NAT";
+TREE[21]="60"; TON[21]="NET";
+TREE[22]="70"; TON[22]="NAT";
+TREE[23]="86"; TON[23]="NAT";
+TREE[24]="90"; TON[24]="INT";
+TREE[25]="90"; TON[25]="NAT";
+TREE[26]="90"; TON[26]="SUB";
+TREE[27]="90"; TON[27]="NET";
+TREE[28]="90"; TON[28]="CON";
+TREE[29]="95"; TON[29]="NAT";
+TREE[30]="110"; TON[30]="INT";
+TREE[31]="110"; TON[31]="NAT";
+TREE[32]="110"; TON[32]="SUB";
+TREE[33]="110"; TON[33]="NET";
+TREE[34]="120"; TON[34]="INT";
+TREE[35]="120"; TON[35]="NAT";
+TREE[36]="120"; TON[36]="SUB";
+TREE[37]="120"; TON[37]="NET";
+TREE[38]="123"; TON[38]="INT";
+TREE[39]="123"; TON[39]="NAT";
+TREE[40]="123"; TON[40]="SUB";
+TREE[41]="129"; TON[41]="INT";
+TREE[42]="129"; TON[42]="NAT";
+TREE[43]="129"; TON[43]="SUB";
+TREE[44]="129"; TON[44]="NET";
+TREE[45]="130"; TON[45]="INT";
+TREE[46]="130"; TON[46]="NAT";
+TREE[47]="130"; TON[47]="SUB";
+TREE[48]="130"; TON[48]="NET";
+TREE[49]="140"; TON[49]="INT";
+TREE[50]="140"; TON[50]="NAT";
+TREE[51]="140"; TON[51]="SUB";
+TREE[52]="140"; TON[52]="NET";
+TREE[53]="143"; TON[53]="INT";
+TREE[54]="143"; TON[54]="NAT";
+TREE[55]="143"; TON[55]="SUB";
+TREE[56]="143"; TON[56]="NET";
+TREE[57]="150"; TON[57]="INT";
+TREE[58]="150"; TON[58]="NAT";
+TREE[59]="150"; TON[59]="SUB";
+TREE[60]="150"; TON[60]="NET";
+TREE[61]="153"; TON[61]="INT";
+TREE[62]="153"; TON[62]="NAT";
+TREE[63]="153"; TON[63]="SUB";
+TREE[64]="153"; TON[64]="NET";
+TREE[65]="156"; TON[65]="INT";
+TREE[66]="156"; TON[66]="NAT";
+TREE[67]="156"; TON[67]="SUB";
+TREE[68]="156"; TON[68]="NET";
+TREE[69]="157"; TON[69]="NAT";
+TREE[70]="157"; TON[70]="SUB";
+TREE[71]="160"; TON[71]="INT";
+TREE[72]="160"; TON[72]="NAT";
+TREE[73]="160"; TON[73]="SUB";
+TREE[74]="160"; TON[74]="NET";
+TREE[75]="163"; TON[75]="INT";
+TREE[76]="163"; TON[76]="NAT";
+TREE[77]="163"; TON[77]="SUB";
+TREE[78]="163"; TON[78]="NET";
+TREE[79]="164"; TON[79]="SUB";
+TREE[80]="166"; TON[80]="INT";
+TREE[81]="166"; TON[81]="NAT";
+TREE[82]="166"; TON[82]="SUB";
+TREE[83]="166"; TON[83]="NET";
+TREE[84]="169"; TON[84]="INT";
+TREE[85]="169"; TON[85]="NAT";
+TREE[86]="169"; TON[86]="SUB";
+TREE[87]="169"; TON[87]="NET";
+TREE[88]="170"; TON[88]="INT";
+TREE[89]="170"; TON[89]="NAT";
+TREE[90]="170"; TON[90]="SUB";
+TREE[91]="170"; TON[91]="NET";
+TREE[92]="171"; TON[92]="INT";
+TREE[93]="171"; TON[93]="NAT";
+TREE[94]="171"; TON[94]="SUB";
+TREE[95]="171"; TON[95]="NET";
+TREE[96]="173"; TON[96]="INT";
+TREE[97]="173"; TON[97]="NAT";
+TREE[98]="173"; TON[98]="SUB";
+TREE[99]="173"; TON[99]="NET";
+TREE[100]="180"; TON[100]="INT";
+TREE[101]="180"; TON[101]="NAT";
+TREE[102]="180"; TON[102]="SUB";
+TREE[103]="180"; TON[103]="NET";
+TREE[104]="189"; TON[104]="SUB";
+TREE[105]="190"; TON[105]="INT";
+TREE[106]="190"; TON[106]="NAT";
+TREE[107]="190"; TON[107]="SUB";
+TREE[108]="190"; TON[108]="NET";
+TREE[109]="193"; TON[109]="INT";
+TREE[110]="193"; TON[110]="NAT";
+TREE[111]="193"; TON[111]="SUB";
+TREE[112]="193"; TON[112]="NET";
+TREE[113]="196"; TON[113]="INT";
+TREE[114]="196"; TON[114]="NAT";
+TREE[115]="196"; TON[115]="SUB";
+TREE[116]="196"; TON[116]="NET";
+TREE[117]="197"; TON[117]="INT";
+TREE[118]="197"; TON[118]="NAT";
+TREE[119]="197"; TON[119]="SUB";
+TREE[120]="197"; TON[120]="NET";
+TREE[121]="199"; TON[121]="NAT";
+TREE[122]="199"; TON[122]="SUB";
+TREE[123]="200"; TON[123]="INT";
+TREE[124]="200"; TON[124]="NAT";
+TREE[125]="200"; TON[125]="SUB";
+TREE[126]="200"; TON[126]="NET";
+TREE[127]="210"; TON[127]="INT";
+TREE[128]="210"; TON[128]="NAT";
+TREE[129]="210"; TON[129]="SUB";
+TREE[130]="210"; TON[130]="NET";
+TREE[131]="211"; TON[131]="INT";
+TREE[132]="211"; TON[132]="NAT";
+TREE[133]="211"; TON[133]="SUB";
+TREE[134]="212"; TON[134]="INT";
+TREE[135]="212"; TON[135]="NAT";
+TREE[136]="212"; TON[136]="SUB";
+TREE[137]="213"; TON[137]="NAT";
+TREE[138]="214"; TON[138]="INT";
+TREE[139]="214"; TON[139]="NAT";
+TREE[140]="214"; TON[140]="SUB";
+TREE[141]="215"; TON[141]="NAT";
+TREE[142]="217"; TON[142]="INT";
+TREE[143]="217"; TON[143]="NAT";
+TREE[144]="217"; TON[144]="SUB";
+TREE[145]="219"; TON[145]="NAT";
+TREE[146]="220"; TON[146]="INT";
+TREE[147]="251"; TON[147]="NAT";
+TREE[148]="252"; TON[148]="CON";
+TREE[149]="253"; TON[149]="CON";
+TREE[150]="301"; TON[150]="NAT";
+TREE[151]="302"; TON[151]="NAT";
+TREE[152]="302"; TON[152]="SUB";
+TREE[153]="302"; TON[153]="UNK";
+TREE[154]="303"; TON[154]="NAT";
+TREE[155]="303"; TON[155]="UNK";
+TREE[156]="304"; TON[156]="INT";
+TREE[157]="304"; TON[157]="NAT";
+TREE[158]="304"; TON[158]="SUB";
+TREE[159]="305"; TON[159]="INT";
+TREE[160]="305"; TON[160]="NAT";
+TREE[161]="305"; TON[161]="SUB";
+TREE[162]="306"; TON[162]="INT";
+TREE[163]="400"; TON[163]="NAT";
+TREE[164]="401"; TON[164]="NAT";
+TREE[165]="402"; TON[165]="NAT";
+TREE[166]="403"; TON[166]="NAT";
+TREE[167]="404"; TON[167]="NAT";
+TREE[168]="405"; TON[168]="NAT";
+TREE[169]="406"; TON[169]="NAT";
+TREE[170]="406"; TON[170]="SUB";
+TREE[171]="407"; TON[171]="NAT";
+TREE[172]="410"; TON[172]="NAT";
+TREE[173]="500"; TON[173]="NAT";
+TREE[174]="501"; TON[174]="INT";
+TREE[175]="501"; TON[175]="NAT";
+TREE[176]="501"; TON[176]="SUB";
+TREE[177]="502"; TON[177]="NAT";
+TREE[178]="503"; TON[178]="INT";
+TREE[179]="503"; TON[179]="NAT";
+TREE[180]="504"; TON[180]="INT";
+TREE[181]="504"; TON[181]="NAT";
+TREE[182]="504"; TON[182]="NET";
+TREE[183]="505"; TON[183]="INT";
+TREE[184]="505"; TON[184]="NAT";
+TREE[185]="506"; TON[185]="INT";
+TREE[186]="506"; TON[186]="NAT";
+TREE[187]="508"; TON[187]="NAT";
+TREE[188]="508"; TON[188]="SUB";
+TREE[189]="509"; TON[189]="NAT";
+TREE[190]="555"; TON[190]="INT";
+TREE[191]="555"; TON[191]="NAT";
+TREE[192]="596"; TON[192]="SUB";
+TREE[193]="608"; TON[193]="SUB";
+TREE[194]="708"; TON[194]="SUB";
+TREE[195]="718"; TON[195]="SUB";
+TREE[196]="1003"; TON[196]="NAT";
+TREE[197]="1110"; TON[197]="INT";
+TREE[198]="1216"; TON[198]="NAT";
+
+return TREE[x]+"-"+TON[x];
+endfunction

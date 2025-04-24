@@ -1,0 +1,182 @@
+function oMSS_SUM_Clone_Users()
+ string Tel;
+ 
+  
+ //pause(0,"Esta macro pertenece a Juan Castillo, solicitar su uso"); 
+ //pause(0,"Before executing this macro Login in");
+ Tel="MSSARA02"; ask(Tel,"INGRESE oMSS a Clonar sus user's ? "); Tel=strupper(Tel); 
+ 
+/*################
+  # o'MSS ORIGEN #
+  ################*/
+ device(Tel);
+ if(sniff())
+   TEXT_IN_COLOR("violet",Tel+ " " +"ACCESO OK\n") ;
+   Log_Resultados(Tel); 
+   oMSS_Profiles();
+   //tx("ZIAI:PROFILE=%s:COM;",PROFILES[1]);
+ else
+   TEXT_IN_COLOR("violet",Tel+ " " +"SIN ACCESO") ;
+ endif  
+ 
+endfunction
+
+/*########################
+  # FUNCIONES - NO TOCAR #
+  ########################*/
+
+void function Log_Resultados(string Tel)
+ string PCTime,filename,A,B;
+ integer handle;
+ PCTime = getpctime(1); strscan(PCTime,"%s %s",A,B);  print("INICIO DE MACRO PARA %s: %s\n",Tel,PCTime); 
+ B=strreplace(B,":","-"); PCTime = A + "_" + B;    
+ filename= "oMSS_SUM_Clone_Users_from_" + Tel + PCTime + "_.TXT" ; 
+ handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+endfunction 
+   
+void function TEXT_IN_COLOR(string color, string Phrase)  
+ if(color == "red") settextcolor(RGB(255,0,0));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+   elseif(color == "blue") settextcolor(RGB(0,0,255));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "violet") settextcolor(RGB(120,0,155));
+   elseif(color == "black")  settextcolor(RGB(0,0,0));   
+ endif
+ print("%s",Phrase); settextcolor(RGB(0,0,0));
+endfunction
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+string function PHRASE(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction
+
+string function USUARIOS(string line,string FRASE)
+  print("fffff");
+  FRASE=strreplace(line,FRASE,""); //strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction
+
+string function PERMISOS(string line,string FRASE,string FRASE1,string FRASE2,string FRASE3,string FRASE4,string FRASE5,string FRASE6,string FRASE7,string FRASE8,string FRASE9,string FRASE10)
+  line=strreplace(line,FRASE," ");  line=strreplace(line,FRASE1," "); line=strreplace(line,FRASE2," ");
+  line=strreplace(line,FRASE3," "); line=strreplace(line,FRASE4," "); line=strreplace(line,FRASE5," ");
+  line=strreplace(line,FRASE6," "); line=strreplace(line,FRASE7," "); line=strreplace(line,FRASE8," ");
+  line=strreplace(line,FRASE9," "); line=strreplace(line,FRASE10," ");
+  return line;
+endfunction
+
+void function oMSS_Profiles()
+ string PROFA[],PROFB[],PROFC[],PROFD[],PROFE[],PROFF[],PROFG[],PROFH[],PROFI[];
+ string PROFJ[],PROFK[],PROFL[],PROFM[],PROFN[],PROFO[],PROFP[],PROFQ[],PROFR[];
+ string PROFS[],PROFT[],PROFU[],PROFV[],PROFW[],PROFX[],PROFY[],MML;
+ string line,VTIME[],MINVTIME[],ACCESS[],TLIMIT[],FTP[],FTP_ACC[],FTP_WRI[];
+ string PROFILES[],ll=", ",USER1[],USER2[],USER3[],PHRASE;
+ integer x=0,y,m,n;
+ 
+ LOG_SQUARE("blue","PROFILE");
+ tx("ZIAI:PROFILE=ALL:COM:;"); 
+   while(getline(line,"'PROFILE NAME: '")) x++;
+     PROFILES[x]=PHRASE(line,"PROFILE NAME: ");
+   endwhile y=x;
+    for(x=1;x<=y;x++)
+     print("ZIAI:PROFILE=%s:COM;\n",PROFILES[x]); // Crea los profiles con nivel de 250
+   endfor
+   for(x=1;x<=y;x++)
+     print("ZIAA:%s:ALL=250:;\n",PROFILES[x]); // Crea los profiles con nivel de 250
+   endfor
+   
+   for(x=2;x<=y;x++)
+    print("\n*%d/%d PROFILE: %s\n",x,y,PROFILES[x]);
+    print("ZIAI:PROFILE=%s:COM:;\n",PROFILES[x]);
+    tx("ZIAI:PROFILE=%s:COM:;",PROFILES[x]);
+      while(getline(line))
+        if(getline(line,"'A='"))
+          line=PERMISOS(line,"=","A","B","C","D","E","F","G","H","I","J");
+          strscan(line,"%s %s %s %s %s %s %s %s %s %s ",PROFA[x],PROFB[x],PROFC[x],PROFD[x],PROFE[x],PROFF[x],PROFG[x],PROFH[x],PROFI[x],PROFJ[x]);  //print("%s %s %s %s %s %s %s %s %s %s\n",PROFA[x],PROFB[x],PROFC[x],PROFD[x],PROFE[x],PROFF[x],PROFG[x],PROFH[x],PROFI[x],PROFJ[x]);
+          MML="ZIAA:" + PROFILES[x] + ":" + "A=" + PROFA[x] + ",B="+PROFB[x] + ",C=" + PROFC[x] + ",D="+PROFD[x] + ",E=" + PROFE[x] + ",F="+PROFF[x] + ",G="+PROFG[x] + ",H="+PROFH[x] + ",I="+PROFI[x] + ",J="+PROFJ[x] + ";";
+          print("%s\n",MML);
+        endif      
+        if(getline(line,"'K='"))
+          line=PERMISOS(line,"=","K","L","M","N","O","P","Q","R","S","T");
+          strscan(line,"%s %s %s %s %s %s %s %s %s %s ",PROFK[x],PROFL[x],PROFM[x],PROFN[x],PROFO[x],PROFP[x],PROFQ[x],PROFR[x],PROFS[x],PROFT[x]);   //print("%s %s %s %s %s %s %s %s %s %s\n",PROFK[x],PROFL[x],PROFM[x],PROFN[x],PROFO[x],PROFP[x],PROFQ[x],PROFR[x],PROFS[x],PROFT[x]);
+          MML= "ZIAA:" + PROFILES[x] + ":K="+PROFK[x]+",L="+PROFL[x]+",M="+PROFM[x]+",N="+PROFN[x]+",O="+PROFO[x]+",P="+PROFP[x]+",Q="+PROFQ[x]+",R="+PROFR[x]+",S="+PROFS[x]+",T="+PROFT[x]+";";
+          print("%s\n",MML);
+        endif
+        if(getline(line,"'U='"))
+          line=PERMISOS(line,"=","U","V","W","X","Y","","","","","");
+          strscan(line,"%s %s %s %s %s ",PROFU[x],PROFV[x],PROFW[x],PROFX[x],PROFY[x]); //print("%s %s %s %s %s \n",PROFU[x],PROFV[x],PROFW[x],PROFX[x],PROFY[x]); 
+          MML= "ZIAA:" + PROFILES[x] + ":U="+PROFU[x]+",V="+PROFV[x]+",W="+PROFW[x]+",X="+PROFX[x]+",Y="+PROFY[x]+";";
+          print("%s\n",MML);
+        endif
+        if(getline(line,"'PASSWORD VALIDITY TIME: '"))
+          VTIME[x]=PHRASE(line,"PASSWORD VALIDITY TIME: ");
+          if(VTIME[x]=="PASSWORD") VTIME[x]="FOREVER"; endif //print("%s\n",VTIME[x]);
+          MML= "ZIAA:" + PROFILES[x] + "::" + "VTIME=" + VTIME[x] ; //print("%s\n",MML);
+        endif
+        if(getline(line,"'MINIMUM PASSWORD VALIDITY TIME:'"))
+          MINVTIME[x]=PHRASE(line,"MINIMUM PASSWORD VALIDITY TIME:"); //print("%s\n",MINVTIME[x]);
+          MML= MML + ",MINVTIME=" + MINVTIME[x] ; //print("%s\n",MML);
+        endif
+        if(getline(line,"'MML COMMAND LOG ACCESSIBILITY:'"))
+          ACCESS[x]=PHRASE(line,"MML COMMAND LOG ACCESSIBILITY:");
+          if(ACCESS[x]=="COMPLETE")  ACCESS[x]="COM"; 
+            elseif(ACCESS[x]=="MEDIUM")  ACCESS[x]="MED"; 
+            elseif(ACCESS[x]=="LIMITED")  ACCESS[x]="LIM"; 
+          endif        
+          MML= MML + ",ACCESS=" + ACCESS[x]; // print("%s\n",MML);  //print("%s\n",ACCESS[x]);
+        endif
+        if(getline(line,"'MML SESSION IDLE TIME LIMIT:'"))
+          TLIMIT[x]=PHRASE(line,"MML SESSION IDLE TIME LIMIT:"); //print("%s\n",TLIMIT[x]);
+          MML= MML + ":TLIMIT=" + TLIMIT[x];  //  print("%s\n",MML);
+        endif
+        if(getline(line,"'FTP AND SFTP ACCESSIBILITY: '"))
+          FTP[x]=PHRASE(line,"FTP AND SFTP ACCESSIBILITY: ");  //print("%s\n",FTP[x]);
+          if(FTP[x]=="WRITE") FTP[x]="W"; 
+          elseif(FTP[x]=="READ") FTP[x]="R"; endif          
+          MML= MML + ":FTP=" + FTP[x] +";";
+          print("%s\n",MML);
+        endif
+        if(getline(line,"'FTP SESSION READ ACCESS LIMIT : '"))
+          FTP_ACC[x]=PHRASE(line,"FTP SESSION READ ACCESS LIMIT : ");// print("FTP SESSION READ ACCESS LIMIT : %s\n",FTP_ACC[x]);
+        endif
+        if(getline(line,"'FTP SESSION WRITE ACCESS LIMIT :'"))
+          FTP_WRI[x]=PHRASE(line,"FTP SESSION WRITE ACCESS LIMIT :"); // print("FTP SESSION WRITE ACCESS LIMIT : %s\n",FTP_WRI[x]);
+        endif        
+      endwhile    
+   endfor
+   
+   LOG_SQUARE("blue","USER'S");
+   
+   for(x=2;x<=y;x++)
+     print("\n*%d/%d PROFILE: %s\n",x,y,PROFILES[x]);
+     m=0; PHRASE=PROFILES[x]; 
+     print("ZIAI:PROFILE=%s:LIM:;\n",PROFILES[x]);  
+     tx("ZIAI:PROFILE=%s:LIM:;",PROFILES[x]);
+       while(getline(line," '%s ' OR '%s' OR '                    '",PHRASE,ll)) m++; 
+         USER1[m]=""; USER2[m]=""; USER3[m]="";     
+         strfetch(line,"21-",PHRASE); strscan(PHRASE,"%s %s %s",USER1[m],USER2[m],USER3[m]);
+         print("%s %s %s\n",USER1[m],USER2[m],USER3[m]);  
+       endwhile n=m;
+      for(m=1;m<=n;m++) 
+        USER1[m]=strreplace(USER1[m],",",""); if(USER1[m]<>"") print("ZIAH:%s:%s:N:;\n",USER1[m],PROFILES[x]); endif          
+        USER2[m]=strreplace(USER2[m],",",""); if(USER2[m]<>"") print("ZIAH:%s:%s:N:;\n",USER2[m],PROFILES[x]); endif
+        USER3[m]=strreplace(USER3[m],",",""); if(USER3[m]<>"") print("ZIAH:%s:%s:N:;\n",USER3[m],PROFILES[x]); endif      
+      endfor
+      print("ZIAI:PROFILE=%s:LIM:;\n",PROFILES[x]); 
+   endfor
+   
+endfunction 
+
+

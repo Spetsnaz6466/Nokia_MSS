@@ -1,0 +1,16 @@
+Compiling 'C:\Users\Juan\Documents\Colombia\Macros_HIT\Nokia\oMSS\oMSS_AUDITORIA\36_oMSS_ranap_timers\oMSS_ranap_timers.tel' ...
+Preprocessing...
+Parsing...
+Typechecking...
+Code generation...
+
+Got no compile errors.
+
+MSSVEN02: Already connected
+############
+# MSSVEN02 #
+############
+################
+# ranap_timers #
+################
+FIN!!!!

@@ -1,0 +1,16 @@
+Compiling 'C:\Users\Juan\Documents\Colombia\Macros_HIT\Nokia\oMSS\oMSS_AUDITORIA\34_oMSS_rnc_version_information\oMSS_rnc_version_information.tel' ...
+Preprocessing...
+Parsing...
+Typechecking...
+Code generation...
+
+Got no compile errors.
+
+MSSVEN02: Already connected
+############
+# MSSVEN02 #
+############
+###########################
+# rnc_version_information #
+###########################
+FIN!!!!

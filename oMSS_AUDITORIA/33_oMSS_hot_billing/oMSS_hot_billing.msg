@@ -1,0 +1,16 @@
+Compiling 'C:\Users\Juan\Documents\Colombia\Macros_HIT\Nokia\oMSS\oMSS_AUDITORIA\33_oMSS_hot_billing\oMSS_hot_billing.tel' ...
+Preprocessing...
+Parsing...
+Typechecking...
+Code generation...
+
+Got no compile errors.
+
+MSSVEN02: Already connected
+############
+# MSSVEN02 #
+############
+###############
+# hot_billing #
+###############
+FIN!!!!

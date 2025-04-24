@@ -1,0 +1,63 @@
+function oMSS_network_location_areas()
+  string filename,filename2,PCTime,Tel,line="",A,B,PRE,VAR;
+  string LAC[],MCC[],MNC[],MISDN[],MNA[],MSNC[],MSPC[],VISDN[],VNA[],VSNC[],VSPC[],VLRS[],TRA[],IMSC[],CID[],VER[];
+  integer handle,handle2,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="network_location_areas";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR); 
+  
+  tx("ZEIO:;"); x=0;
+    while(getline(line)) 
+      if(getline(line,"'(LAC)'")) x++; strfetch(line,"40-",LAC[x]); strscan(LAC[x],"%s",LAC[x]);  endif
+      if(getline(line,"'(MCC)'")) strfetch(line,"40-",MCC[x]); strscan(MCC[x],"%s",MCC[x]);  endif
+      if(getline(line,"'(MNC)'")) strfetch(line,"40-",MNC[x]); strscan(MNC[x],"%s",MNC[x]);  endif
+      if(getline(line,"'(MISDN)'")) strfetch(line,"40-",MISDN[x]); strscan(MISDN[x],"%s",MISDN[x]);  endif
+      if(getline(line,"'(MNA)'")) strfetch(line,"40-",MNA[x]); strscan(MNA[x],"%s",MNA[x]);  endif
+      if(getline(line,"'(MSNC)'")) strfetch(line,"40-",MSNC[x]); strscan(MSNC[x],"%s",MSNC[x]);  endif
+      if(getline(line,"'(MSPC)'")) strfetch(line,"40-",MSPC[x]); strscan(MSPC[x],"%s",MSPC[x]);  endif
+      if(getline(line,"'(VISDN)'")) strfetch(line,"40-",VISDN[x]); strscan(VISDN[x],"%s",VISDN[x]);  endif
+      if(getline(line,"'(VNA)'")) strfetch(line,"40-",VNA[x]); strscan(VNA[x],"%s",VNA[x]);  endif      
+      if(getline(line,"'(VSNC)'")) strfetch(line,"40-",VSNC[x]); strscan(VSNC[x],"%s",VSNC[x]); endif
+      if(getline(line,"'(VSPC)'")) strfetch(line,"40-",VSPC[x]); strscan(VSPC[x],"%s",VSPC[x]); endif
+      if(getline(line,"'(VLRS)'")) strfetch(line,"40-",VLRS[x]); strscan(VLRS[x],"%s",VLRS[x]); endif
+      if(getline(line,"'(TRA)'")) strfetch(line,"40-",TRA[x]); strscan(TRA[x],"%s",TRA[x]); endif
+      if(getline(line,"'(IMSC)'")) strfetch(line,"40-",IMSC[x]); strscan(IMSC[x],"%s",IMSC[x]); endif
+      if(getline(line,"'(CID)'")) strfetch(line,"40-",CID[x]); strscan(CID[x],"%s",CID[x]); endif
+      if(getline(line,"'(VER)'")) strfetch(line,"40-",VER[x]); strscan(VER[x],"%s",VER[x]); endif   
+  endwhile y=x;
+    
+  filename2= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.CSV" ;
+  handle2 = fileopen(filename2,NEW); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  for(x=1; x<=y; x++) 
+    fileprint(handle2,"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",LAC[x],MISDN[x],MNA[x],VISDN[x],VNA[x],VLRS[x],TRA[x],IMSC[x],CID[x],VER[x],MCC[x],MNC[x]);
+    print("%d*- %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",x,LAC[x],MISDN[x],MNA[x],VISDN[x],VNA[x],VLRS[x],TRA[x],IMSC[x],CID[x],VER[x],MCC[x],MNC[x]);
+  endfor  fileclose(handle2);
+
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+

@@ -1,0 +1,93 @@
+function oMSS_origin_analysis()
+  string filename,PCTime,Tel,line="",A,B,PRE,CELLTR[],CLASSMK[],CHO[];
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_origin_analysis_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  print("origin_analysis\n");
+  LOG_SQUARE("origin_analysis"); 
+  //tx("ZRVI:;"); 
+  tx("ZRVI:CPC=ORD,:;"); x=0;
+    while(getline(line))
+      if(getline(line,"'CELL TARIFF'")) x++;
+        strscan(line,"%s %s %s %s %s %s",CELLTR[x],CELLTR[x],CELLTR[x],CELLTR[x],CLASSMK[x],CLASSMK[x]);
+        CELLTR[x]=strreplace(CELLTR[x],"TARIFF=",""); 
+        CLASSMK[x]=strreplace(CLASSMK[x],"CLASSMARK=","");
+      endif
+      if(getline(line,"'CHARGING ORIGIN '")) 
+        strscan(line,"%s %s %s %s",CHO[x],CHO[x],CHO[x],CHO[x]);
+      endif
+    endwhile y=x;
+    for(x=1; x<=y; x++)
+      print("*%d- ORDINARY CELL_TARIFF %s CLASSMARK %s CHARGING_ORIGIN %s\n",x,CELLTR[x],CLASSMK[x],CHO[x]);
+    endfor
+  tx("ZRVI:CPC=PAY,:;"); x=0;
+     while(getline(line))
+      if(getline(line,"'CELL TARIFF'")) x++;
+        strscan(line,"%s %s %s %s %s %s",CELLTR[x],CELLTR[x],CELLTR[x],CELLTR[x],CLASSMK[x],CLASSMK[x]);
+        CELLTR[x]=strreplace(CELLTR[x],"TARIFF=",""); 
+        CLASSMK[x]=strreplace(CLASSMK[x],"CLASSMARK=","");
+      endif
+      if(getline(line,"'CHARGING ORIGIN '")) 
+        strscan(line,"%s %s %s %s",CHO[x],CHO[x],CHO[x],CHO[x]);
+      endif
+    endwhile y=x;
+    for(x=1; x<=y; x++)
+      print("*%d- PAY CELL_TARIFF %s CLASSMARK %s CHARGING_ORIGIN %s\n",x,CELLTR[x],CLASSMK[x],CHO[x]);
+    endfor
+  tx("ZRVI:CPC=PRI,:;"); x=0;
+     while(getline(line))
+      if(getline(line,"'CELL TARIFF'")) x++;
+        strscan(line,"%s %s %s %s %s %s",CELLTR[x],CELLTR[x],CELLTR[x],CELLTR[x],CLASSMK[x],CLASSMK[x]);
+        CELLTR[x]=strreplace(CELLTR[x],"TARIFF=",""); 
+        CLASSMK[x]=strreplace(CLASSMK[x],"CLASSMARK=","");
+      endif
+      if(getline(line,"'CHARGING ORIGIN '")) 
+        strscan(line,"%s %s %s %s",CHO[x],CHO[x],CHO[x],CHO[x]);
+      endif
+    endwhile y=x;
+    for(x=1; x<=y; x++)
+      print("*%d- PRI CELL_TARIFF %s CLASSMARK %s CHARGING_ORIGIN %s\n",x,CELLTR[x],CLASSMK[x],CHO[x]);
+    endfor
+  tx("ZRVI:CPC=TES,:;"); x=0;
+     while(getline(line))
+      if(getline(line,"'CELL TARIFF'")) x++;
+        strscan(line,"%s %s %s %s %s %s %s",CELLTR[x],CELLTR[x],CELLTR[x],CELLTR[x],CELLTR[x],CLASSMK[x],CLASSMK[x]);
+        CELLTR[x]=strreplace(CELLTR[x],"TARIFF=",""); 
+        CLASSMK[x]=strreplace(CLASSMK[x],"CLASSMARK=","");
+      endif
+      if(getline(line,"'CHARGING ORIGIN '")) 
+        strscan(line,"%s %s %s %s",CHO[x],CHO[x],CHO[x],CHO[x]);
+      endif
+    endwhile y=x;
+    for(x=1; x<=y; x++)
+      print("*%d- TEST CELL_TARIFF %s CLASSMARK %s CHARGING_ORIGIN %s\n",x,CELLTR[x],CLASSMK[x],CHO[x]);
+    endfor
+ 
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

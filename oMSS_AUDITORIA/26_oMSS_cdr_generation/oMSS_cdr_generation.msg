@@ -1,0 +1,16 @@
+Compiling 'C:\Users\Juan\Documents\Colombia\Macros_HIT\Nokia\oMSS\oMSS_AUDITORIA\26_oMSS_cdr_generation\oMSS_cdr_generation.tel' ...
+Preprocessing...
+Parsing...
+Typechecking...
+Code generation...
+
+Got no compile errors.
+
+MSSVEN02: Already connected
+############
+# MSSVEN02 #
+############
+##################
+# cdr_generation #
+##################
+FIN!!!!

@@ -1,0 +1,120 @@
+function oMSS_MeasurementControl()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR,TEMP[],OID[];
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="Measurement Control";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);  fileclose(handle); 
+  //logenable(LOG_ENABLE_ALL); logset(filename,APPEND); //logenable(LOG_ENABLE_RX | LOG_ENABLE_SYSPRINT);
+ 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR);  
+  y=11; logscreen();
+  for(x=1; x<=y; x++)
+    TEMP[x]="ZT2I:NAME=" + MML0(x) + ":OID=;";
+    tx(TEMP[x]);
+      if(getline(line,"'   AMEAS' OR '  MEAS' OR ' PMEAS'")) 
+        strscan(line,"%s",OID[x] ); 
+        print("MEAS: %s OID:%s\n",MML0(x),OID[x]);
+      endif
+  endfor  
+  
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND);
+  
+  for(x=1; x<=y; x++)
+    TEMP[x]="ZT2I:NAME=" + MML0(x) + ":OID=" + OID[x] + ":ICH=A;";
+    tx(TEMP[x]);
+  endfor
+  
+  LOG_SQUARE("PROTOCOL TRAFFIC AND CAPACITY MEASUREMENT");
+  tx("ZT8I:CAPL:;");
+  
+  LOG_SQUARE("GSM MEASUREMENT HANDLING");
+  tx("ZTPI:HO;");
+  tx("ZTPI:VLR;");
+  tx("ZTPI:AUC;");
+  
+  LOG_SQUARE("LOAD OBSERVATION");
+  tx("ZTLI:CGR;");
+  tx("ZTLI:CNTL;");
+  tx("ZTLI:COMP;");
+  tx("ZTLI:REJ;");
+  
+  LOG_SQUARE("TRAFFIC MEASUREMENT");
+  tx("ZTMI:TRACGRA;");
+  tx("ZTMI:TRAVANA;");
+  tx("ZTMI:TRADESTA;");
+  tx("ZTMI:TRACNTLA;");
+  tx("ZTMI:TRACATA;");
+  tx("ZTMI:TRABSA;");
+   
+  LOG_SQUARE("FIELD REPORTING");
+  tx("ZTUI:;");
+  tx("ZTUI:FAC;");
+  tx("ZTUI:RES;");
+  tx("ZTUI:SER;");
+  tx("ZTUI:ACG;");
+  tx("ZTUI:TRF;");
+  tx("ZTUI:CLR;");
+  tx("ZTUI:CLS;");
+  tx("ZTUI:DES;"); 
+  tx("ZTUI:SSC;");
+  tx("ZTUI:DAT;");
+  tx("ZTUI:DCL;");
+  
+  LOG_SQUARE("SS7 STATISTICS");
+  // INTERROGATE REPORTING STATUS OF SCCP SUBSYSTEMS
+  tx("ZOSE:NA0,;");
+  tx("ZOSE:NA1,;");  
+  // INTERROGATE STATES OF SS7 STATISTICS
+  tx("ZOSI:ALL:;");  
+  //INTERROGATE REPORTING STATUS OF SIGNALLING POINTS 
+  tx("ZOSK:M;");
+  tx("ZOSK:S;"); 
+  tx("ZOSR:ALL;"); 
+  tx("ZOSQ:ALL;"); 
+  tx("ZOSU:NA0,:;");
+  tx("ZOSU:NA1,:;");
+ 
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+string function MML0(integer x)
+  string MML[];
+  
+ MML[1]="AMEAS135";  
+ MML[2]="AMEAS180";   
+ MML[3]="AMEAS182";   
+ MML[4]="AMEAS184";   
+ MML[5]="AMEAS185";   
+ MML[6]="AMEAS186";   
+ MML[7]="AMEAS188";   
+ MML[8]="AMEAS18C";   
+ MML[9]="AMEAS191";   
+ MML[10]="AMEAS233";  
+ MML[11]="AMEAS183"; 
+
+
+return MML[x];
+endfunction

@@ -1,0 +1,55 @@
+function oMSS_routes()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR,TEMP[],IND[],FLAG="OFF";
+  string routes[],Nroutes[],NCCP[],NCLISET[],CLISET[];
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="routes";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR); 
+  
+  tx("ZRRI:GSW;"); x=0;
+    while(getline(line," 'EXT' ")) x++;
+      strscan(line,"%s",routes[x]);
+    endwhile y=x;
+    for(x=1; x<=y; x++)
+      tx("ZRRI:GSW:ROU=%s;",routes[x]); 
+        if(getline(line," '      IP' ")) strscan(line,"%s",Nroutes[x]); endif  
+        if(getline(line," '      N    ' ")) 
+          strscan(line,"%s %s %s",NCCP[x],NCCP[x],NCCP[x]); endif        
+        if(getline(line," 'OAM' OR 'MSS' OR 'DEFAULT' OR '%s' OR '99' OR 'REMOVE'",NCCP[x])) 
+          strscan(line,"%s %s",CLISET[x],NCLISET[x]); endif
+     endfor
+     
+     for(x=1; x<=y; x++)
+      print("*%d/%d ROU_#: %s ROU_NAME: %s NCCP: %s CLISET: %s NCLISET: %s \n",x,y,routes[x],Nroutes[x],NCCP[x],CLISET[x],NCLISET[x]);
+
+     endfor 
+    
+ 
+  print("\nFIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+

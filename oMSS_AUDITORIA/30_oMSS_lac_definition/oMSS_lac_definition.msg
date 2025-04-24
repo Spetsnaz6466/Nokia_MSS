@@ -1,0 +1,16 @@
+Compiling 'C:\Users\Juan\Documents\Colombia\Macros_HIT\Nokia\oMSS\oMSS_AUDITORIA\30_oMSS_lac_definition\oMSS_lac_definition.tel' ...
+Preprocessing...
+Parsing...
+Typechecking...
+Code generation...
+
+Got no compile errors.
+
+MSSVEN02: Already connected
+############
+# MSSVEN02 #
+############
+lac_definition##################
+# lac_definition #
+##################
+FIN!!!!

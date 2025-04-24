@@ -1,0 +1,347 @@
+function oMSS_Health_para_Pre_and_Post_check()
+ string Tel;
+ integer handle2;  
+  
+ Tel="MSSTRI02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+ if(sniff())
+   pause(3,"Se tiene acceso al MSS %",Tel); 
+   LOG_SQUARE("blue",Tel);
+   SESSION_LOG(Tel);
+   handle2 = fileopen(RESUME_LOG(Tel),NEW); 
+   
+   ALARMAS(handle2);  
+   LIC_AND_FEATURES(handle2);
+   HARDWARE(handle2);
+   UNITs_IP_ADDRESS( handle2);
+   DGW_IPs( handle2); 
+   DIAGNOSTIC( handle2);   
+   DNS_SNTP( handle2);   
+   COMMAND_CALLENDAR( handle2);  
+   SIGNALLING_ROUTING_DATA( handle2) ;    
+   ASOCIACIONES_M3UA( handle2);
+   ASOCIACIONES_SGSAP( handle2); 
+   UPD( handle2);    
+   MGW(handle2); 
+   SGSN_MME(handle2);  
+   SOFTWARE( handle2);  
+   DB_STATE( handle2);
+   SUBSCRIBERS_VLR( handle2);                                          
+   CALLS( handle2); 
+   CGR_CKTS_STATE(handle2);
+   FQDN( handle2); 
+   MEASUREMENTS(handle2);   
+   CDR_STATE( handle2);
+   TRAFICABILITY( handle2);  
+   fileclose(handle2);
+   
+ else
+   COLOR_PHRASE("red","NO ACCESS TO MSS " + Tel);
+ endif
+  COLOR_PHRASE("green","MACRO IS OVER");
+endfunction
+
+/*########################
+  # FUNCIONES - NO TOCAR #
+  ########################*/
+
+void function COLOR_PHRASE(string color,string information )
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ logprint("\n%s\n",information); logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+void function SESSION_LOG(string Tel)
+ string PCTime,line="",A,B,PRE,filename;
+ integer handle;
+ tx("ZDCD;"); 
+   if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+   PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; filename= Tel + "_MSS_" + PRE + "_" + PCTime + "_.TXT" ;
+    handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+endfunction
+
+string function RESUME_LOG(string Tel)
+ string PCTime,line="",A,B,PRE,filename;
+ tx("ZDCD;"); 
+   if(getline(line,"'TIME  '")) 
+     strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); 
+   endif
+   PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; 
+    filename= "RESUME_" + Tel + "_MSS_" + PRE + "_" + PCTime + "_.TXT" ;
+ return filename;
+endfunction
+
+void function LIC_AND_FEATURES(integer handle2)
+ string line;
+LOG_SQUARE("blue","FEATURES ON");  FILE_SQUARE("FEATURES ON", handle2);
+  tx("ZW7I:FEA,LIM:FSTATE=ON;"); 
+  tx("ZW7I:UCAP,LIM:;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZW7I:LIC,LIM;"); 
+endfunction
+
+void function HARDWARE(integer handle2)
+ string line,temp,CLOUD="Y";
+  LOG_SQUARE("blue","HARDWARE /UNIT's"); FILE_SQUARE("HARDWARE /UNIT's", handle2);
+  tx("ZUSI;"); 
+  while(getline(line,"'-'")) 
+    strfetch(line,"20-20",temp); if(temp=="-") strfetch(line,"18-22",temp); if(temp=="WO-EX") elseif(temp=="SP-EX") else print(line); endif endif
+  endwhile 
+  tx("ZUSL:,INCO;"); while(getline(line)) fileprint(handle2,"%s",line); endwhile
+  tx("ZW?\r"); if(getline(line,"'T .....'")) CLOUD="N"; print(line); endif
+    if(CLOUD=="N") 
+      tx("ZWTI:J;"); tx("ZWTI:C;"); tx("ZWTI:CI;"); tx("ZWTI:PI;"); 
+      tx("ZWTI:PS;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile  
+      LOG_SQUARE("blue","SWU"); FILE_SQUARE("SWU", handle2);
+      tx("ZYFE:IFL;"); while(getline(line)) fileprint(handle2,"%s",line); endwhile
+      tx("ZYFE:ALL;");      
+    endif
+endfunction
+
+void function ASOCIACIONES_M3UA(integer handle2)
+ string line,ASOC_NAME[],ASOC[];
+ integer x,y;
+ LOG_SQUARE("blue","INTERROGATING SOURCE IP ADDRESSES FOR SCTP"); 
+ FILE_SQUARE("INTERROGATING SOURCE IP ADDRESSES FOR SCTP", handle2); 
+  tx("ZOYL;");
+ LOG_SQUARE("blue","ASOCIACIONES - ZOYI"); FILE_SQUARE("ASOCIACIONES - ZOYI", handle2);
+  tx("ZOYI:NBR=0&&1023;"); x=0;
+  while(getline(line,"'M3UA'")) x++; strscan(line,"%s %s",ASOC_NAME[x],ASOC[x]); endwhile
+  y=x;
+  for(x=1;x<=y;x++)
+    print("ASOCIACION NUMERO %s:  %s\n",ASOC[x],ASOC_NAME[x]);
+    fileprint(handle2,"ASOCIACION NUMERO %s:  %s\n",ASOC[x],ASOC_NAME[x]);
+    tx("ZOYI:NBR=%s:A;",ASOC[x]); 
+    while(getline(line," 'DOWN' OR 'UP-PROCEED' ")) print(line); fileprint(handle2,"%s",line); endwhile
+  endfor
+endfunction
+
+void function ASOCIACIONES_SGSAP(integer handle2)
+ string line;
+ LOG_SQUARE("blue","ASOCIACIONES - SGSAP"); FILE_SQUARE("ASOCIACIONES - SGSAP", handle2);
+  tx("ZOYV:SGSAP:;"); 
+  while(getline(line,"'SCTP-'")) print(line); fileprint(handle2,"%s",line); endwhile
+endfunction
+
+void function DB_STATE(integer handle2)
+ string line;
+ LOG_SQUARE("blue","DB STATE"); FILE_SQUARE("DB STATE", handle2); 
+  tx("ZRQI:MOC:STATE=TEST;");  while(getline(line,"' NAME        : '")) print(line); fileprint(handle2,"%s",line); endwhile 
+  tx("ZRQI:MTC:STATE=TEST;");  while(getline(line,"' NAME        : '")) print(line); fileprint(handle2,"%s",line); endwhile 
+  tx("ZRQI:CHA:STATE=TEST;");  while(getline(line,"' NAME        : '")) print(line); fileprint(handle2,"%s",line); endwhile 
+  tx("ZRQI:EOS:STATE=TEST;");  while(getline(line,"' NAME        : '")) print(line); fileprint(handle2,"%s",line); endwhile 
+  tx("ZRQI:ROU:STATE=TEST;");  while(getline(line,"' NAME        : '")) print(line); fileprint(handle2,"%s",line); endwhile 
+  tx("ZRQI:IN:STATE=TEST;");   while(getline(line,"' NAME        : '")) print(line); fileprint(handle2,"%s",line);  endwhile
+  tx("ZRQI:SERV:STATE=TEST;"); while(getline(line,"' NAME        : '")) print(line); fileprint(handle2,"%s",line); endwhile
+endfunction
+
+void function CDR_STATE(integer handle2)
+ string line,CHU[],temp;
+ integer x,y;
+ LOG_SQUARE("blue","CDR's"); FILE_SQUARE("CDR's", handle2);
+  tx("ZUSI:CHU,,0;"); x=0; while(getline(line,"'-EX'")) x++; strfetch(line,"6-6",CHU[x]); endwhile
+  y=x;
+  for(y=1;y<=x;y++)
+    temp="CHU-"+CHU[y] + ": CDR'S & WDU/VDU";
+    LOG_SQUARE("blue",temp);
+    tx("ZIFO:CHU,%s:GSMCHA:,FULL;",CHU[y]);  while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+    tx("ZIFO:CHU,%s:GSMCHA:,OPEN;",CHU[y]);  while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+    tx("ZISI:,CHU,%s;",CHU[y]);
+    while(getline(line," 'WDU' OR 'VDS' ")) print(line); endwhile 
+  endfor
+endfunction
+
+void function CGR_CKTS_STATE(integer handle2)
+ string line,CGR[],CKTNOWO,NCGR[],TCGR[],TDIR[],NBCRCT[],STATE[];
+ integer a,b,PORC[],CKTOOS[];
+ LOG_SQUARE("blue","ESTADO DE LOS CIRCUIT GROUPS"); FILE_SQUARE("ESTADO DE LOS CIRCUIT GROUPS", handle2);
+  tx("ZRCI;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZRCI;"); a=0; 
+  while(getline(line,"'ECCS' OR 'DCS' OR 'BICC' OR 'EDCS' OR 'SIP' ")) 
+    a++; strscan(line,"%s %s %s %s %s %s %s",CGR[a],NCGR[a],TCGR[a],TDIR[a],NBCRCT[a],NBCRCT[a],STATE[a]);
+  endwhile
+  for(b=1;b<=a;b++)
+    tx("ZCEL:CGR=%s,ST=NO-WO;",CGR[b]); PORC[b]=0; CKTOOS[b]=0;
+      while(getline(line," 'IDLE' "))
+        strscan(line,"%s %s %s %s",CKTNOWO,CKTNOWO,CKTNOWO,CKTNOWO); PORC[b]=PORC[b] + strtoint(CKTNOWO,DEC);   
+      endwhile
+     // if(PORC[b]<>0) CKTOOS[b]= (PORC[b]*100)/(strtoint(NBCRCT[b],DEC)); PORC[b]= 100 - CKTOOS[b]; else PORC[b]=100; endif
+  endfor
+  print("\nCGR NCGR TYPE DIR NBCRCT STATE NO-WO WO_PORCENT.\n"); fileprint(handle2,"\nCGR NCGR TYPE DIR NBCRCT STATE NO-WO WO_PORCENT.\n");
+  for(b=1;b<=a;b++)
+    print("%s %s %s %s %s %s %d %d\n",CGR[b],NCGR[b],TCGR[b],TDIR[b],NBCRCT[b],STATE[b],CKTOOS[b],PORC[b]); 
+    fileprint(handle2,"%s %s %s %s %s %s %d %d\n",CGR[b],NCGR[b],TCGR[b],TDIR[b],NBCRCT[b],STATE[b],CKTOOS[b],PORC[b]); 
+  endfor
+  tx("ZCEL:ST=NO-WO,FORM=EXT;");
+endfunction
+
+void function TRAFICABILITY(integer handle2)
+ string line;
+  LOG_SQUARE("blue","TRAFICABILITY");  FILE_SQUARE("TRAFICABILITY", handle2);
+  tx("ZTUT:CLR;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZTUL:CLR;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZTUT:TRF;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZTUL:TRF;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile  
+endfunction
+
+void function MEASUREMENTS(integer handle2)
+ string line;
+ LOG_SQUARE("blue","MEASUREMENTS - MEAXML"); FILE_SQUARE("MEASUREMENTS - MEAXML", handle2);
+ tx("ZIFO:OMU:MEAXML:,FULL;"); while(getline(line," ' FULL' ")) print(line); fileprint(handle2,"%s",line); endwhile
+ tx("ZIFO:OMU:MEAXML:,OPEN;"); while(getline(line," ' OPEN' ")) print(line); fileprint(handle2,"%s",line); endwhile
+endfunction  
+  
+void function FQDN(integer handle2)
+ string line;
+  LOG_SQUARE("blue","FQDN"); FILE_SQUARE("FQDN", handle2); 
+  tx("ZJNL;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZJHL;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+endfunction 
+
+void function MGW(integer handle2)
+ string line;
+ LOG_SQUARE("blue","INFORMACION DE MGW's"); FILE_SQUARE("INFORMACION DE MGW's", handle2); 
+  tx("ZJGI:MODE=0:MGWID=0&&99;");  // Si desea mas detalle usar 1
+  while(getline(line,"'REGISTERED'")) print(line); fileprint(handle2,"%s",line); endwhile
+endfunction
+
+void function SGSN_MME(integer handle2)
+ string line;
+ LOG_SQUARE("blue","SGSN / MME"); FILE_SQUARE("SGSN / MME", handle2); 
+  tx("ZEJO:;");  // Si desea mas detalle usar 1
+    while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZEJJ:TYPE=SG,;");
+endfunction
+
+void function COMMAND_CALLENDAR(integer handle2)
+ string line,COMCAL[];
+ integer m1,m2;
+ LOG_SQUARE("blue","COMMAND CALLENDAR"); FILE_SQUARE("COMMAND CALLENDAR", handle2);
+  tx("ZICL;"); m1=0; 
+  while(getline(line,"' -  '")) m1++; strscan(line,"%s %s %s",COMCAL[m1],COMCAL[m1],COMCAL[m1]); fileprint(handle2,"%s",line); endwhile
+  m2=m1;
+  for(m1=1;m1<=m2;m1++) tx("ZICL:CFILE=%s:COM:;",COMCAL[m1]); endfor
+endfunction
+
+void function UPD(integer handle2)
+ LOG_SQUARE("blue","UPD"); FILE_SQUARE("ASOCIACIONES - SGSAP", handle2);
+ tx("ZJFL;"); 
+ tx("ZJFI:UPD=0&&99;");
+endfunction
+
+void function SOFTWARE(integer handle2)
+ string line;
+ LOG_SQUARE("blue","SOFTWARE"); FILE_SQUARE("SOFTWARE", handle2); 
+  tx("ZWQO:CR;"); 
+   while(getline(line," 'Y    Y' OR ' FB ' ")) print(line); fileprint(handle2,"%s",line);  endwhile
+endfunction    
+
+void function ALARMAS(integer handle2)
+ string line,FEBU;  
+ LOG_SQUARE("blue","ALARMAS CRITICAS");   FILE_SQUARE("ALARMAS CRITICAS",handle2); tx("ZAHO::CLS=AL3;"); while(getline(line)) print(line); fileprint(handle2,line); endwhile 
+  LOG_SQUARE("blue","ALARMAS MAYORES");    FILE_SQUARE("ALARMAS MAYORES",handle2);  tx("ZAHO::CLS=AL2;"); while(getline(line)) fileprint(handle2,line); endwhile
+  LOG_SQUARE("blue","ALARMAS MENORES");    FILE_SQUARE("ALARMAS MENORES",handle2);  tx("ZAHO::CLS=AL1;"); while(getline(line)) fileprint(handle2,line); endwhile
+  LOG_SQUARE("blue","ALARMAS TODAS");      FILE_SQUARE("ALARMAS TODAS",handle2); 
+    tx("ZAHO;"); while(getline(line," '2742' OR '2653' OR '3184' OR '3433' OR '3474' OR '3473'")) fileprint(handle2,line); endwhile
+  LOG_SQUARE("blue","ALARMAS HISTORICAS"); FILE_SQUARE("ALARMAS HISTORICAS", handle2); ask(FEBU,"Ingrese fecha de busqueda: "); tx("ZAHP:::%s;",FEBU);
+endfunction   
+
+void function DIAGNOSTIC(integer handle2)
+ string line;
+ LOG_SQUARE("blue"," HARDWARE DIAG "); FILE_SQUARE(" HARDWARE DIAG ", handle2);
+  tx("ZUDH:::1999-01-01;"); 
+  tx("ZUDL;"); while(getline(line)) fileprint(handle2,"%s",line); endwhile
+  tx("ZUDQ;"); while(getline(line)) fileprint(handle2,"%s",line); endwhile
+endfunction 
+
+void function UNITs_IP_ADDRESS(integer handle2)
+ LOG_SQUARE("blue","UNITs IP ADDRESS"); FILE_SQUARE("UNITs IP ADDRESS", handle2);
+  tx("ZQRI;"); 
+endfunction
+
+void function DGW_IPs(integer handle2)  
+  LOG_SQUARE("blue","DGW's IPs"); FILE_SQUARE("DGW's IPs", handle2); 
+  tx("ZQKO;");
+endfunction
+
+void function SUBSCRIBERS_VLR(integer handle2)
+ string line;
+ LOG_SQUARE("blue","SUBSCRIBERS IN VLR's"); FILE_SQUARE("SUBSCRIBERS IN VLR's", handle2); 
+  tx("ZMVI;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+endfunction
+
+void function CALLS(integer handle2) 
+ string line;                                         
+ LOG_SQUARE("blue","TOTAL NUMBER OF ALL RECORDS IN MSC"); FILE_SQUARE("TOTAL NUMBER OF ALL RECORDS IN MSC", handle2);
+  tx("ZMCJ:ALL=N;"); while(getline(line)) print(line); fileprint(handle2,"%s",line); endwhile
+endfunction   
+
+void function SIGNALLING_ROUTING_DATA(integer handle2) 
+ string line; 
+ LOG_SQUARE("blue"," SIGNALLING POINT DATA"); FILE_SQUARE(" SIGNALLING POINT DATA ", handle2);
+  tx("ZNRI:NA0;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNRI:NA1;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNPI;"); 
+ 
+  LOG_SQUARE("blue","LINKS ZNET"); FILE_SQUARE("LINKS ZNET", handle2);
+  tx("ZNET:NA0;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNET:NA1;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile  
+     
+  LOG_SQUARE("blue","LINKSET STATES"); FILE_SQUARE("LINKSET STATES", handle2); 
+  tx("ZNLI;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  
+  LOG_SQUARE("blue","SUBSYSTEM STATES"); FILE_SQUARE("SUBSYSTEM STATES", handle2); 
+  tx("ZNHI:NA0;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNHI:NA1;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNFI:NA0;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNFI:NA1;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  
+  LOG_SQUARE("blue","ROUTE SET STATES"); FILE_SQUARE("ROUTE SET STATES", handle2);
+  tx("ZNVI:NA0;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNVI:NA1;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNSI:NA0;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNSI:NA1;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+ 
+  LOG_SQUARE("blue","ROUTE SET STATES"); FILE_SQUARE("ROUTE SET STATES", handle2); 
+  tx("ZNER:NA0;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  tx("ZNER:NA1;"); while(getline(line,"' UA  ' OR ' UA-'")) print(line); fileprint(handle2,"%s",line); endwhile
+  
+  LOG_SQUARE("blue","STATIC ROUTES"); FILE_SQUARE("STATIC ROUTES", handle2); 
+  tx("ZQKB;");
+  tx("ZQKO;"); 
+endfunction
+
+void function DNS_SNTP(integer handle2) 
+ string line;
+ LOG_SQUARE("blue","DNS"); FILE_SQUARE("DNS", handle2);
+  tx("ZQRJ:;"); while(getline(line)) fileprint(handle2,"%s",line); endwhile
+  
+  LOG_SQUARE("blue","SNTP"); FILE_SQUARE("SNTP", handle2);
+  tx("ZDCP;"); while(getline(line)) fileprint(handle2,"%s",line); endwhile
+endfunction
+

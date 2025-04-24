@@ -1,0 +1,57 @@
+function oMSS_announcement_parameters()
+  string filename,filename2,PCTime,Tel,Tel2,line="",A,B,PRE,VAR,TEMP[],IND[];
+  string DIG[],NRD[],SRD[],SAD[],RT[],NB[],DST[],TON[]; 
+  integer handle,handle2,x,y,z;  
+  
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ORIGEN: "); Tel=strupper(Tel); device(Tel); 
+  VAR="announcement_parameters";
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; 
+  filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR);   
+  tx("ZRAL:;"); x=0;
+    while(getline(line,"'VAN'"))  x++; strscan(line,"%s",TEMP[x]);
+    endwhile y=x;
+    for(x=1; x<=y; x++)
+      TEMP[x]="ZRAL:ANAM="+TEMP[x]+":;"; tx(TEMP[x]); print("%d/%d %s\n",x,y,TEMP[x]);
+    endfor
+  deviceclose(Tel);
+  
+  Tel2="MSSING01"; ask(Tel2,"INGRESE MSS A COMPARAR: "); Tel2=strupper(Tel2);
+  device(Tel2);
+  filename2= "oMSS_REFERENCIA_" + VAR + "_" + Tel2 + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle2 = fileopen(filename2,NEW);   fileclose(handle2); 
+  logenable(LOG_ENABLE_ALL); logset(filename2,APPEND); 
+  
+  LOG_SQUARE(Tel2); LOG_SQUARE(VAR);   
+  tx("ZRAL:;"); x=0;
+    //Commands from 1st MSS
+    for(x=1; x<=y; x++)  tx(TEMP[x]); print("%d/%d %s\n",x,y,TEMP[x]);
+    endfor
+  deviceclose(Tel2);
+      
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+ 
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+

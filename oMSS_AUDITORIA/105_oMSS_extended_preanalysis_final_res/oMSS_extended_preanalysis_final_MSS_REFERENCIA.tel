@@ -1,0 +1,69 @@
+function oMSS_extended_preanalysis_final_res_MSS_REFERENCIA()
+  string filename,PCTime,Tel,Tel2,line="",A,B,PRE,VAR,TEMP[],TEMP2[],temp;
+  integer handle,x,y,z,x2,y2; 
+  
+  Tel="MSSARA02";  //# TEL : MSS ORIGEN    
+  Tel2="MSSARA01"; //# TEL2: MSS REFERENCIA   
+  
+  ask(Tel,"INGRESE MSS: "); Tel=strupper(Tel);  
+  ask(Tel2,"INGRESE MSS REFERENCIA: "); Tel2=strupper(Tel2);
+  device(Tel);  VAR="extended_preanalysis_final_res";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);  fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); logenable(LOG_ENABLE_RX | LOG_ENABLE_SYSPRINT);
+ 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR);  
+  tx("ZCWQ:;");  logscreen(); x=0;
+    while(getline(line,"'RESULT NAME '")) x++;
+      strscan(line,"%s %s %s %s",TEMP[x],TEMP[x],TEMP[x],TEMP[x]);  
+    endwhile y=x;
+    for(x=1; x<=y; x++) logprint("%d*- %s\n",x,TEMP[x]); 
+    endfor
+  deviceclose(Tel);
+  
+  device(Tel2); VAR="extended_preanalysis_final_res";
+  filename= "oMSS_" + VAR + "_" + Tel2 + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);  fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); logenable(LOG_ENABLE_RX | LOG_ENABLE_SYSPRINT);
+  LOG_SQUARE(Tel2); LOG_SQUARE(VAR);  
+  tx("ZCWQ:;");  logscreen(); x2=0;
+    while(getline(line,"'RESULT NAME '")) x2++;
+      strscan(line,"%s %s %s %s",TEMP2[x2],TEMP2[x2],TEMP2[x2],TEMP2[x2]);
+    endwhile y2=x2;
+    for(x2=1; x2<=y2; x2++) logprint("%d*- %s\n",x2,TEMP2[x2]); 
+    endfor
+  deviceclose(Tel);
+  
+  /////////////
+  LOG_SQUARE("COMPARANDO MSS REFERENCIA CONTRA MSS ORIGEN's"); 
+  for(x2=1; x2<=y2; x2++) temp="FALSO";
+    for(x=1; x<=y; x++)
+      if(TEMP2[x2] == TEMP[x]) temp="VERDADERO"; endif 
+    endfor 
+    if(temp == "FALSO") print("%d*- %s %s\n",x2,TEMP2[x2],temp); endif
+  endfor
+  
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+

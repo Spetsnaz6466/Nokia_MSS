@@ -1,0 +1,101 @@
+function oMSS_GoLive()
+ string Tel;
+ integer handle2;  
+  
+ Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+ if(sniff())
+   pause(3,"Se tiene acceso al MSS %",Tel); 
+   LOG_SQUARE("blue",Tel);
+   SESSION_LOG(Tel);  
+   handle2 = fileopen(RESUME_LOG(Tel),NEW); 
+   CDR_STATE_FROM_FULL_TO_TRANSFERED( handle2); 
+   fileclose(handle2);  
+ else
+   COLOR_PHRASE("red","NO ACCESS TO MSS " + Tel);
+ endif
+  COLOR_PHRASE("green","MACRO IS OVER");
+endfunction
+
+/*########################
+  # FUNCIONES - NO TOCAR #
+  ########################*/
+
+void function COLOR_PHRASE(string color,string information )
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ logprint("\n%s\n",information); logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+void function SESSION_LOG(string Tel)
+ string PCTime,line="",A,B,PRE,filename;
+ integer handle;
+ tx("ZDCD;"); 
+   if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+   PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; filename= Tel + "_MSS_" + PRE + "_" + PCTime + "_.TXT" ;
+    handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+endfunction
+
+string function RESUME_LOG(string Tel)
+ string PCTime,line="",A,B,PRE,filename;
+ tx("ZDCD;"); 
+   if(getline(line,"'TIME  '")) 
+     strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); 
+   endif
+   PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; 
+    filename= "RESUME_" + Tel + "_MSS_" + PRE + "_" + PCTime + "_.TXT" ;
+ return filename;
+endfunction
+
+void function CDR_STATE_FROM_FULL_TO_TRANSFERED(integer handle2)
+ string line,CHU[],temp,CDR[];
+ integer x,y,m=0,n;
+ LOG_SQUARE("blue","CDR's"); FILE_SQUARE("CDR's", handle2);
+  tx("ZUSI:CHU,,0;"); x=0; while(getline(line,"'-EX'")) x++; strfetch(line,"6-6",CHU[x]); endwhile
+  y=x;
+  for(y=1;y<=x;y++)
+    temp="CHU-"+CHU[y] + ": CDR'S & WDU/VDU";
+    LOG_SQUARE("blue",temp);
+    tx("ZIFO:CHU,%s:GSMCHA:,FULL;",CHU[y]);  
+      while(getline(line,"' FULL '")) m++;
+        strscan(line,"%s",CDR[m]);  // print("CDR %s\n",CDR[x]); fileprint(handle2,"%s",line); 
+      endwhile n=m;
+      for(m=1; m<=n; m++) 
+        tx("ZIFS:CHU,%s:GSMCHA:%s,FULL,:T:;\n",CHU[y],CDR[m]);   //ZIFS:CHU,0:GSMCHA:2,FULL,:T:;       
+      endfor m=0;
+      tx("ZIFO:CHU,%s:GSMCHA:;",CHU[y]);  
+        while(getline(line,"'TRANSFERRED'")) m++; endwhile
+        print("CHU: %s existen %d files trasferred\n",CHU[y],m); m=0;    
+    tx("ZISI:,CHU,%s;",CHU[y]);
+    while(getline(line," 'WDU' OR 'VDS' ")) print(line); endwhile 
+  endfor
+endfunction
+
+
+

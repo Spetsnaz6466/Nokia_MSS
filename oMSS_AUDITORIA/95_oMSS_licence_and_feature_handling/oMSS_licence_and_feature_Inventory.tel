@@ -1,0 +1,172 @@
+function oMSS_Run_MML_on_all_MSS()
+  string PCTime,PCTime2; 
+  integer x;  
+   
+  PCTime = getpctime(1); 
+  for(x=1;x<=6; x++) 
+    LOG_SQUARE("blue",Claro_MSS(x));
+    print("ACCESING %d: %s\n",x,Claro_MSS(x) );
+    oMSS_Run_MML_on_MSS(Claro_MSS(x)); 
+  endfor
+  PCTime2 = getpctime(1);
+  print("\nHora inicio de macro: %s\n",PCTime);
+  print("Hora fin de macro: %s\n",PCTime2);
+  print("FIN: Macro ejecutada");
+
+endfunction
+
+string function oMSS_Run_MML_on_MSS(string CLARO_MSS)
+  string filename,line,RES,FLAG,A,B,PRE,PCTime;
+  integer handle,x,y;
+  string LIC[],LIC_NAME[],CUSTO[],STATE[],CAPACI[],FRASE;
+  string FEA[],FEA_NAME[],FEA_STATE[],FEA_CAPACI[];
+  
+  device(CLARO_MSS); FLAG="OFF";
+  if(sniff()) 
+    print("El acceso al MSS: %s esta OK\n",CLARO_MSS);
+    tx("ZDCD;"); 
+      if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+      PRE="MML_CMMDS_LICE_FEA"; 
+      PCTime = A + "_" + B; filename= "oMSS_" + CLARO_MSS + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+      handle = fileopen(filename,NEW);   fileclose(handle); 
+      logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+    
+    /*Commands to execute*/
+   
+    x=0;
+    tx("ZW7I:LIC,FULL:STATE=;");
+      while(getline(line))
+      if(getline(line,"'LICENCE CODE'")) x++; FRASE="LICENCE CODE:.............."; LIC[x]=PHRASE(line,FRASE);  endif 
+      if(getline(line,"'LICENCE NAME'")) FRASE="LICENCE NAME:..............";  LIC_NAME[x]=PHRASE(line,FRASE); endif    
+      if(getline(line,"'CUSTOMER NAME'")) FRASE="CUSTOMER NAME:.............";  CUSTO[x]=PHRASE(line,FRASE); endif
+      if(getline(line,"'LICENCE STATE'")) FRASE="LICENCE STATE:.............";  STATE[x]=PHRASE(line,FRASE); endif    
+      if(getline(line,"'LICENCE CAPACITY'")) FRASE="LICENCE CAPACITY:..........";  CAPACI[x]=PHRASE(line,FRASE); else CAPACI[x]=""; endif
+      endwhile y=x;
+    for(x=1; x<=y; x++)
+     print("%s, %s, %s, %s, %s, %s\n",CLARO_MSS,LIC[x],LIC_NAME[x],CUSTO[x],STATE[x],CAPACI[x]);
+    endfor
+    
+    x=0;
+    
+    
+    tx("ZW7I:FEA,FULL:FSTATE=ON;");
+      while(getline(line))
+        FRASE="FEATURE CODE:.............."; if(getline(line,"'%s'",FRASE)) x++; FEA[x]=PHRASE(line,FRASE);  endif        
+        FRASE="FEATURE NAME:.............."; if(getline(line,"'%s'",FRASE)) FEA_NAME[x]=PHRASE(line,FRASE);  endif        
+        FRASE="FEATURE STATE:............."; if(getline(line,"'%s'",FRASE)) FEA_STATE[x]=PHRASE(line,FRASE);  endif        
+        FRASE="FEATURE CAPACITY:.........."; if(getline(line,"'%s'",FRASE)) FEA_CAPACI[x]=PHRASE(line,FRASE); else FEA_CAPACI[x]=""; endif
+      endwhile y=x;
+      for(x=1; x<=y; x++)
+        print("FEA %s, %s, %s, %s, %s, \n",CLARO_MSS,FEA[x],FEA_NAME[x],FEA_STATE[x],FEA_CAPACI[x]);
+      endfor
+ 
+    
+    
+  else
+    RES="Sin acceso SSH al MSS: " + CLARO_MSS + "\n"; printColor("red",RES); 
+  endif
+  deviceclose(CLARO_MSS);
+  return FLAG;
+ endfunction 
+ 
+string function PHRASE(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); FRASE=strreplace(FRASE," ","_"); strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction
+ 
+ 
+string function Claro_MSS (integer x)
+  string CLARO_MSS[];
+  
+  CLARO_MSS[1]="MSSVEN02";
+  CLARO_MSS[2]="MSSVEN01";
+  CLARO_MSS[3]="MSSING02";
+  CLARO_MSS[4]="MSSING01";
+  CLARO_MSS[5]="MSSARA02";
+  CLARO_MSS[6]="MSSVEN01";
+  
+  
+  
+  
+  /*
+   CLARO_MSS[1]="MSS01ING";
+  CLARO_MSS[2]="MSS01PER";
+  CLARO_MSS[3]="MSS01SIN";
+  CLARO_MSS[4]="MSS01TOB";
+  CLARO_MSS[5]="MSS02ALK";
+  CLARO_MSS[6]="MSS02BUC";    */
+  CLARO_MSS[7]="MSS02CAL";
+  CLARO_MSS[8]="MSS02MED";
+  CLARO_MSS[9]="MSS02PER";
+  CLARO_MSS[10]="MSS02SIN";
+  CLARO_MSS[11]="MSS02TOB";
+  CLARO_MSS[12]="MSS02VEN";
+  CLARO_MSS[13]="MSS03ARA";
+  CLARO_MSS[14]="MSS03BAR";
+  CLARO_MSS[15]="MSS03CAL";
+  CLARO_MSS[16]="MSS03MED";
+  CLARO_MSS[17]="MSS03PRA";
+  CLARO_MSS[18]="MSS03VEN";
+  CLARO_MSS[19]="MSS04ARA";
+  CLARO_MSS[20]="MSS04CAL";
+  CLARO_MSS[21]="MSS04VEN";
+  CLARO_MSS[22]="MSS04VEN";
+  CLARO_MSS[23]="MSS05ARA";
+  CLARO_MSS[24]="MSS05MED";
+  CLARO_MSS[25]="MSS05VEN";
+  CLARO_MSS[26]="MSS06ARA";
+  CLARO_MSS[27]="MSS06MED";
+  CLARO_MSS[28]="MSS06VEN";
+  CLARO_MSS[29]="MSS07ARA";
+  CLARO_MSS[30]="MSS07VEN";
+  CLARO_MSS[31]="MSSALK01";
+  CLARO_MSS[32]="MSSALK02";
+  CLARO_MSS[33]="MSSARA01";
+  CLARO_MSS[34]="MSSBUC01";
+  CLARO_MSS[35]="MSSING01";
+  CLARO_MSS[36]="MSSMAR01";
+  CLARO_MSS[37]="MSSMGA01";
+  CLARO_MSS[38]="MSSPER01";
+  CLARO_MSS[39]="MSSTRI01";
+  CLARO_MSS[40]="MSSTRI02";
+  CLARO_MSS[41]="MSSTRI03";
+  CLARO_MSS[42]="MSSVEN01";
+  CLARO_MSS[43]="MSSMGA02";
+  CLARO_MSS[44]="MSS01ALK"; 
+  CLARO_MSS[45]="MSSARA02";
+  CLARO_MSS[46]="MSSING02";  
+  CLARO_MSS[47]="MSSVEN02";  
+  CLARO_MSS[48]="MSS01CAR";   //SIN ACCESO.
+  return CLARO_MSS[x];
+endfunction
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+void function printColor(string color,string information )
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ print("%s",information); settextcolor(RGB(0,0,0));
+endfunction

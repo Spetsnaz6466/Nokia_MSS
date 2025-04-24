@@ -1,0 +1,46 @@
+function oMSS_ss7_level_3_parameters()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR,TEMP[];
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="ss7_level_3_parameters";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR); x=0;
+  
+  tx("ZNMI:;"); 
+    while(getline(line,"'GROUP' ")) x++;
+      strscan(line,"%s %s",TEMP[x],TEMP[x]); 
+      TEMP[x]=strreplace(TEMP[x],":"," "); 
+      strscan(TEMP[x],"%s",TEMP[x]);
+    endwhile y=x;
+    for(x=1; x<=y; x++)
+      tx("ZNMI:%s,Y:;",TEMP[x]);
+    endfor
+  tx("ZNMO:NA0,J,Y:;"); tx("ZNMO:NA0,K,Y:;"); tx("ZNMO:NA0,L,Y:;"); tx("ZNMO:NA0,M,Y:;");
+  tx("ZNMO:NA1,J,Y:;"); tx("ZNMO:NA1,K,Y:;"); tx("ZNMO:NA1,L,Y:;"); tx("ZNMO:NA1,M,Y:;");
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+

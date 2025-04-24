@@ -1,0 +1,120 @@
+// Esta macro activa los MPS si es que hay continuidad
+
+function oMSS_PING_SGsAP()
+  string MSS;  
+  
+  MSS="MSSARA02"; ask(MSS,"Ingrese MSS: "); 
+  oMSS_PING_SGsAP2(MSS);
+  print("FIN!!!!");
+  
+endfunction
+
+void function oMSS_PING_SGsAP2(string CLARO_MSS)
+  string PCTime,filename,A,B,line,SIP1,SIP2,DIP1,DIP2,GISU2,FRASE;
+  string SCTP_NAME[],GISU[],ROLE[],STATE[],RESET="NO",UNIT="GISU",TRACE="NO";
+  integer handle,x,y,IND[],ini,fin;
+  
+  device(CLARO_MSS); 
+  tx("ZDCD;"); if(getline(line,"':'")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; 
+  filename= CLARO_MSS + "_" + "_SGsAP_SV" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  LOG_SQUARE("blue",CLARO_MSS); RESET="NO";
+  tx("ZUSL:,INCO:ALL:;");
+    while(getline(line," 'FLTY' OR 'RP' ")) print(line); endwhile
+  tx("ZUSI;");
+    if(getline(line," 'BSU-' ")) UNIT="BSU"; 
+    elseif(getline(line," 'GISU-' ")) UNIT="GISU";
+    endif
+  tx("ZOYV:SGSAP:;"); x=0;
+    while(getline(line," 'GISU-' OR 'BSU-' ")) x++;
+      strscan(line,"%s %d %s %s %s %s %s",SCTP_NAME[x],IND[x],GISU[x],ROLE[x],ROLE[x],STATE[x],STATE[x]);
+    endwhile y=x; 
+    for(x=1; x<=y; x++) 
+      print("%d %s %d %s %s ",x,SCTP_NAME[x],IND[x],GISU[x],ROLE[x]); 
+      if(STATE[x]<>"ASP-ACTIVE") settextcolor(RGB(250,0,0)); print("%s\n",STATE[x]); settextcolor(RGB(0,0,0));
+        else print("%s\n",STATE[x]); 
+      endif
+    endfor print("\nExisten %d SCTP SGsAP\n\n",y);
+    
+   ask(TRACE,"Desea hacer traces: [Y/NO] ");   
+   ask(RESET,"Desea Activar los SG's: [Y/NO] "); 
+   ini= 1; ask(ini,"Inicio: ??");
+   fin=1; ask(fin,"Fin: ??");
+      
+   for(x=ini; x<=fin; x++) 
+    settextcolor(RGB(0,0,250)); print("%d %s ->> %s IND %d ",x,CLARO_MSS,SCTP_NAME[x],IND[x]); settextcolor(RGB(0,0,0));
+    tx("ZOYV:SGSAP:NAME=%s:A;",SCTP_NAME[x]); 
+      if(getline(line,"'GISU-' OR 'BSU-' ")) strscan(line,"%s %s %s",GISU2,GISU2,GISU2); GISU2=strreplace(GISU2,"GISU-",""); GISU2=strreplace(GISU2,"BSU-",""); endif    
+      FRASE="SOURCE IPV4 ADDRESS 1  . . . . : ";  if(getline(line,"'%s'",FRASE)) SIP1=PHRASE(line,FRASE); endif   
+      FRASE="SOURCE IPV4 ADDRESS 2  . . . . : "; if(getline(line,"'%s'",FRASE)) SIP2=PHRASE(line,FRASE); endif
+      FRASE="PRIMARY DEST. IPV4 ADDRESS . . : "; if(getline(line,"'%s'",FRASE)) DIP1=PHRASE(line,FRASE); endif
+      FRASE="SECONDARY DEST. IPV4 ADDRESS . : "; if(getline(line,"'%s'",FRASE)) DIP2=PHRASE(line,FRASE); endif
+      print("PING FROM GISU/BSU: %s / SRC1 %s  DEST1: %s ",GISU2,SIP1,DIP1); 
+        if(SIP1<>"" OR DIP1<>"") PING(UNIT, GISU2, SIP1, DIP1, TRACE, "PRI"); 
+        else settextcolor(RGB(255,0,100)); print("NO DATA - PLEASE REVIEW ");settextcolor(RGB(0,0,0));   endif
+      print("/ SRC2 %s  DEST2 %s ",SIP2,DIP2);  
+      if(SIP2<>"" OR DIP2<>"") PING(UNIT, GISU2, SIP2, DIP2, TRACE, "SEC"); print("\n");  
+      else settextcolor(RGB(255,0,100)); print("NO DATA - PLEASE REVIEW\n");settextcolor(RGB(0,0,0));   endif
+   endfor
+   ini= 1; ask(ini,"Inicio: ??");
+   fin=1; ask(fin,"Inicio: ??");
+   
+   for(x=ini; x<=fin; x++) 
+    if(RESET=="Y")       
+      print("Taking DOWN %s\n",SCTP_NAME[x]); //tx("ZOYS:SGSAP:%s:DOWN;",SCTP_NAME[x]);
+      print("Bringing ACT %s\n",SCTP_NAME[x]); // tx("ZOYS:SGSAP:%s:ACT;",SCTP_NAME[x]);
+      tx("ZOYV:SGSAP:NAME=%s:A;",SCTP_NAME[x]);
+    endif
+    RESET="NO";
+    
+   endfor
+   
+ 
+   tx("ZOYV:SGSAP:;");  
+   device(CLARO_MSS); 
+   
+   
+ endfunction 
+ 
+/*########################
+  # FUNCIONES - NO TOCAR #
+  ########################*/
+
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function PING(string UNIT,string IPDU,string SIP1,string DIP1,string TRACE,string link)
+ string line;
+  tx("ZQRX:%s,%s::PING:SRC=\"%s\",HOST=\"%s\",;",UNIT,IPDU,SIP1,DIP1);
+    if(getline(line,"'1 packets received'")) print("OK ",link,SIP1,DIP1); 
+    elseif(getline(line,"'0 packets received'")) settextcolor(RGB(255,0,100));  print(" FAIL\n",link,SIP1,DIP1); settextcolor(RGB(0,0,0));      
+      if(TRACE=="Y") print(" -->> ##** TRACING %s FROM %s to %s\n",link,SIP1,DIP1);  
+        tx("ZQRX:%s,%s::TRACE:SRC=\"%s\",HOST=\"%s\",MAX=7;",UNIT,IPDU,SIP1,DIP1); 
+          while(getline(line,"'ms'")) print(line); endwhile     
+      endif
+    endif 
+endfunction
+
+string function IP(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); FRASE=strreplace(FRASE,"/"," ");
+  strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction
+
+string function PHRASE(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction

@@ -1,0 +1,115 @@
+function oMSS_tcp_ip_network_interfaces()
+  string filename,PCTime,Tel,line="",A,B,PRE,UNIT[],IP[];
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_tcp_ip_network_interfaces_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  print("4.5.2. Configuring IP routing support for internal Network Time Protocol\n");
+  LOG_SQUARE("4.5.2. Configuring IP routing support for internal Network Time Protocol "); 
+  tx("ZQRI:OMU::EL0;");
+  tx("ZQRI:CMM::EL0;"); 
+  tx("ZQRI:STU::EL0;");
+  tx("ZQRI:CHU,,0::EL0;");
+  tx("ZQRI:CHU,,1::EL0;");
+  tx("ZQRI:VLRU,,0::EL0;");
+  tx("ZQRI:VLRU,,1::EL0;");
+  tx("ZQRI:CMU::EL0;");
+  
+  print("4.6.2 Configuring the Operation and Maintenance LAN\n");
+  LOG_SQUARE("4.6.2 Configuring the Operation and Maintenance LAN"); 
+  tx("ZQRI:OMU::EL4;");
+  
+  print("4.7.1 Configuring OaM IPDUs - generic instructions\n");
+  LOG_SQUARE("4.7.1 Configuring OaM IPDUs - generic instructions"); 
+  tx("ZQRI:IPDU::EL0;");
+  
+  print("4.7.3 Configuring IP routing support for Traffica load balancing\n");
+  LOG_SQUARE("4.7.3 Configuring IP routing support for Traffica load balancing"); 
+  tx("ZQRI:IPDU::EL6;");
+  
+  print("4.8.2 Configuring IP routing support for Bi/Bc traffic\n");
+  LOG_SQUARE("4.8.2 Configuring IP routing support for Bi/Bc traffic"); 
+  tx("ZQRI:CHU,,0::EL4;");
+  
+  print("4.9 Lawful Interception LAN\n");
+  LOG_SQUARE("4.9 Lawful Interception LAN"); 
+  tx("ZQRI:STU::EL4;");
+  tx("ZQRI:OMU::EL6;");
+  
+  print("4.10.2 Configuring IP routing support for fraud reports\n");
+  LOG_SQUARE("4.10.2 Configuring IP routing support for fraud reports"); 
+  tx("ZQRI:STU::EL5;");
+  
+  print("4.11.2 Con?guring the Storage LAN\n");
+  LOG_SQUARE("4.11.2 Con?guring the Storage LAN"); 
+  tx("ZQRI:OMU::EL5;");
+  tx("ZQRI:CHU::EL5;");
+  
+  print("4.12.3 Configuring control plane IPDUs - generic instructions\n");
+  LOG_SQUARE("4.12.3 Configuring control plane IPDUs - generic instructions"); 
+  tx("ZQRI:IPDU::;");
+  tx("ZQRI:IPDU::EL0;");
+ 
+  print("4.12.4 Configuring GISUs - generic instructions\n");
+  LOG_SQUARE("4.12.4 Configuring GISUs - generic instructions"); 
+  tx("ZQRI:GISU::EL0;"); 
+  
+  print("4.13.1.2 Configuring IP routing support for H.248 load balancing\n");
+  LOG_SQUARE("4.13.1.2 Configuring IP routing support for H.248 load balancing"); 
+  tx("ZQRI:IPDU::EL4;"); 
+  tx("ZQRI:IPDU::EL5;");
+  
+  print("4.13.2.2 Configuring IP routing support for SIP load balancingn\n");
+  LOG_SQUARE("4.13.2.2 Configuring IP routing support for SIP load balancing"); 
+  tx("ZQRI:IPDU::EL6;"); 
+  tx("ZQRI:GISU::EL0;");
+  
+  print("4.13.4.2 Configuring DNS proxy service\n");
+  LOG_SQUARE("4.13.4.2 Configuring DNS proxy service"); 
+  tx("ZQRI:IPDU::EL6;"); 
+  
+  print("4.14.3.2 Configuring IP routing support for SGsAP\n");
+  LOG_SQUARE("4.14.3.2 Configuring IP routing support for SGsAP"); 
+  tx("ZQRI:GISU::EL1;"); 
+  tx("ZQRI:IPDU,3::EL1;"); 
+  tx("ZQRI:IPDU,6::EL1;"); 
+  tx("ZQRI:IPDU,4::EL1;"); 
+  tx("ZQRI:IPDU,7::EL1;"); 
+  tx("ZQRI:IPDU,3::EL4;"); 
+  tx("ZQRI:IPDU,6::EL4;"); 
+  tx("ZQRI:IPDU,4::EL5;"); 
+  tx("ZQRI:IPDU,7::EL5;"); 
+  
+  print("4.14.5.2 Configuring IP routing support for Sv\n");
+  LOG_SQUARE("4.14.5.2 Configuring IP routing support for Sv"); 
+  tx("ZQRI:GISU::EL1;"); 
+  tx("ZQRI:IPDU,5::EL1;"); 
+  tx("ZQRI:IPDU,5::EL6;");   
+  //fileclose(handle); 
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

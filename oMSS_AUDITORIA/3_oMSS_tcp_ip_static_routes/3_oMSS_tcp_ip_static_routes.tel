@@ -1,0 +1,133 @@
+function oMSS_tcp_ip_static_routes()
+  string filename,PCTime,Tel,line="",A,B,PRE,UNIT[];
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_tcp_ip_static_routes_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  print("4.6.2 Configuring the Operation and Maintenance LAN\n");
+  LOG_SQUARE("4.6.2 Configuring the Operation and Maintenance LAN"); 
+  tx("ZQKO:OMU,0;");
+  tx("ZQKO:OMU,1;");
+  
+  print("4.7.3 Configuring IP routing support for Traffica load balancing\n");
+  LOG_SQUARE("4.7.3 Configuring IP routing support for Traffica load balancing"); 
+  tx("ZQKO:IPDU,0;");
+  
+  print("4.8 Billing LAN\n");
+  LOG_SQUARE("4.8 Billing LAN"); 
+  tx("ZQKO:CHU,0;"); 
+  tx("ZQKO:CHU,1;"); 
+  tx("ZQKO:CHU,2;"); 
+  tx("ZQKO:CHU,3;");
+  
+  print("4.9 Lawful Interception LAN\n");
+  LOG_SQUARE("4.9 Lawful Interception LAN"); 
+  tx("ZQKO:STU,0;"); 
+  tx("ZQKO:OMU,0;"); 
+  tx("ZQKB:STU:;"); 
+  tx("ZQKB:OMU:;"); 
+  
+  
+  
+  print("4.10.2 Configuring IP routing support for fraud reports\n");
+  LOG_SQUARE("4.10.2 Configuring IP routing support for fraud reports"); 
+  tx("ZQKO:STU,0;"); 
+  
+  print("4.13.1.2 Configuring IP routing support for H.248 load balancing\n");
+  LOG_SQUARE("4.13.1.2 Configuring IP routing support for H.248 load balancing"); 
+  tx("ZUSI:IPDU;"); x=0;
+    while(getline(line,"'GRP2' AND 'WO-EX'"))
+      x++; strscan(line,"%s",UNIT[x]); UNIT[x]=strreplace(UNIT[x],"IPDU-","");
+      strscan(UNIT[x],"%s",UNIT[x]);
+    endwhile y=x;  
+    for(x=1; x<=y; x++) tx("ZQKO:IPDU,%s;",UNIT[x]); endfor
+ 
+  print("4.13.2.2 Configuring IP routing support for SIP load balancing\n");
+  LOG_SQUARE("4.13.2.2 Configuring IP routing support for SIP load balancing"); 
+  tx("ZUSI:GISU;"); x=0;
+    while(getline(line,"'GISU-' AND 'WO-EX'"))
+      x++; strscan(line,"%s",UNIT[x]); UNIT[x]=strreplace(UNIT[x],"GISU-","");
+      strscan(UNIT[x],"%s",UNIT[x]);
+    endwhile y=x;  
+    for(x=1; x<=y; x++) tx("ZQKO:GISU,%s;",UNIT[x]); endfor
+  tx("ZUSI:IPDU;"); x=0;
+    while(getline(line,"'GRP2' AND 'WO-EX'"))
+      x++; strscan(line,"%s",UNIT[x]); UNIT[x]=strreplace(UNIT[x],"IPDU-","");
+      strscan(UNIT[x],"%s",UNIT[x]);
+    endwhile y=x;  
+    for(x=1; x<=y; x++) tx("ZQKO:IPDU,%s;",UNIT[x]); endfor
+  
+  print("4.13.4.2 Con?guring DNS proxy service\n");
+  LOG_SQUARE("4.13.4.2 Con?guring DNS proxy service"); 
+  tx("ZUSI:IPDU;"); x=0;
+    while(getline(line,"'GRP2' AND 'WO-EX'"))
+      x++; strscan(line,"%s",UNIT[x]); UNIT[x]=strreplace(UNIT[x],"IPDU-","");
+      strscan(UNIT[x],"%s",UNIT[x]);
+    endwhile y=x;  
+    for(x=1; x<=y; x++) tx("ZQKO:IPDU,%s;",UNIT[x]); endfor
+  
+  print("4.14.3.2 Configuring IP routing support for SGsAP\n");
+  LOG_SQUARE("4.14.3.2 Configuring IP routing support for SGsAP"); 
+  tx("ZUSI:GISU;"); x=0;
+    while(getline(line,"'GISU-' AND 'WO-EX'"))
+      x++; strscan(line,"%s",UNIT[x]); UNIT[x]=strreplace(UNIT[x],"GISU-","");
+      strscan(UNIT[x],"%s",UNIT[x]);
+    endwhile y=x;  
+    for(x=1; x<=y; x++) tx("ZQKO:GISU,%s;",UNIT[x]); endfor
+  
+  print("ZQK1 SGsAP SCTP Primary IPF\n");
+  LOG_SQUARE("ZQK1 SGsAP SCTP Primary IPF"); 
+  tx("ZQKQ:IPDU;"); 
+  
+  print("4.14.5.2 Configuring IP routing support for Sv\n");
+  LOG_SQUARE("4.14.5.2 Configuring IP routing support for Sv"); 
+  tx("ZUSI:GISU;"); x=0;
+    while(getline(line,"'GISU-' AND 'WO-EX'"))
+      x++; strscan(line,"%s",UNIT[x]); UNIT[x]=strreplace(UNIT[x],"GISU-","");
+      strscan(UNIT[x],"%s",UNIT[x]);
+    endwhile y=x;  
+    for(x=1; x<=y; x++) tx("ZQKO:GISU,%s;",UNIT[x]); endfor
+  tx("ZQKQ:IPDU,5;");
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

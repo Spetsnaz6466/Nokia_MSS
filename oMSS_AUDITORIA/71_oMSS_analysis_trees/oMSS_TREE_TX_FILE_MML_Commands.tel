@@ -1,0 +1,82 @@
+function oMSS_TX_FILE_MML()
+  string filename,PCTime,Tel,line="",A,B,PRE,line2,line3[];
+  string filter,file; 
+  integer handle,x,y,m1,m2,file_handle,cuenta=300,z;  
+  
+  Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_BSS_PARAMETERS_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  filter="All0 files(*.*)|*.*"; file=askfile(filter); file_handle = fileopen(file,READ); x=0; y=0;
+  question(1, "CONFIRM COMMAND EXECUTION: Y/N ?"); answer(1, "Y\r");
+  question(2, "CONFIRMATION: Y/N/E ?"); answer(2, "Y\r");
+  m1=0; z=0;
+  while(1) 
+    if(fileread(file_handle,line,cuenta)); 
+     tx("%s",line); x++;
+       while(getline(line2," 'DIGITS' ")) z++; //print(line2);
+       endwhile    
+       if(getline(line2," 'ALREADY EXISTS' ")) print("%d /#%d ALREADY EXISTS %s",x,z,line); 
+       elseif(getline(line2," 'DIGIT ANALYSES NOT FOUND' ")) print("%d /#%d DIGIT ANALYSES NOT FOUND %s",x,z,line); m1++; line3[m1]=inttostr(x,DEC) +" "+line;     
+       elseif(getline(line2," 'ANALYSIS EXISTENT' ")) print("%d /#%d ANALYSIS EXISTENT %s",x,z,line);
+       elseif(getline(line2," 'SAME ACTIVATION STATUS ALREADY SET' ")) print("%d /#%d SAME ACTIVATION STATUS ALREADY SET %s",x,z,line); 
+       elseif(getline(line2," 'SUBDESTINATION EXISTS' ")) print("%d /#%d SUBDESTINATION EXISTS %s",x,z,line);  
+       elseif(getline(line2," 'PARAMETER SET NOT EXIST' ")) print("%d /#%d PARAMETER SET NOT EXIST %s",x,z,line); m1++; line3[m1]=inttostr(x,DEC) +" "+line;
+       elseif(getline(line2," 'SEMANTIC ERROR' ")) print("%d /#%d SEMANTIC ERROR %s",x,z,line); m1++; line3[m1]=inttostr(x,DEC) +" "+line;
+       elseif(getline(line2," 'SAME PARAMETER VALUE ALREADY SET' ")) print("%d /#%d SAME PARAMETER VALUE ALREADY SET %s",x,z,line);
+       elseif(getline(line2," 'CHANGING OF PARAMETER VALUE DENIED' ")) print("%d /#%d CHANGING OF PARAMETER VALUE DENIED %s",x,z,line);
+       elseif(getline(line2," 'ROUTE NONEXISTENT' ")) print("%d /#%d ROUTE NONEXISTENT %s",x,z,line); m1++; line3[m1]=inttostr(x,DEC) +" "+line; 
+       elseif(getline(line2," 'SUBDESTINATION NONEXISTENT' ")) print("%d /#%d SUBDESTINATION NONEXISTENT %s",x,z,line); m1++; line3[m1]=inttostr(x,DEC) +" "+line;     
+       elseif(getline(line2," 'LOCATION AREA DOES NOT EXIST' ")) print("%d /#%d LOCATION AREA DOES NOT EXIST %s",x,z,line); m1++; line3[m1]=inttostr(x,DEC) +" "+line;  
+       elseif(getline(line2," 'COMMAND EXECUTED' ")) print("%d /#%d COMMAND EXECUTED %s",x,z,line); y++;  
+       else print("%d /#%d  %s",x,z,line);  endif
+      else break;
+    endif
+    //delay(1000);
+  endwhile
+  fileclose(file_handle);  
+  print("\n\n"); LOG_SQUARE("RESUMEN");
+  print("Comandos enviados: %d\n",x);
+  print("Comandos ejecutados: %d\n",y);
+  print("Comandos No Ejecutados / Observacion:%d\n",m1);
+  for(m2=1;m2<=m1;m2++)
+    print("%s\n",line3[m2]);
+  endfor
+  
+  print("Línea Digitos contada: %d\n",z);
+  
+  print("FIN!!!!");
+ 
+ endfunction
+ 
+ 
+ 
+  
+ /*** SEMANTIC ERROR ***/ 
+/*** UNREASONABLE VALUE ***/ 
+ 
+
+
+
+ 
+
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

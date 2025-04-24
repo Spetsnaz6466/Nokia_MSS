@@ -1,0 +1,79 @@
+function oMSS_cdr_generation()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR,TEMP[];
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="cdr_generation";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR);
+  
+  tx("ZUSI:CHU;"); x=0;
+    while(getline(line,"'WO-EX'")) x++;
+      strscan(line,"%s",TEMP[x]); TEMP[x]=strreplace(TEMP[x],"-"," "); strscan(TEMP[x],"%s %s",TEMP[x],TEMP[x]);
+    endwhile y=x; 
+    for(x=1; x<=y; x++) tx("ZGTI:CDR:ORIG:CHU=%s:;",TEMP[x]); endfor
+    for(x=1; x<=y; x++) tx("ZGTI:CDR:ROAM:CHU=%s:;",TEMP[x]); endfor
+    for(x=1; x<=y; x++) tx("ZGTI:CDR:TERM:CHU=%s:;",TEMP[x]); endfor
+    for(x=1; x<=y; x++) tx("ZGTI:CDR:EVE:CHU=%s:;",TEMP[x]); endfor
+    for(x=1; x<=y; x++) tx("ZGTI:CDR:LOCA:CHU=%s:;",TEMP[x]); endfor
+    for(x=1; x<=y; x++) tx("ZGTI:CDR:SMS:CHU=%s:;",TEMP[x]); endfor
+  
+    for(x=1; x<=y; x++) 
+      tx("ZGTI:CDR:SUPS,CFU:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CFB:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CFNR:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CFNA:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,OCCF:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CFNS:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CT:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CDA:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CDI:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CW:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,HOLD:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CCBS:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CCNR:CHU=%s:;",TEMP[x]);    
+      tx("ZGTI:CDR:SUPS,MC:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,MPTY:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,AOCI:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,AOCC:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,AOCD:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,AOCE:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,BAOC:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,BOIC:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,BOIH:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,BORO:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,BAIC:CHU=%s:;",TEMP[x]);    
+      tx("ZGTI:CDR:SUPS,BIRO:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,CTR:CHU=%s:;",TEMP[x]);
+      tx("ZGTI:CDR:SUPS,IN:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,UUS1:CHU=%s:;",TEMP[x]);
+      tx("ZGTI:CDR:SUPS,UUS2:CHU=%s:;",TEMP[x]); 
+      tx("ZGTI:CDR:SUPS,UUS3:CHU=%s:;",TEMP[x]);
+      tx("ZGTI:CDR:SUPS,FM:CHU=%s:;",TEMP[x]);         
+  endfor
+
+  print("FIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

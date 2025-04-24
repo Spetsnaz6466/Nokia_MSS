@@ -1,0 +1,95 @@
+function oMSS_MML_AUTHORITY_GoLive()
+ string Tel;
+ integer handle2;  
+  
+ Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+ if(sniff())
+    pause(3,"Se tiene acceso al MSS %",Tel); 
+    LOG_SQUARE("blue",Tel);
+    SESSION_LOG(Tel);  
+    handle2 = fileopen(RESUME_LOG(Tel),NEW); 
+    MML_AUTH( handle2); 
+    fileclose(handle2);  
+ else
+    COLOR_PHRASE("red","NO ACCESS TO MSS " + Tel);
+ endif
+   COLOR_PHRASE("green","MACRO IS OVER");
+endfunction
+
+/*########################
+  # FUNCIONES - NO TOCAR #
+  ########################*/
+
+void function COLOR_PHRASE(string color,string information )
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ logprint("\n%s\n",information); logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+void function SESSION_LOG(string Tel)
+ string PCTime,line="",A,B,PRE,filename;
+ integer handle;
+ tx("ZDCD;"); 
+   if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+   PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; filename= Tel + "_MSS_" + PRE + "_" + PCTime + "_.TXT" ;
+    handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+   
+endfunction
+
+string function RESUME_LOG(string Tel)
+ string PCTime,line="",A,B,PRE,filename;
+ tx("ZDCD;"); 
+   if(getline(line,"'TIME  '")) 
+     strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); 
+   endif
+   PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; 
+    filename= "MML_AUTH_CMDS_" + Tel + "_MSS_" + PRE + "_" + PCTime + "_.TXT" ;
+ return filename;
+endfunction
+
+void function MML_AUTH(integer handle2)
+ string line,AUTHORITY[],temp,AUTHORITY_REQ[];
+ integer x,y;
+ LOG_SQUARE("blue","AUTHORITY"); 
+  tx("ZIAT:;"); x=0; 
+     while(getline(line,"'NO'")) x++; 
+       strscan(line,"%s %s",AUTHORITY[x],AUTHORITY_REQ[x]); 
+     endwhile  y=x;
+     print("Existen %d definiciones\n",y);
+     for(x=1; x<=y; x++) 
+       temp="ZIAM:"+ AUTHORITY[x] +":AUTH="+AUTHORITY_REQ[x]+",;"; 
+       print("* %d/%d- %s\n",x,y,temp);
+       fileprint(handle2,"%s\n",temp);
+      endfor
+     
+endfunction
+
+
+

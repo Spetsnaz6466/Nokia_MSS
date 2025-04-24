@@ -1,0 +1,58 @@
+function oMSS_incoming_call_control_parameter()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR;
+  string NCCP[],RG[],OWN[],CLIS[],NCLIC[],CALLNS[],PREACM[],REROU[],PARRAB[],ARABIP[],CONNPR[],OVISUP[],CDR[];
+
+  integer handle,x,y;  
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  VAR="incoming_call_control_parameter";
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR); x=0;
+  
+  tx("ZCPI:IN:;");
+    while(getline(line))
+    if(getline(line,"'NAME  : '")) x++; strscan(line,"%s %s %s",NCCP[x],NCCP[x],NCCP[x]); endif
+    if(getline(line,"'RESULT GROUP: '")) strscan(line,"%s %s %s ",RG[x],RG[x],RG[x]); endif
+    if(getline(line,"'PREACM   ='")) strscan(line,"%s %s %s %s %s %s %s %s %s %s %s %s",PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x],PREACM[x]); endif
+    if(getline(line,"'CONNPR  = '")) strscan(line,"%s %s %s %s %s %s %s %s %s %s %s %s",CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x],CONNPR[x]); endif   
+    if(getline(line,"'REROU'")) strscan(line,"%s %s %s %s %s %s",REROU[x],REROU[x],REROU[x],REROU[x],REROU[x],REROU[x]); endif
+    if(getline(line,"'OWN      = '")) strscan(line,"%s %s %s ",OWN[x],OWN[x],OWN[x]); endif
+    
+    if(getline(line,"'OVISUP  = '")) strscan(line,"%s %s %s %s %s %s %s %s %s %s %s %s",OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x],OVISUP[x]); endif   
+    
+    if(getline(line,"'CLIS     = '")) strscan(line,"%s %s %s ",CLIS[x],CLIS[x],CLIS[x]); endif
+    if(getline(line,"'NCLIC    = '")) strscan(line,"%s %s %s ",NCLIC[x],NCLIC[x],NCLIC[x]); endif
+    if(getline(line,"'CALLNS    = '")) strscan(line,"%s %s %s %s %s %s",CALLNS[x],CALLNS[x],CALLNS[x],PARRAB[x],PARRAB[x],PARRAB[x]); endif
+
+    endwhile
+ y=x;
+ print("# Name	OWN	CLIS	NCLIC	REROU\n");
+ for(x=1;x<=y; x++)
+ print("%d*- %s	%s %s %s %s\n",x,NCCP[x],OWN[x],CLIS[x],NCLIC[x],REROU[x]);
+ endfor
+  print("\nFIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
