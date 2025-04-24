@@ -1,0 +1,106 @@
+function oMSS_PING_FISCALIA_FROM_OMU_STU()
+  string filename,PCTime,Tel,line="",A,B,PRE,UNIT,SOA;
+  string UNIT_ID,GW,IPFISCALIA;
+  integer handle;  
+  
+  //## MSS & UNIT UNDER PING TEST 
+  Tel="MSSTRI02"; 
+  UNIT="OMU"; 
+  IPFISCALIA="X.X.X.X";
+ 
+   
+  ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); 
+  ask(UNIT,"INGRESE UNIDAD (OMU, IPDU...): "); UNIT=strupper(UNIT);
+  device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_PING_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  tx("ZUSI:%s;",UNIT);
+    while(getline(line,"'WO-EX'")) print(line);
+      strscan(line,"%s",UNIT_ID); 
+      UNIT_ID=strreplace(UNIT_ID,"-"," ");
+      strscan(UNIT_ID,"%s %s",UNIT_ID,UNIT_ID); 
+    endwhile
+    
+  tx("ZQRS:%s,%s;",UNIT,UNIT_ID);
+  
+  tx("ZQKO:%s,%s;",UNIT,UNIT_ID);
+    if(getline(line,"'SOURCE ADDRESS: '"))
+      strscan(line,"%s %s %s",SOA,SOA,SOA); 
+    endif 
+    if(getline(line,"'DEFAULT GW    : '"))
+     print(line);
+     strscan(line,"%s %s %s %s",GW,GW,GW,GW); 
+    endif 
+  tx("ZQRX:%s,%s::PING:SRC=\"%s\",HOST=\"%s\";",UNIT,UNIT_ID,SOA,GW);
+  
+  //OMU
+  UNIT="OMU";
+  tx("ZQRI:%s,%s;",UNIT,UNIT_ID);
+    if(getline(line,"'EL6'")) print(line);
+    endif
+ 
+ // UNIT="OMU"; SOA="10.66.67.225"; //IPFISCALIA="10.189.131.1";
+  UNIT="OMU"; SOA="10.67.65.217"; //IPFISCALIA="10.189.131.1";
+  
+  tx("ZQRX:%s,%s::PING:SRC=\"%s\",IP=\"%s\";",UNIT,UNIT_ID,SOA,IPFISCALIA);
+    if(getline(line,"'1 packets received'")) print(line); endif 
+  tx("ZQRX:%s,%s::TRACE:SRC=\"%s\",IP=\"%s\";",UNIT,UNIT_ID,SOA,IPFISCALIA);
+  
+  //##STU
+  UNIT="STU";
+  tx("ZUSI:%s;",UNIT);
+    while(getline(line,"'WO-EX'")) print(line);
+      strscan(line,"%s",UNIT_ID); UNIT_ID=strreplace(UNIT_ID,"-"," ");
+      strscan(UNIT_ID,"%s %s",UNIT_ID,UNIT_ID); 
+    endwhile
+  tx("ZQRI:%s,%s;",UNIT,UNIT_ID);
+    if(getline(line,"'EL4'")) print(line);
+    endif
+   tx("ZQKO:%s,%s;",UNIT,UNIT_ID);
+    if(getline(line,"'SOURCE ADDRESS: '"))
+      strscan(line,"%s %s %s",SOA,SOA,SOA); 
+    endif 
+    if(getline(line,"'DEFAULT GW    : '"))
+    print(line);
+     strscan(line,"%s %s %s %s",GW,GW,GW,GW); 
+    endif 
+  tx("ZQRX:%s,%s::PING:SRC=\"%s\",HOST=\"%s\";",UNIT,UNIT_ID,SOA,GW);
+  
+  
+  //UNIT="STU"; SOA="10.66.67.226";  
+  UNIT="STU"; SOA="10.67.65.218";
+  //10.67.65.218
+  tx("ZQRX:%s,%s::PING:SRC=\"%s\",IP=\"%s\";",UNIT,UNIT_ID,SOA,IPFISCALIA);
+    if(getline(line,"'1 packets received'")) print(line); endif 
+  tx("ZQRX:%s,%s::TRACE:SRC=\"%s\",IP=\"%s\";",UNIT,UNIT_ID,SOA,IPFISCALIA);
+  
+     
+  print("\nFIN!!!");
+ endfunction
+ 
+
+
+ 
+
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

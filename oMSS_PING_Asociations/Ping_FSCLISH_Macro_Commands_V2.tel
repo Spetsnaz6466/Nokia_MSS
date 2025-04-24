@@ -1,0 +1,46 @@
+
+function PING_FSCLISH_Device()
+
+ string  line,file,filter,Tel,Day,Month,PCTime,Year,filename,linea;
+ integer cuenta=200,handle,file_handle,n;  
+ 
+ messagebox("Primero abra session con el Device");
+ Tel="MGWVEN03"; ask(Tel,"Ingrese Device Sesion"); device(Tel); send("date\r"); delay(1000);
+ if(getline(line,"':'")) 
+   print(line);
+   strscan(line,"%s %s %s %s %s %s",Month,Month,Day,PCTime,Year,Year); 
+   PCTime=strreplace(PCTime,":","-"); PCTime = Month + "_" + Day + "_" + Year + "_" + PCTime; 
+   filename= "LOG_" + Tel + "_"+ PCTime + ".TXT" ;
+   handle = fileopen(filename,NEW); fileclose(handle); 
+   print("Se ha creado LOG: %d",handle);
+   logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+ endif
+ 
+ send("fsclish -c 'show has functional-unit unit-info unit-type IPNIU show-mode verbose'\r"); delay(3000);
+ messagebox("Seleccionar File a ejecutar"); filter="All0 files(*.*)|*.*"; file=askfile(filter); 
+ file_handle = fileopen(file,READ); LOG_SQUARE(file);
+ 
+ n=0; 
+ while(1) 
+   if(fileread(file_handle,line,cuenta)); 
+    n++; send("%s",line); print("%d ",n); linea=line; 
+    while(1)
+     if(getline(line," '0 received,' ")) print("FAIL "); print("%s",linea); break;
+     elseif(getline(line," 'Network is unreachable' ")) print("Network is unreachable "); print("%s",linea); break;
+     elseif(getline(line," '64 bytes from' ")) print("OK ");  print("%s",linea); break;
+     endif 
+    endwhile
+   else break; endif
+ endwhile
+  fileclose(file_handle);
+ 
+ print("\nEND OF FILE. YES!!!");
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction

@@ -1,0 +1,4272 @@
+#HIT_SYSPRINT: "07.09.2022 17:23:32" HIT 2.10-3
+#HIT_PRINT:#######
+#HIT_PRINT:# OMU #
+#HIT_PRINT:#######
+ZUSI:OMU;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:23:22
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ OMU-0      0000 WO-EX   -                            
+ OMU-1      0001 SP-EX   -                            
+
+TOTAL OF 2     UNITS
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:OMU,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:22
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+OMU-0              
+  EL0        UP    1500  PI       169.250.0.250/23                             
+                         LI       169.250.0.20/23                              
+  EL1        UP    1500                                                        
+  EL4        UP    1500  P        10.66.67.194/28                              
+                         L        10.66.67.193/28                              
+  EL5        UP    1500  PI       192.168.250.100/24                           
+                                    iSCSI                                   
+  EL6        UP    1500  L        10.66.67.225/28                              
+  EMB0       UP    1500  PI       10.20.1.0/21                                 
+  EMB1       UP    1500  PI       10.30.1.0/21                                 
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:OMU,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:23
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+OMU-1              
+  EL0        UP    1500  PI       169.250.0.251/23                             
+                         LI      (169.250.0.20/23)                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  P        10.66.67.195/28                              
+                         L       (10.66.67.193/28)                             
+  EL5        UP    1500  PI       192.168.251.101/24                           
+                                    iSCSI                                   
+  EL6        UP    1500  L       (10.66.67.225/28)                             
+  EMB0       UP    1500  PI       10.20.1.1/21                                 
+  EMB1       UP    1500  PI       10.30.1.1/21                                 
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  
+#HIT_PRINT:#######
+#HIT_PRINT:# STU #
+#HIT_PRINT:#######
+ZUSI:STU;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:23:24
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ STU-0      0002 WO-EX   -                            
+ STU-1      0003 SP-EX   -                            
+
+TOTAL OF 2     UNITS
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:STU,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:25
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+STU-0              
+  EL0        UP    1500  PI       169.250.0.254/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.66.67.226/28                              
+  EL5        UP    1500  L        10.66.67.211/28                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:STU,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:26
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+STU-1              
+  EL0        UP    1500  PI       169.250.0.255/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L       (10.66.67.226/28)                             
+  EL5        UP    1500  L       (10.66.67.211/28)                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  
+#HIT_PRINT:#######
+#HIT_PRINT:# CMU #
+#HIT_PRINT:#######
+ZUSI:CMU;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:23:27
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ CMU-0      000A WO-EX   -                            
+ CMU-1      000B SP-EX   -                            
+
+TOTAL OF 2     UNITS
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:CMU,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:27
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CMU-0              
+  EL0        UP    1500  PI       169.250.1.170/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CMU,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:28
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CMU-1              
+  EL0        UP    1500  PI       169.250.1.171/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  
+#HIT_PRINT:#######
+#HIT_PRINT:# CMM #
+#HIT_PRINT:#######
+ZUSI:CMM;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:23:29
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ CMM-0      0004 WO-EX   -                            
+ CMM-1      0005 SP-EX   -                            
+
+TOTAL OF 2     UNITS
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:CMM,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:29
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CMM-0              
+  EL0        UP    1500  PI       169.250.0.252/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CMM,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:30
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CMM-1              
+  EL0        UP    1500  PI       169.250.0.253/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  
+#HIT_PRINT:########
+#HIT_PRINT:# IPDU #
+#HIT_PRINT:########
+ZUSI:IPDU;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:23:31
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ IPDU-0     0070 WO-EX   -                            
+ IPDU-1     0071 WO-EX   -                            
+ IPDU-2     0072 SP-EX  IDLE                          
+ IPDU-3     0073 WO-EX  GRP2                          
+ IPDU-4     0074 WO-EX  GRP2                          
+ IPDU-5     0075 WO-EX  GRP2                          
+ IPDU-6     0076 WO-EX  GRP2                          
+ IPDU-7     0077 WO-EX  GRP2                          
+ IPDU-8     0078 WO-EX  GRP2                          
+ IPDU-9     0079 WO-EX  GRP2                          
+ IPDU-10    007A WO-EX  GRP2                          
+ IPDU-11    0100 SP-EX  IDLE GRP2                     
+
+TOTAL OF 12    UNITS
+ GROUP 2 OF N+1 REPLACEABLE  9                                                 
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:IPDU,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:31
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-0             
+  EL0        UP    1500  PI       169.250.0.230/23                             
+                         LI       169.250.0.1/23                               
+  EL1        UP    1500                                                        
+  EL4        UP    1500                                                        
+  EL5        UP    1500                                                        
+  EL6        UP    1500  L        10.66.67.209/28                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:32
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-1             
+  EL0        UP    1500  PI       169.250.0.231/23                             
+                         LI       169.250.0.2/23                               
+  EL1        UP    1500                                                        
+  EL4        UP    1500                                                        
+  EL5        UP    1500                                                        
+  EL6        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,2::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:33
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-2             
+  EL0        UP    1500  PI       169.250.0.232/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500                                                        
+  EL5        UP    1500                                                        
+  EL6        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,3::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:34
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-3             
+  EL0        UP    1500  PI       169.250.0.233/23                             
+                         LI       169.250.0.4/23                               
+  EL1        UP    1500  L        10.61.160.1/26                               
+  EL4        UP    1500  L        10.40.172.1/26                               
+                         L        10.40.172.11/26                              
+  EL5        UP    1500  L        10.41.172.1/26                               
+  EL6        UP    1500  LV       10.40.172.65/26                              
+                         L        10.40.172.81/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,4::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:34
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-4             
+  EL0        UP    1500  PI       169.250.0.234/23                             
+                         LI       169.250.0.5/23                               
+  EL1        UP    1500  L        10.61.161.1/26                               
+  EL4        UP    1500  L        10.40.172.2/26                               
+  EL5        UP    1500  L        10.41.172.2/26                               
+                         L        10.41.172.11/26                              
+  EL6        UP    1500  LV       10.40.172.66/26                              
+                         L        10.40.172.82/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,5::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:35
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-5             
+  EL0        UP    1500  PI       169.250.0.235/23                             
+                         LI       169.250.0.6/23                               
+  EL1        UP    1500  L        10.41.172.65/26                              
+  EL4        UP    1500  L        10.40.172.3/26                               
+  EL5        UP    1500  L        10.41.172.3/26                               
+  EL6        UP    1500  LV       10.40.172.67/26                              
+                         L        10.40.172.83/26                              
+                         L        10.40.172.77/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,6::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:36
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-6             
+  EL0        UP    1500  PI       169.250.0.236/23                             
+                         LI       169.250.0.7/23                               
+  EL1        UP    1500  L        10.61.160.65/26                              
+  EL4        UP    1500  L        10.40.172.4/26                               
+                         L        10.40.172.12/26                              
+  EL5        UP    1500  L        10.41.172.4/26                               
+  EL6        UP    1500  LV       10.40.172.68/26                              
+                         L        10.40.172.84/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,7::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:37
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-7             
+  EL0        UP    1500  PI       169.250.0.237/23                             
+                         LI       169.250.0.8/23                               
+  EL1        UP    1500  L        10.61.161.65/26                              
+  EL4        UP    1500  L        10.40.172.5/26                               
+  EL5        UP    1500  L        10.41.172.5/26                               
+                         L        10.41.172.12/26                              
+  EL6        UP    1500  LV       10.40.172.69/26                              
+                         L        10.40.172.85/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,8::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:37
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-8             
+  EL0        UP    1500  PI       169.250.0.238/23                             
+                         LI       169.250.0.9/23                               
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.40.172.6/26                               
+  EL5        UP    1500  L        10.41.172.6/26                               
+  EL6        UP    1500  LV       10.40.172.70/26                              
+                         L        10.40.172.86/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,9::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:38
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-9             
+  EL0        UP    1500  PI       169.250.0.239/23                             
+                         LI       169.250.0.10/23                              
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.40.172.7/26                               
+  EL5        UP    1500  L        10.41.172.7/26                               
+  EL6        UP    1500  LV       10.40.172.71/26                              
+                         L        10.40.172.87/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,10::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:39
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-10            
+  EL0        UP    1500  PI       169.250.0.240/23                             
+                         LI       169.250.0.11/23                              
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.40.172.8/26                               
+  EL5        UP    1500  L        10.41.172.8/26                               
+  EL6        UP    1500  LV       10.40.172.72/26                              
+                         L        10.40.172.88/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:IPDU,11::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:39
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+IPDU-11            
+  EL0        UP    1500  PI       169.250.0.241/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500                                                        
+  EL5        UP    1500                                                        
+  EL6        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  
+#HIT_PRINT:########
+#HIT_PRINT:# GISU #
+#HIT_PRINT:########
+ZUSI:GISU;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:23:40
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ GISU-0     003A WO-EX   -                            
+ GISU-1     003B WO-EX   -                            
+ GISU-2     003C WO-EX   -                            
+ GISU-3     003D WO-EX   -                            
+ GISU-4     003E WO-EX   -                            
+ GISU-5     003F WO-EX   -                            
+ GISU-6     0040 WO-EX   -                            
+ GISU-7     0041 WO-EX   -                            
+ GISU-8     0042 WO-EX   -                            
+ GISU-9     0043 WO-EX   -                            
+ GISU-10    0044 WO-EX   -                            
+ GISU-11    0045 WO-EX   -                            
+ GISU-12    0046 WO-EX   -                            
+ GISU-13    0047 WO-EX   -                            
+ GISU-14    0048 WO-EX   -                            
+ GISU-15    0049 WO-EX   -                            
+ GISU-16    004A WO-EX   -                            
+ GISU-17    004B WO-EX   -                            
+ GISU-18    004C WO-EX   -                            
+ GISU-19    004D WO-EX   -                            
+ GISU-20    004E WO-EX   -                            
+ GISU-21    004F WO-EX   -                            
+ GISU-22    0050 WO-EX   -                            
+ GISU-23    0051 WO-EX   -                            
+ GISU-24    0052 WO-EX   -                            
+ GISU-25    0053 WO-EX   -                            
+ GISU-26    0054 WO-EX   -                            
+ GISU-27    0055 WO-EX   -                            
+ GISU-28    0056 WO-EX   -                            
+ GISU-29    0057 WO-EX   -                            
+ GISU-30    0058 WO-EX   -                            
+ GISU-31    0059 WO-EX   -                            
+ GISU-32    005A WO-EX   -                            
+ GISU-33    005B WO-EX   -                            
+ GISU-34    005C WO-EX   -                            
+ GISU-35    005D WO-EX   -                            
+ GISU-36    005E WO-EX   -                            
+ GISU-37    005F WO-EX   -                            
+ GISU-38    0060 WO-EX   -                            
+ GISU-39    0061 WO-EX   -                            
+ GISU-40    0062 WO-EX   -                            
+ GISU-41    0063 WO-EX   -                            
+ GISU-42    0064 WO-EX   -                            
+ GISU-43    0065 WO-EX   -                            
+ GISU-44    0066 WO-EX   -                            
+ GISU-45    0067 WO-EX   -                            
+ GISU-46    0068 WO-EX   -                            
+ GISU-47    0069 WO-EX   -                            
+ GISU-48    006A WO-EX   -                            
+ GISU-49    006B WO-EX   -                            
+ GISU-50    006C WO-EX   -                            
+ GISU-51    006D WO-EX   -                            
+ GISU-52    00BE WO-EX   -                            
+ GISU-53    00BF WO-EX   -                            
+ GISU-54    00C0 WO-EX   -                            
+ GISU-55    00C1 WO-EX   -                            
+ GISU-56    00C2 WO-EX   -                            
+ GISU-57    00C3 WO-EX   -                            
+ GISU-58    00C4 WO-EX   -                            
+ GISU-59    00C5 WO-EX   -                            
+ GISU-60    00C6 WO-EX   -                            
+ GISU-61    00C7 WO-EX   -                            
+ GISU-62    00C8 WO-EX   -                            
+ GISU-63    00C9 WO-EX   -                            
+ GISU-64    00CA WO-EX   -                            
+ GISU-65    00CB WO-EX   -                            
+ GISU-66    00CC WO-EX   -                            
+ GISU-67    00CD WO-EX   -                            
+ GISU-68    00CE WO-EX   -                            
+ GISU-69    00CF WO-EX   -                            
+ GISU-70    00D0 WO-EX   -                            
+ GISU-71    00D1 WO-EX   -                            
+ GISU-72    00D2 WO-EX   -                            
+ GISU-73    00D3 WO-EX   -                            
+ GISU-74    00D4 WO-EX   -                            
+ GISU-75    00D5 WO-EX   -                            
+ GISU-76    00D6 WO-EX   -                            
+ GISU-77    00D7 WO-EX   -                            
+ GISU-78    00D8 WO-EX   -                            
+ GISU-79    00D9 WO-EX   -                            
+ GISU-80    00DA WO-EX   -                            
+ GISU-81    00DB WO-EX   -                            
+ GISU-82    00DC WO-EX   -                            
+ GISU-83    00DD WO-EX   -                            
+ GISU-84    00DE WO-EX   -                            
+ GISU-85    00DF SP-EX  IDLE                          
+
+TOTAL OF 86    UNITS
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:GISU,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:41
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-0             
+  EL0        UP    1500  PI       169.250.1.0/23                               
+                         LI       169.250.0.100/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.2/26                               
+                         L        10.61.161.2/26                               
+                         L        10.41.172.66/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:42
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-1             
+  EL0        UP    1500  PI       169.250.1.1/23                               
+                         LI       169.250.0.101/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.66/26                              
+                         L        10.61.161.66/26                              
+                         L        10.41.172.67/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,2::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:43
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-2             
+  EL0        UP    1500  PI       169.250.1.2/23                               
+                         LI       169.250.0.102/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.3/26                               
+                         L        10.61.161.3/26                               
+                         L        10.41.172.68/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,3::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:43
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-3             
+  EL0        UP    1500  PI       169.250.1.3/23                               
+                         LI       169.250.0.103/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.67/26                              
+                         L        10.61.161.67/26                              
+                         L        10.41.172.69/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,4::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:44
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-4             
+  EL0        UP    1500  PI       169.250.1.4/23                               
+                         LI       169.250.0.104/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.4/26                               
+                         L        10.61.161.4/26                               
+                         L        10.41.172.70/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,5::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:45
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-5             
+  EL0        UP    1500  PI       169.250.1.5/23                               
+                         LI       169.250.0.105/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.68/26                              
+                         L        10.61.161.68/26                              
+                         L        10.41.172.71/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,6::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:45
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-6             
+  EL0        UP    1500  PI       169.250.1.6/23                               
+                         LI       169.250.0.106/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.5/26                               
+                         L        10.61.161.5/26                               
+                         L        10.41.172.72/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,7::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:46
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-7             
+  EL0        UP    1500  PI       169.250.1.7/23                               
+                         LI       169.250.0.107/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.69/26                              
+                         L        10.61.161.69/26                              
+                         L        10.41.172.73/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,8::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:47
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-8             
+  EL0        UP    1500  PI       169.250.1.8/23                               
+                         LI       169.250.0.108/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.6/26                               
+                         L        10.61.161.6/26                               
+                         L        10.41.172.74/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,9::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:48
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-9             
+  EL0        UP    1500  PI       169.250.1.9/23                               
+                         LI       169.250.0.109/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.70/26                              
+                         L        10.61.161.70/26                              
+                         L        10.41.172.75/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,10::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:48
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-10            
+  EL0        UP    1500  PI       169.250.1.10/23                              
+                         LI       169.250.0.110/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.7/26                               
+                         L        10.61.161.7/26                               
+                         L        10.41.172.76/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,11::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:49
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-11            
+  EL0        UP    1500  PI       169.250.1.11/23                              
+                         LI       169.250.0.111/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.71/26                              
+                         L        10.61.161.71/26                              
+                         L        10.41.172.77/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,12::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:50
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-12            
+  EL0        UP    1500  PI       169.250.1.12/23                              
+                         LI       169.250.0.112/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.8/26                               
+                         L        10.61.161.8/26                               
+                         L        10.41.172.78/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,13::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:50
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-13            
+  EL0        UP    1500  PI       169.250.1.13/23                              
+                         LI       169.250.0.113/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.72/26                              
+                         L        10.61.161.72/26                              
+                         L        10.41.172.79/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,14::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:51
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-14            
+  EL0        UP    1500  PI       169.250.1.14/23                              
+                         LI       169.250.0.114/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.9/26                               
+                         L        10.61.161.9/26                               
+                         L        10.41.172.80/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,15::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:52
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-15            
+  EL0        UP    1500  PI       169.250.1.15/23                              
+                         LI       169.250.0.115/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.73/26                              
+                         L        10.61.161.73/26                              
+                         L        10.41.172.81/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,16::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:53
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-16            
+  EL0        UP    1500  PI       169.250.1.16/23                              
+                         LI       169.250.0.116/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.10/26                              
+                         L        10.61.161.10/26                              
+                         L        10.41.172.82/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,17::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:53
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-17            
+  EL0        UP    1500  PI       169.250.1.17/23                              
+                         LI       169.250.0.117/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.74/26                              
+                         L        10.61.161.74/26                              
+                         L        10.41.172.83/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,18::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:54
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-18            
+  EL0        UP    1500  PI       169.250.1.18/23                              
+                         LI       169.250.0.118/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.11/26                              
+                         L        10.61.161.11/26                              
+                         L        10.41.172.84/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,19::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:55
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-19            
+  EL0        UP    1500  PI       169.250.1.19/23                              
+                         LI       169.250.0.119/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.75/26                              
+                         L        10.61.161.75/26                              
+                         L        10.41.172.85/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,20::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:55
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-20            
+  EL0        UP    1500  PI       169.250.1.20/23                              
+                         LI       169.250.0.120/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.12/26                              
+                         L        10.61.161.12/26                              
+                         L        10.41.172.86/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,21::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:56
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-21            
+  EL0        UP    1500  PI       169.250.1.21/23                              
+                         LI       169.250.0.121/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.76/26                              
+                         L        10.61.161.76/26                              
+                         L        10.41.172.87/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,22::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:57
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-22            
+  EL0        UP    1500  PI       169.250.1.22/23                              
+                         LI       169.250.0.122/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.13/26                              
+                         L        10.61.161.13/26                              
+                         L        10.41.172.88/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,23::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:58
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-23            
+  EL0        UP    1500  PI       169.250.1.23/23                              
+                         LI       169.250.0.123/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.77/26                              
+                         L        10.61.161.77/26                              
+                         L        10.41.172.89/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,24::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:58
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-24            
+  EL0        UP    1500  PI       169.250.1.24/23                              
+                         LI       169.250.0.124/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.14/26                              
+                         L        10.61.161.14/26                              
+                         L        10.41.172.90/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,25::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:23:59
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-25            
+  EL0        UP    1500  PI       169.250.1.25/23                              
+                         LI       169.250.0.125/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.78/26                              
+                         L        10.61.161.78/26                              
+                         L        10.41.172.91/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,26::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:00
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-26            
+  EL0        UP    1500  PI       169.250.1.26/23                              
+                         LI       169.250.0.126/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.15/26                              
+                         L        10.61.161.15/26                              
+                         L        10.41.172.92/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,27::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:00
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-27            
+  EL0        UP    1500  PI       169.250.1.27/23                              
+                         LI       169.250.0.127/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.79/26                              
+                         L        10.61.161.79/26                              
+                         L        10.41.172.93/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,28::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:01
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-28            
+  EL0        UP    1500  PI       169.250.1.28/23                              
+                         LI       169.250.0.128/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.16/26                              
+                         L        10.61.161.16/26                              
+                         L        10.41.172.94/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,29::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:02
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-29            
+  EL0        UP    1500  PI       169.250.1.29/23                              
+                         LI       169.250.0.129/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.80/26                              
+                         L        10.61.161.80/26                              
+                         L        10.41.172.95/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,30::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:03
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-30            
+  EL0        UP    1500  PI       169.250.1.30/23                              
+                         LI       169.250.0.130/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.17/26                              
+                         L        10.61.161.17/26                              
+                         L        10.41.172.96/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,31::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:03
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-31            
+  EL0        UP    1500  PI       169.250.1.31/23                              
+                         LI       169.250.0.131/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.81/26                              
+                         L        10.61.161.81/26                              
+                         L        10.41.172.97/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,32::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:04
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-32            
+  EL0        UP    1500  PI       169.250.1.32/23                              
+                         LI       169.250.0.132/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.18/26                              
+                         L        10.61.161.18/26                              
+                         L        10.41.172.98/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,33::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:05
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-33            
+  EL0        UP    1500  PI       169.250.1.33/23                              
+                         LI       169.250.0.133/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.82/26                              
+                         L        10.61.161.82/26                              
+                         L        10.41.172.99/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,34::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:05
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-34            
+  EL0        UP    1500  PI       169.250.1.34/23                              
+                         LI       169.250.0.134/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.19/26                              
+                         L        10.61.161.19/26                              
+                         L        10.41.172.100/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,35::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:06
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-35            
+  EL0        UP    1500  PI       169.250.1.35/23                              
+                         LI       169.250.0.135/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.83/26                              
+                         L        10.61.161.83/26                              
+                         L        10.41.172.101/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,36::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:07
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-36            
+  EL0        UP    1500  PI       169.250.1.36/23                              
+                         LI       169.250.0.136/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.20/26                              
+                         L        10.61.161.20/26                              
+                         L        10.41.172.102/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,37::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:07
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-37            
+  EL0        UP    1500  PI       169.250.1.37/23                              
+                         LI       169.250.0.137/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.84/26                              
+                         L        10.61.161.84/26                              
+                         L        10.41.172.103/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,38::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:08
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-38            
+  EL0        UP    1500  PI       169.250.1.38/23                              
+                         LI       169.250.0.138/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.21/26                              
+                         L        10.61.161.21/26                              
+                         L        10.41.172.104/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,39::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:09
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-39            
+  EL0        UP    1500  PI       169.250.1.39/23                              
+                         LI       169.250.0.139/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.85/26                              
+                         L        10.61.161.85/26                              
+                         L        10.41.172.105/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,40::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:10
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-40            
+  EL0        UP    1500  PI       169.250.1.40/23                              
+                         LI       169.250.0.140/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.22/26                              
+                         L        10.61.161.22/26                              
+                         L        10.41.172.106/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,41::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:10
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-41            
+  EL0        UP    1500  PI       169.250.1.41/23                              
+                         LI       169.250.0.141/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.86/26                              
+                         L        10.61.161.86/26                              
+                         L        10.41.172.107/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,42::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:11
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-42            
+  EL0        UP    1500  PI       169.250.1.42/23                              
+                         LI       169.250.0.142/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.23/26                              
+                         L        10.61.161.23/26                              
+                         L        10.41.172.108/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,43::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:12
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-43            
+  EL0        UP    1500  PI       169.250.1.43/23                              
+                         LI       169.250.0.143/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.87/26                              
+                         L        10.61.161.87/26                              
+                         L        10.41.172.109/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,44::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:12
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-44            
+  EL0        UP    1500  PI       169.250.1.44/23                              
+                         LI       169.250.0.144/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.24/26                              
+                         L        10.61.161.24/26                              
+                         L        10.41.172.110/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,45::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:13
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-45            
+  EL0        UP    1500  PI       169.250.1.45/23                              
+                         LI       169.250.0.145/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.88/26                              
+                         L        10.61.161.88/26                              
+                         L        10.41.172.111/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,46::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:14
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-46            
+  EL0        UP    1500  PI       169.250.1.46/23                              
+                         LI       169.250.0.146/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.25/26                              
+                         L        10.61.161.25/26                              
+                         L        10.41.172.112/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,47::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:15
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-47            
+  EL0        UP    1500  PI       169.250.1.47/23                              
+                         LI       169.250.0.147/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.89/26                              
+                         L        10.61.161.89/26                              
+                         L        10.41.172.113/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,48::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:15
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-48            
+  EL0        UP    1500  PI       169.250.1.48/23                              
+                         LI       169.250.0.148/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.26/26                              
+                         L        10.61.161.26/26                              
+                         L        10.41.172.114/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,49::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:16
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-49            
+  EL0        UP    1500  PI       169.250.1.49/23                              
+                         LI       169.250.0.149/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.90/26                              
+                         L        10.61.161.90/26                              
+                         L        10.41.172.115/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,50::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:17
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-50            
+  EL0        UP    1500  PI       169.250.1.50/23                              
+                         LI       169.250.0.150/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.27/26                              
+                         L        10.61.161.27/26                              
+                         L        10.41.172.116/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,51::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:17
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-51            
+  EL0        UP    1500  PI       169.250.1.51/23                              
+                         LI       169.250.0.151/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.91/26                              
+                         L        10.61.161.91/26                              
+                         L        10.41.172.117/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,52::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:18
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-52            
+  EL0        UP    1500  PI       169.250.1.52/23                              
+                         LI       169.250.0.152/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.28/26                              
+                         L        10.61.161.28/26                              
+                         L        10.41.172.118/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,53::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:19
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-53            
+  EL0        UP    1500  PI       169.250.1.53/23                              
+                         LI       169.250.0.153/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.92/26                              
+                         L        10.61.161.92/26                              
+                         L        10.41.172.119/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,54::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:19
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-54            
+  EL0        UP    1500  PI       169.250.1.54/23                              
+                         LI       169.250.0.154/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.29/26                              
+                         L        10.61.161.29/26                              
+                         L        10.41.172.120/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,55::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:20
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-55            
+  EL0        UP    1500  PI       169.250.1.55/23                              
+                         LI       169.250.0.155/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.93/26                              
+                         L        10.61.161.93/26                              
+                         L        10.41.172.121/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,56::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:21
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-56            
+  EL0        UP    1500  PI       169.250.1.56/23                              
+                         LI       169.250.0.156/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.30/26                              
+                         L        10.61.161.30/26                              
+                         L        10.41.172.122/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,57::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:21
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-57            
+  EL0        UP    1500  PI       169.250.1.57/23                              
+                         LI       169.250.0.157/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.94/26                              
+                         L        10.61.161.94/26                              
+                         L        10.41.172.123/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,58::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:22
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-58            
+  EL0        UP    1500  PI       169.250.1.58/23                              
+                         LI       169.250.0.158/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.31/26                              
+                         L        10.61.161.31/26                              
+                         L        10.41.172.124/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,59::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:23
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-59            
+  EL0        UP    1500  PI       169.250.1.59/23                              
+                         LI       169.250.0.159/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.95/26                              
+                         L        10.61.161.95/26                              
+                         L        10.41.172.125/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,60::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:24
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-60            
+  EL0        UP    1500  PI       169.250.1.60/23                              
+                         LI       169.250.0.160/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.32/26                              
+                         L        10.61.161.32/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,61::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:24
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-61            
+  EL0        UP    1500  PI       169.250.1.61/23                              
+                         LI       169.250.0.161/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.96/26                              
+                         L        10.61.161.96/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,62::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:25
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-62            
+  EL0        UP    1500  PI       169.250.1.62/23                              
+                         LI       169.250.0.162/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.33/26                              
+                         L        10.61.161.33/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,63::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:26
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-63            
+  EL0        UP    1500  PI       169.250.1.63/23                              
+                         LI       169.250.0.163/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.97/26                              
+                         L        10.61.161.97/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,64::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:27
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-64            
+  EL0        UP    1500  PI       169.250.1.64/23                              
+                         LI       169.250.0.164/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.34/26                              
+                         L        10.61.161.34/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,65::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:27
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-65            
+  EL0        UP    1500  PI       169.250.1.65/23                              
+                         LI       169.250.0.165/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.98/26                              
+                         L        10.61.161.98/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,66::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:28
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-66            
+  EL0        UP    1500  PI       169.250.1.66/23                              
+                         LI       169.250.0.166/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.35/26                              
+                         L        10.61.161.35/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,67::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:29
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-67            
+  EL0        UP    1500  PI       169.250.1.67/23                              
+                         LI       169.250.0.167/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.99/26                              
+                         L        10.61.161.99/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,68::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:29
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-68            
+  EL0        UP    1500  PI       169.250.1.68/23                              
+                         LI       169.250.0.168/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.36/26                              
+                         L        10.61.161.36/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,69::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:30
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-69            
+  EL0        UP    1500  PI       169.250.1.69/23                              
+                         LI       169.250.0.169/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.100/26                             
+                         L        10.61.161.100/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,70::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:31
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-70            
+  EL0        UP    1500  PI       169.250.1.70/23                              
+                         LI       169.250.0.170/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.37/26                              
+                         L        10.61.161.37/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,71::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:32
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-71            
+  EL0        UP    1500  PI       169.250.1.71/23                              
+                         LI       169.250.0.171/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.101/26                             
+                         L        10.61.161.101/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,72::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:32
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-72            
+  EL0        UP    1500  PI       169.250.1.72/23                              
+                         LI       169.250.0.172/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.38/26                              
+                         L        10.61.161.38/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,73::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:33
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-73            
+  EL0        UP    1500  PI       169.250.1.73/23                              
+                         LI       169.250.0.173/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.102/26                             
+                         L        10.61.161.102/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,74::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:34
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-74            
+  EL0        UP    1500  PI       169.250.1.74/23                              
+                         LI       169.250.0.174/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.39/26                              
+                         L        10.61.161.39/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,75::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:34
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-75            
+  EL0        UP    1500  PI       169.250.1.75/23                              
+                         LI       169.250.0.175/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.103/26                             
+                         L        10.61.161.103/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,76::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:35
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-76            
+  EL0        UP    1500  PI       169.250.1.76/23                              
+                         LI       169.250.0.176/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.40/26                              
+                         L        10.61.161.40/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,77::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:36
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-77            
+  EL0        UP    1500  PI       169.250.1.77/23                              
+                         LI       169.250.0.177/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.104/26                             
+                         L        10.61.161.104/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,78::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:37
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-78            
+  EL0        UP    1500  PI       169.250.1.78/23                              
+                         LI       169.250.0.178/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.41/26                              
+                         L        10.61.161.41/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,79::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:37
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-79            
+  EL0        UP    1500  PI       169.250.1.79/23                              
+                         LI       169.250.0.179/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.105/26                             
+                         L        10.61.161.105/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,80::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:38
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-80            
+  EL0        UP    1500  PI       169.250.1.80/23                              
+                         LI       169.250.0.180/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.42/26                              
+                         L        10.61.161.42/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,81::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:39
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-81            
+  EL0        UP    1500  PI       169.250.1.81/23                              
+                         LI       169.250.0.181/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.106/26                             
+                         L        10.61.161.106/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,82::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:39
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-82            
+  EL0        UP    1500  PI       169.250.1.82/23                              
+                         LI       169.250.0.182/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.43/26                              
+                         L        10.61.161.43/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,83::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:40
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-83            
+  EL0        UP    1500  PI       169.250.1.83/23                              
+                         LI       169.250.0.183/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.107/26                             
+                         L        10.61.161.107/26                             
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,84::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:41
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-84            
+  EL0        UP    1500  PI       169.250.1.84/23                              
+                         LI       169.250.0.184/23                             
+                         LV       10.40.172.65/32                              
+                         LV       10.40.172.66/32                              
+                         LV       10.40.172.67/32                              
+                         LV       10.40.172.68/32                              
+                         LV       10.40.172.69/32                              
+                         LV       10.40.172.70/32                              
+                         LV       10.40.172.71/32                              
+                         LV       10.40.172.72/32                              
+  EL1        UP    1500  L        10.61.160.44/26                              
+                         L        10.61.161.44/26                              
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:GISU,85::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:41
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+GISU-85            
+  EL0        UP    1500  PI       169.250.1.85/23                              
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  
+#HIT_PRINT:#######
+#HIT_PRINT:# CHU #
+#HIT_PRINT:#######
+ZUSI:CHU;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:24:42
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ CHU-0-0    0010 WO-EX  INAC                          
+ CHU-0-1    0011 SP-EX  INAC                          
+ CHU-1-0    0012 WO-EX  INAC                          
+ CHU-1-1    0013 SP-EX  INAC                          
+ CHU-2-0    0014 WO-EX  INAC                          
+ CHU-2-1    0015 SP-EX  INAC                          
+ CHU-3-0    0016 WO-EX  INAC                          
+ CHU-3-1    0017 SP-EX  INAC                          
+
+TOTAL OF 8     UNITS
+ INACTIVE UNIT               8                                                 
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:CHU,0,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:43
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-0-0            
+  EL0        UP    1500  PI       169.250.1.120/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.61.160.129/27                             
+  EL5        UP    1500  PI       192.168.250.102/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CHU,0,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:44
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-0-1            
+  EL0        UP    1500  PI       169.250.1.125/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L       (10.61.160.129/27)                            
+  EL5        UP    1500  PI       192.168.251.103/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CHU,1,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:44
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-1-0            
+  EL0        UP    1500  PI       169.250.1.121/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.61.160.130/27                             
+  EL5        UP    1500  PI       192.168.250.104/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CHU,1,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:45
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-1-1            
+  EL0        UP    1500  PI       169.250.1.126/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L       (10.61.160.130/27)                            
+  EL5        UP    1500  PI       192.168.251.105/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CHU,2,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:46
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-2-0            
+  EL0        UP    1500  PI       169.250.1.122/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.61.160.131/27                             
+  EL5        UP    1500  PI       192.168.250.106/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CHU,2,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:47
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-2-1            
+  EL0        UP    1500  PI       169.250.1.127/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L       (10.61.160.131/27)                            
+  EL5        UP    1500  PI       192.168.251.107/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CHU,3,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:48
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-3-0            
+  EL0        UP    1500  PI       169.250.1.123/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L        10.61.160.132/27                             
+  EL5        UP    1500  PI       192.168.250.108/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:CHU,3,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:49
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+CHU-3-1            
+  EL0        UP    1500  PI       169.250.1.128/23                             
+  EL1        UP    1500                                                        
+  EL4        UP    1500  L       (10.61.160.132/27)                            
+  EL5        UP    1500  PI       192.168.251.109/24                           
+                                    iSCSI                                   
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  
+#HIT_PRINT:########
+#HIT_PRINT:# VLRU #
+#HIT_PRINT:########
+ZUSI:VLRU;
+
+LOADING PROGRAM VERSION 1.21-0
+
+EXECUTION STARTED
+
+
+MSS       MSSARA02                  2022-09-07  17:24:49
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE  INFO
+ VLRU-0-0   001A WO-EX   -                            
+ VLRU-0-1   001B SP-EX   -                            
+ VLRU-1-0   001C WO-EX   -                            
+ VLRU-1-1   001D SP-EX   -                            
+ VLRU-2-0   001E WO-EX   -                            
+ VLRU-2-1   001F SP-EX   -                            
+ VLRU-3-0   0020 WO-EX   -                            
+ VLRU-3-1   0021 SP-EX   -                            
+ VLRU-4-0   0022 WO-EX   -                            
+ VLRU-4-1   0023 SP-EX   -                            
+ VLRU-5-0   0024 WO-EX   -                            
+ VLRU-5-1   0025 SP-EX   -                            
+ VLRU-6-0   0026 WO-EX   -                            
+ VLRU-6-1   0027 SP-EX   -                            
+ VLRU-7-0   0028 WO-EX   -                            
+ VLRU-7-1   0029 SP-EX   -                            
+ VLRU-8-0   002A WO-EX   -                            
+ VLRU-8-1   002B SP-EX   -                            
+ VLRU-9-0   002C WO-EX   -                            
+ VLRU-9-1   002D SP-EX   -                            
+ VLRU-10-0  002E WO-EX   -                            
+ VLRU-10-1  002F SP-EX   -                            
+ VLRU-11-0  0030 WO-EX   -                            
+ VLRU-11-1  0031 SP-EX   -                            
+ VLRU-12-0  0032 WO-EX   -                            
+ VLRU-12-1  0033 SP-EX   -                            
+ VLRU-13-0  0034 WO-EX   -                            
+ VLRU-13-1  0035 SP-EX   -                            
+ VLRU-14-0  0036 WO-EX   -                            
+ VLRU-14-1  0037 SP-EX   -                            
+ VLRU-15-0  0038 WO-EX   -                            
+ VLRU-15-1  0039 SP-EX   -                            
+ VLRU-16-0  00F6 WO-EX   -                            
+ VLRU-16-1  00F7 SP-EX   -                            
+ VLRU-17-0  00F8 WO-EX   -                            
+ VLRU-17-1  00F9 SP-EX   -                            
+ VLRU-18-0  00FA SP-EX   -                            
+ VLRU-18-1  00FB WO-EX   -                            
+ VLRU-19-0  00FC SP-EX   -                            
+ VLRU-19-1  00FD WO-EX   -                            
+
+TOTAL OF 40    UNITS
+
+COMMAND EXECUTED
+
+
+CONFIGURATION AND STATE HANDLING COMMAND <US_>
+<  ZQRI:VLRU,0,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:50
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-0-0           
+  EL0        UP    1500  PI       169.250.1.130/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,0,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:51
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-0-1           
+  EL0        UP    1500  PI       169.250.1.150/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,1,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:51
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-1-0           
+  EL0        UP    1500  PI       169.250.1.131/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,1,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:52
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-1-1           
+  EL0        UP    1500  PI       169.250.1.151/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,2,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:53
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-2-0           
+  EL0        UP    1500  PI       169.250.1.132/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,2,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:53
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-2-1           
+  EL0        UP    1500  PI       169.250.1.152/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,3,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:54
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-3-0           
+  EL0        UP    1500  PI       169.250.1.133/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,3,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:55
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-3-1           
+  EL0        UP    1500  PI       169.250.1.153/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,4,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:56
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-4-0           
+  EL0        UP    1500  PI       169.250.1.134/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,4,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:56
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-4-1           
+  EL0        UP    1500  PI       169.250.1.154/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,5,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:57
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-5-0           
+  EL0        UP    1500  PI       169.250.1.135/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,5,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:58
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-5-1           
+  EL0        UP    1500  PI       169.250.1.155/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,6,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:58
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-6-0           
+  EL0        UP    1500  PI       169.250.1.136/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,6,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:24:59
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-6-1           
+  EL0        UP    1500  PI       169.250.1.156/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,7,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:00
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-7-0           
+  EL0        UP    1500  PI       169.250.1.137/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,7,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:01
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-7-1           
+  EL0        UP    1500  PI       169.250.1.157/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,8,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:01
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-8-0           
+  EL0        UP    1500  PI       169.250.1.138/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,8,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:02
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-8-1           
+  EL0        UP    1500  PI       169.250.1.158/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,9,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:03
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-9-0           
+  EL0        UP    1500  PI       169.250.1.139/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,9,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:03
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-9-1           
+  EL0        UP    1500  PI       169.250.1.159/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,10,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:04
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-10-0          
+  EL0        UP    1500  PI       169.250.1.140/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,10,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:05
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-10-1          
+  EL0        UP    1500  PI       169.250.1.160/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,11,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:06
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-11-0          
+  EL0        UP    1500  PI       169.250.1.141/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,11,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:06
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-11-1          
+  EL0        UP    1500  PI       169.250.1.161/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,12,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:07
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-12-0          
+  EL0        UP    1500  PI       169.250.1.142/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,12,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:08
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-12-1          
+  EL0        UP    1500  PI       169.250.1.162/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,13,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:08
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-13-0          
+  EL0        UP    1500  PI       169.250.1.143/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,13,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:09
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-13-1          
+  EL0        UP    1500  PI       169.250.1.163/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,14,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:10
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-14-0          
+  EL0        UP    1500  PI       169.250.1.144/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,14,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:11
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-14-1          
+  EL0        UP    1500  PI       169.250.1.164/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,15,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:11
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-15-0          
+  EL0        UP    1500  PI       169.250.1.145/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,15,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:12
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-15-1          
+  EL0        UP    1500  PI       169.250.1.165/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,16,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:13
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-16-0          
+  EL0        UP    1500  PI       169.250.1.146/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,16,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:13
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-16-1          
+  EL0        UP    1500  PI       169.250.1.166/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,17,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:14
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-17-0          
+  EL0        UP    1500  PI       169.250.1.147/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,17,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:15
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-17-1          
+  EL0        UP    1500  PI       169.250.1.167/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,18,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:16
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-18-0          
+  EL0        UP    1500  PI       169.250.1.148/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,18,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:16
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-18-1          
+  EL0        UP    1500  PI       169.250.1.168/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,19,0::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:17
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-19-0          
+  EL0        UP    1500  PI       169.250.1.149/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRI:VLRU,19,1::;
+
+LOADING PROGRAM VERSION 1.38-1
+
+MSS       MSSARA02                  2022-09-07  17:25:18
+
+INTERROGATING NETWORK INTERFACE DATA
+
+UNIT         ADMIN       ADDR
+  INTERFACE  STATE MTU   ATTR     IP ADDRESS
+------------ ----- ----- -------- ---------------------------------------------
+VLRU-19-1          
+  EL0        UP    1500  PI       169.250.1.169/23                             
+  EL1        UP    1500                                                        
+
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  

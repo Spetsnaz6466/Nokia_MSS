@@ -1,0 +1,94 @@
+
+function oMSS_Busqueda_NDEST_NSDEST_BY_TREE()
+  string filename,PCTime,Tel,line="",A,B,PRE,VAR,TEMP[],TREE[],TON[];
+  string DIG[],ALT[],NDEST[],CH[],CNT[],NSDEST[],CORG[],NCHA[];
+  string ATYPE[],filename2,BDEST[],BDESTI;
+  integer handle,handle2,x,y,z,z0,z1,OldColor,a,b;
+
+  OldColor = settextcolor(RGB(0,0,0)); 
+  
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); 
+  PRE="ALL"; ask(PRE,"BUSCAR EN TREE BY # / ALL TREES[ALL]");  device(Tel); VAR="Busqueda_NDEST_NSDEST_BY_TREE";
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; 
+  filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  filename2= "oMSS_" + VAR + "_" + Tel + "_RESULTADOS_" + PCTime + "_.CSV" ; 
+  handle = fileopen(filename,NEW);  fileclose(handle); handle2 = fileopen(filename2,NEW);  //fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  //## BUSQUEDA DE ARBOLES
+  x=0; z0=0; a=0;
+  if(PRE=="ALL") B="1&&9999"; else B=PRE; endif
+  B="ZRIH:TREE="+B+";";
+  BDESTI="HLRENQNONP"; ask(BDESTI,"Ingrese NDEST/SDEST a buscar: ");
+  tx(B);
+    while(getline(line,"'TREE= '")) x++;
+       strscan(line,"%s %s %s %s",TREE[x],TREE[x],ATYPE[x],TON[x]);
+       ATYPE[x]=strreplace(ATYPE[x],"ATYPE=","");
+       TON[x]=strreplace(TON[x],"TON=",""); 
+    endwhile y=x; 
+    VAR=""; 
+    fileprint(handle2,"TREE,ATYPE,TON,DIG,ALT,NDEST,CH,CNT,NSDEST,CORG,NCHA\n");
+    print("\nTREE,ATYPE,TON\n");
+    for(x=1; x<=y; x++)
+      print("%d*- %s %s %s\n",x,TREE[x],ATYPE[x],TON[x]);
+    endfor
+    for(x=1; x<=y; x++)
+      TEMP[x]= "TREE " + TREE[x]; 
+      if(TEMP[x]<>VAR) z=0; LOG_SQUARE(TEMP[x]); VAR=TEMP[x]; endif 
+      TEMP[x]="ZRIH:TREE=" + TREE[x] + ",ATYPE=" + ATYPE[x] + ",TON=" +TON[x] + ";";  
+      print("%d*- %s\n",x,TEMP[x]); 
+      
+      tx(TEMP[x]);  settextcolor(RGB(255,0,0));   
+        while(getline(line,"'%s'",BDESTI)) a++;
+          BDEST[a]= "TREE "+ TREE[x] +" TON " + TON[x] + " ATYPE " + ATYPE[x] + " LINE__" + line;
+          print("%d**__ %s",a,BDEST[a]);
+        endwhile b=a;  settextcolor(OldColor);
+        
+      tx(TEMP[x]); z=0;      
+        while(getline(line,"'CHARGE'"))
+          strfetch(line,"27",TEMP[x]);
+          if(TEMP[x]=="0") z++;
+            strscan(line,"%s %s %s %s %s %s %s %s",DIG[z],ALT[z],NDEST[z],CH[z],CNT[z],NSDEST[z],CORG[z],NCHA[z]);
+          endif
+        endwhile
+        for(z1=1;z1 <=z; z1++)
+          print("TUPLA#%d*- %s %s %s %s %s %s %s %s %s %s %s\n",z1,TREE[x],ATYPE[x],TON[x],DIG[z1],ALT[z1],NDEST[z1],CH[z1],CNT[z1],NSDEST[z1],CORG[z1],NCHA[z1]);
+          fileprint(handle2,"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",TREE[x],ATYPE[x],TON[x],DIG[z1],ALT[z1],NDEST[z1],CH[z1],CNT[z1],NSDEST[z1],CORG[z1],NCHA[z1]);
+        endfor      
+        print("TREE %s ATYPE %s TON %s tiene %d tuplas\n\n",TREE[x],ATYPE[x],TON[x],z);
+        z0=z+z0; z=0;
+    endfor
+    settextcolor(RGB(0,0,255)); print("Existen %d tuplas insertadas\n\n",z0); settextcolor(OldColor);
+        
+  fileclose(handle2); 
+  
+  for(a=1; a <= b ; a++)     
+    print("%d/%d*- %s",a,b,BDEST[a]); 
+  endfor
+  LOG_SQUARE("FIN");
+  
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ integer OldColor;
+
+ OldColor = settextcolor(RGB(0,0,0));
+ settextcolor(RGB(0,0,255));
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(OldColor);
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+

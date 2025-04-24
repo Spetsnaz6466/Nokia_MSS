@@ -1,0 +1,84 @@
+function ventana()
+string line,DEV,IP;
+integer x;
+
+ //TCPIP=1, NAME, IP/PORT, NO_DX=0, PERMANENT=1, SSH=4, SSH_VER=2
+DEV="MSSING02_2"; 
+IP="10.68.46.129";
+IP=IP+":22";
+if(devicecreate(1,DEV, IP, 1, 1, 2,2))
+  setloginq("MSSING02_2", "ENTER USERNAME <", "ENTER PASSWORD <", 1);
+  setlogin("MSSING02_2", "SYSTEM", "SYSTEM", 1);
+  settransmitdelay(1,500,550);
+  print("device create ... OK\n");
+  device("MSSING02_2"); promptcheck(2);
+ 
+  
+  
+tx("ZUSI;"); tx("ZUSI;");
+while(getline(line)) print(line);
+endwhile
+
+/*
+  x=deviceopen("MSSING02_2");
+  if (x)
+    print("Connection established\n");
+    //setlogin("MSSING02_2", "SYSTEM", "SYSTEM", 1);  
+    //device("MSSING02_2");
+        tx("?");
+  else
+    print("Failed to connect OMUMSC\n");
+  endif
+*/
+
+
+
+ else
+
+ abort("devicecreate FAILED\n");
+
+ endif
+
+//for (x=1;x<=2;x++)
+//winexec("putty -ssh 10.66.85.97 -l _nokfsoperator -pw root -pw root -sessionlog log-&h-&y&m&d-&t.TXT");
+//winexec("putty -ssh 10.66.85.97 -l TEST1 -pw &Vimpel06");
+//endfor
+
+/*
+integer Handle;
+  Handle = deviceopen("MSSARA02");
+  if (Handle)
+    print("Connection to OMUMSC established\n");
+    send("\r");
+    tx("?");
+  else
+    print("Failed to connect OMUMSC\n");
+  endif
+  */
+//winexec("putty -ssh _nokfsoperator@10.66.85.97 -pw root -sessionlog texst.TXT");
+
+//winexec("putty -ssh 10.70.32.49 -l _nokfsoperator -pw root -sessionlog texst.TXT");
+
+endfunction
+
+function Create_perm_telnet(string sPassword)
+
+ //TCPIP=1, NAME, IP/PORT, NO_DX=0, PERMANENT=1, TELNET=4
+
+ if (devicecreate(1, "NEW_TELNET", "localhost:23", 0, 1, 4))
+
+ print("devicecreate OK\n");
+
+ else
+
+ abort("devicecreate FAILED\n");
+
+ endif
+
+ //setlogin("NEW_TELNET", user, sPassword, 1);
+
+ //setloginq("NEW_TELNET", "login: ", "Password: ", 1);
+
+ //savedevices("/etc/hit/myinifile.ini");
+
+endfunction

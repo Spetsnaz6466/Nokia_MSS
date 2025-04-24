@@ -1,0 +1,80 @@
+function oMSS_SSH_REVIEW()
+  string filename,PCTime,Tel,line="",A,B,PRE,OMU,GW,SOA;
+  integer handle;  
+   
+  Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_BSS_PARAMETERS_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+ 
+  tx("ZI2B;"); 
+  tx("ZI2D:I:ID=1;");
+  tx("ZI2D:I:ID=2;");
+  tx("ZI2D:I:ID=3;");
+  tx("ZI2D:I:ID=4;");
+  
+  tx("ZI2H:PROTOCOL=SSH;");
+  tx("ZI2H:PROTOCOL=MMLTELNET;");
+  tx("ZI2H:PROTOCOL=STTELNET;");
+  tx("ZI2H:PROTOCOL=FTP;");
+  tx("ZI2H:PROTOCOL=SFTP;");
+  tx("ZI2H:PROTOCOL=ALARM;");
+  tx("ZI2H:PROTOCOL=XOH;");
+  tx("ZI2H:PROTOCOL=XOHS;");
+  
+  tx("ZI2I:OMU:ALL;");
+  tx("ZI2V;");
+  
+  tx("ZUSI:OMU;");
+    while(getline(line,"'WO-EX'"))
+      strscan(line,"%s",OMU); 
+      OMU=strreplace(OMU,"-"," ");
+      strscan(OMU,"%s %s",OMU,OMU); 
+    endwhile
+    
+  tx("ZQRS:OMU,%s;",OMU);
+  GW="0"; SOA="0";
+  
+  tx("ZQKO:OMU,%s;",OMU);
+    if(getline(line,"'SOURCE ADDRESS: '"))
+      strscan(line,"%s %s %s",SOA,SOA,SOA); 
+    endif 
+    if(getline(line,"'DEFAULT GW    : '"))
+     strscan(line,"%s %s %s %s",GW,GW,GW,GW); 
+    endif 
+  
+  tx("ZQRX:OMU,%s::PING:SRC=\"%s\",HOST=\"%s\";",OMU,SOA,GW);
+  GW="172.24.232.202"; ask(GW,"Ingrese IP de destino: "); 
+  tx("ZQRX:OMU,%s::PING:SRC=\"%s\",HOST=\"%s\";",OMU,SOA,GW);
+  GW="172.22.4.168"; ask(GW,"Ingrese IP de destino: "); 
+  tx("ZQRX:OMU,%s::PING:SRC=\"%s\",HOST=\"%s\";",OMU,SOA,GW);
+  
+  tx("ZIAI:USERID=ALL:;");
+  tx("ZIAI:PROFILE=ALL:;");     
+  print("\nFIN!!!");
+ endfunction
+ 
+
+
+ 
+
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

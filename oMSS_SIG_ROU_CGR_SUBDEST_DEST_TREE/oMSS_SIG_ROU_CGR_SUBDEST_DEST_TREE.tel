@@ -1,0 +1,128 @@
+function oMSS_SIG_ROU_CGR_SUBDEST_DEST_TREE_MAIN()
+  string MSS,NET,PCTime,PCTime2,OPCION;   
+  
+  OPCION="SPC"; ask(OPCION,"METODO DE BUSQUEDA [ SPC / CGR ]: ");
+  MSS="MSSING02"; ask(MSS,"Ingrese MSS Objetivo: "); MSS=strupper(MSS); PCTime = getpctime(1); 
+  if(OPCION == "SPC")  NET="NA0"; ask(NET,"NET [ NA0 / NA1 ]: ");
+    oMSS_SIG_ROU_CGR_SUBDEST_DEST_TREE_ANALYSIS(MSS,NET);
+  elseif(OPCION == "CGR")  
+    oMSS_CGR_ROU_SIG_SUBDEST_DEST_TREE_ANALYSIS(MSS);
+  endif
+  print("Hora inicio de macro: %s\n",PCTime); PCTime2 = getpctime(1);
+  print("Hora fin de macro: %s\n",PCTime2);
+  print("FIN!!!!");
+endfunction
+
+
+void function oMSS_SIG_ROU_CGR_SUBDEST_DEST_TREE_ANALYSIS(string MSS,string NET)
+  string PCTime,filename,A,B,line,CGR,NCGR,SPC,ROU,OPC,note;
+  integer handle;
+  device(MSS); tx("ZDCD;"); 
+  if(getline(line,"':'")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; 
+  filename= "oMSS_" + MSS + "_SPC_ROU_CGR_SUBDEST_DEST_TREE_" + PCTime + "_.TXT" ; note="notepad " + filename;
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  tx("ZNVI:%s;",NET); 
+    while(getline(line,"'%s ' AND '/'",NET)) print(line); 
+    endwhile 
+  tx("ZNVI:%s;",NET); 
+    while(getline(line,"'%s ' AND '/'",NET)) 
+      if(getline(line,"'OWN SP AS STP'",NET)) 
+        strscan(line,"%s %s",OPC,OPC); OPC=strreplace(OPC,"/"," "); strscan(OPC,"%s",OPC);
+      endif 
+    endwhile 
+    print("\nMSS: %s - OWN POINT CODE: %s\n",MSS,OPC);
+  SPC="0997"; ask(SPC,"SPC: "); SPC=strupper(SPC); 
+  tx("ZNRI:%s,%s:;",NET,SPC);
+    while(getline(line)) print(line); endwhile
+  tx("ZRCI:;");  
+    while(getline(line)) print(line); endwhile
+  tx("ZRCI:SEA=15:NET=%s,SPC=%s,CIC=0&&254;",NET,SPC);
+    if(getline(line,"'CGR' AND ':'")) 
+    strscan(line,"%s %s %s %s %s %s",CGR,CGR,CGR,NCGR,NCGR,NCGR);
+    print("CGR: %s NCGR: %s\n",CGR,NCGR); endif
+  tx("ZRRI:GSW:NCGR=%s:;",NCGR);
+    while(getline(line,"'NET'")) strscan(line,"%s",ROU); print("ROU: %s\n",ROU); endwhile
+  tx("ZRIR:ROU=%s:;",ROU);
+    while(getline(line)) print(line); endwhile 
+  tx("ZRIH:CGR=%s:;",CGR);
+    while(getline(line)) print(line); endwhile
+  winexec(note);
+  deviceclose(MSS);
+endfunction 
+
+void function oMSS_CGR_ROU_SIG_SUBDEST_DEST_TREE_ANALYSIS(string MSS)
+  string PCTime,filename,A,B,line,CGR,NCGR,SPC,ROU,NET,note;
+  integer handle;
+ 
+  device(MSS); tx("ZDCD;"); 
+  if(getline(line,"':'")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; 
+  filename= "oMSS_" + MSS + "_CGR_SPC_ROU_SUBDEST_DEST_TREE_" + PCTime + "_.TXT" ; note="notepad " + filename;
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  tx("ZRCI;"); 
+    while(getline(line)) print(line); strscan(line,"%s",CGR); endwhile
+  ask(CGR,"CGR: "); 
+  tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGR);
+    while(getline(line)) 
+      if(getline(line," 'CGR' AND 'NCGR' ")) 
+        strscan(line,"%s %s %s %s %s %s",NCGR,NCGR,NCGR,NCGR,NCGR,NCGR); endif   
+      if(getline(line," 'SPC(H/D)' ")) 
+        strscan(line,"%s %s %s %s %s %s %s %s %s",NET,NET,NET,NET,NET,NET,SPC,SPC,SPC); 
+        SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC);   endif    
+    endwhile 
+  tx("ZNRI:%s,%s:;",NET,SPC);
+    while(getline(line)) print(line); endwhile  
+  tx("ZRRI:GSW:NCGR=%s:;",NCGR);
+    while(getline(line,"'NET'")) strscan(line,"%s",ROU); print("ROU: %s\n",ROU); endwhile
+  tx("ZRIR:ROU=%s:;",ROU);
+    while(getline(line)) print(line); endwhile
+  tx("ZRIH:CGR=%s:;",CGR);
+    while(getline(line)) print(line); endwhile
+  winexec(note);
+  deviceclose(MSS);
+endfunction 
+ 
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+ /*
+   string PCTime,filename,A,B,line,RES,CGR,NCGR,SPC,ROU,ROU2[];
+  string NSDEST[],SDEST[],NSDEST0,NDEST[],DEST[],NDEST0;
+  integer handle,x,y;
+ 
+ 
+  tx("ZRIL:SDEST=,OUT=B;"); x=0;
+    while(getline(line,"'NAME OF SUBDESTINATION'")) x++;
+       strscan(line,"%s %s %s %s %s %s",NSDEST[x],NSDEST[x],NSDEST[x],NSDEST[x],SDEST[x],SDEST[x]); //print("NSDEST: %s SDEST: %s\n",NSDEST[x],SDEST[x]); 
+    endwhile y=x; x=0; // print("hay  subdesti  %d \n",y);
+  tx("ZRIL:SDEST=,OUT=B;");
+    while(getline(line," ' SPR ' OR ' ROU '  OR 'APR' OR 'FPR' OR ' ANN ' OR ' PCA ' OR ' SSET ' "))  x++;
+      strscan(line,"%s %s %s %s %s",ROU2[x],ROU2[x],ROU2[x],ROU2[x],ROU2[x]); //print("ROU: %s\n",ROU2[x]); 
+    endwhile y=x; print("SUBDESTINOS ENCONTRADOS  %d \n",y);
+  for(x=1; x<=y; x++) 
+    if(ROU2[x]==ROU)  
+      NSDEST0=NSDEST[x]; print("NSDEST: %s SDEST: %s ROU:%s\n",NSDEST[x],SDEST[x],ROU2[x]); endif //print("NSDEST: %s SDEST: %s ROU:%s\n",NSDEST[x],SDEST[x],ROU2[x]); 
+  endfor 
+  tx("ZRIL:NSDEST=%s;",NSDEST0);
+    while(getline(line)) print(line); endwhile
+  tx("ZRIL:DEST=,OUT=B;"); x=0;
+    while(getline(line," ' APD ' OR ' PAD '  "))  x++;
+      strscan(line,"%s %s ",DEST[x],NDEST[x]); //print("DEST: %s NDEST: %s\n",DEST[x],NDEST[x]); 
+    endwhile y=x; print("DESTINOS ENCONTRADOS %d \n",y);
+  for(x=1; x<=y; x++)
+     tx("ZRIL:NDEST=%s,OUT=B;",NDEST[x]);
+     if(getline(line,"'%s'",NSDEST0)) 
+       print("DEST: %s NDEST: %s \n",DEST[x],NDEST[x]);
+       print(line);
+     endif
+  endfor    
+  */
+  

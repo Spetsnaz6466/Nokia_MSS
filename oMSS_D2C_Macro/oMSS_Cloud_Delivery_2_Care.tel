@@ -1,0 +1,970 @@
+function oMSS_CLOUD_D2C()
+ string  line,Tel,PCTime,A,B;
+  
+ messagebox("Esta Macro realiza el oMSS Cloud Delivery 2 Care");
+ 
+ Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime="0"; PCTime = A + "_" + B; PCTime=""; 
+ 
+  /*
+  pause(2,"Paso 3: Review COMMON PROBLEMS & TN");
+  TS_MSS_HW_0019(Tel, PCTime); 
+  TS_MSS_HW_0101(Tel,PCTime);
+  TS_MSS_SW_0102(Tel,PCTime); 
+  TS_MSS_SW_0117(Tel,PCTime);
+  TS_MSS_SW_0118(Tel,PCTime); 
+  TS_MSS_SW_0133(Tel,PCTime);
+  TS_MSSTAS_SW_0077(Tel,PCTime);  ///////////////////////////////////////////// FSLTA PUNTO 8 !!!!!!!!!!!!!!!!!!
+  
+  
+  //#######################
+  TS_MSS_SW_0094(Tel,PCTime);
+  TS_MSS_SW_0016(Tel,PCTime);
+  TS_MSS_SW_0135(Tel,PCTime);
+  TS_MSS_SW_0139(Tel,PCTime);
+  
+  
+  TS_MSS_SW_0140(Tel,PCTime);
+  TS_MSS_SW_0142(Tel,PCTime);
+  
+  TS_MSS_SW_0143(Tel,PCTime);
+  
+  
+  TS_MSS_SW_0144(Tel,PCTime);
+  TS_MSS_SW_0145(Tel,PCTime);
+  TS_MSS_SW_0146(Tel,PCTime);
+  TS_MSS_SW_0148(Tel,PCTime);
+  TS_MSS_SW_0150(Tel,PCTime);
+  TS_MSS_SW_0152(Tel,PCTime);
+  TS_MSS_SW_0153(Tel,PCTime);
+  TS_MSS_SW_0154(Tel,PCTime);
+  TS_MSS_SW_0155(Tel,PCTime);
+  TS_MSS_SW_0156(Tel,PCTime);
+  
+  
+  //###########################
+  
+  
+  
+  
+  
+  
+  
+  
+  pause(2,"TEST_CASES: 4. GENERAL & IP CONFIGURATION");
+  BLOCKED_ALARMS(Tel, PCTime);
+  Installed_Licenses(Tel,PCTime);
+  Installed_Features(Tel,PCTime);
+  MSS_have_correct_date_and_timezone(Tel,PCTime);
+  NETWORK_AND_NETWORK_ELEMENT_SPECIFIC_NUMBER(Tel,PCTime);
+  Command_Caledar_configuration(Tel,PCTime);
+  Logical_Files(Tel,PCTime);
+  Vlan_Configuration_ALL_Units(Tel,PCTime);  
+  
+  ZIP( DATABASE_STATE(Tel, PCTime));
+
+  pause(2,"TEST_CASES: 5. SIGTRAN_CONFIGURATION_&_TDM_SIGNALING"); 
+  SCCP_SIGNALLING_POINT_PARAMETER_SETS(Tel,PCTime); 
+  All_Associations_are_ASP_ACTIVE_state_in_the_active_Association_Set(Tel,PCTime);
+  Signaling_links_distributed(Tel,PCTime);
+  Number_of_Signaling_Links_in_Link_Set(Tel,PCTime);
+  SIGNALING_ROUTE_SET(Tel,PCTime);
+  
+  pause(2,"TEST_CASES: 6 MEGACO CONFIGURATION");
+  Used_SCTP_Parameter_Set(Tel,PCTime);
+  VMGW_configuration_is_distributed_to_different_GISU(Tel, PCTime);
+  SCTP_MODE(Tel,PCTime);
+  Control_Primary_IP_address_is_used(Tel,PCTime);
+   
+  pause(2,"TEST_CASES: 7 CGR_/_SDH_PGR");
+  Check_that_all_used_Circuits_are_in_unlocked_enabled_States(Tel,PCTime);
+  */
+  
+  Check_that_all_used_Circuits_group_in_WO_EX(Tel, PCTime);
+  ECHO_CANCEL_parameter(Tel,PCTime);
+   
+  pause(2,"TEST_CASES: 8 MEASUREMENTS");
+  Activate_Measurements_MEASUREMENT(Tel,PCTime);
+  GSM_MEASUREMENT(Tel,PCTime);
+  TRAFFIC_MEASUREMENT(Tel,PCTime);
+  DEFINITION_LIST(Tel,PCTime);
+   
+  pause(2,"TEST_CASES: 9 VLRU_Memory_Checking");
+  VLRU_Memory_Checking(Tel,PCTime);
+   
+  pause(2,"TEST_CASES: 10  IMEI_Checking");
+  IMEI_Checking(Tel,PCTime);
+   
+  pause(2,"TEST_CASES: 11 EMB checking using EBSTER");
+  EMB_checking_using_EBSTER(Tel,PCTime);
+  
+  pause(2,"TEST_CASES: 12	eMLPP Feature Checking");
+  eMLPP_Feature_Checking(Tel,PCTime);
+
+  pause(2,"TEST_CASES: 13 NOTHING TO DO");
+  pause(2,"TEST_CASES: 14	eMLPP Feature Checking"); 
+  PLMN_Definition_Checking(Tel,PCTime);
+ 
+  pause(2,"TEST_CASES: 15 EMB checking using EBSTER");
+  National_Roaming_Checking(Tel,PCTime);
+  
+  pause(2,"TEST_CASES: 16	eMLPP Feature Checking");
+  Alarms(Tel,PCTime);
+  
+  
+  pause(2,"TEST_CASES: 17 EMB checking using EBSTER");
+ // NTP_Server_Configuration(Tel,PCTime);   
+  
+  print("Hora inicio de macro: %s\n",PCTime); PCTime = getpctime(1);
+  print("Hora fin de macro: %s\n",PCTime);
+  print("FIN!!!!");
+  
+endfunction
+ 
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function ZIP(string filename )
+  string zipi,temp;
+  zipi= strreplace(filename,"."," "); strscan(zipi,"%s",zipi);
+  
+  temp="tar -cf "+ zipi + ".zip " + filename; 
+  winexec(temp); 
+  print("ZIP file name %s\n",zipi);
+  print("ZIP file %s\n",temp);
+endfunction
+
+/*
+###########################################
+#            FUNCIONES DEL TOOL           #
+###########################################
+*/
+
+function TS_MSS_HW_0019(string Tel, string PCTime)
+  string filename; integer handle;
+  filename= "TS-MSS-HW-0019 _" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("3.1 TS-MSS-HW-0019 - IP configuration file can be corrupted after system restart" ); delay(1000);
+  
+  print("Checking IP configuration\n");
+  tx("ZUSI:OMU;"); tx("ZUSI:OMU,0;"); tx("ZUSI:OMU,1;"); 
+  tx("ZAHO::NR=1809;");
+  pause(8,"SI ALARMA 1809 PROBLEMAS CON IPs");
+  tx("ZDDE:OMU,:\"ZGSC\";");
+  tx("ZDDE:OMU,:\"ZL:P\";");
+  tx("ZDDE:OMU,:\"ZLP:P,POMOXIGX\",\"ZPS:TYPE,/etc/if.dat\";");
+  tx("ZDDE:OMU,:\"ZL:P\";");
+  print("NOTE! The command “ZPS:TYPE,/etc/if.dat” is only valid in Md16.2. \n\
+  In MSS, you don’t need to use IPZORG to modify ip configuration, \n\
+  you can modify XIPIFCGX.XML manually directly (You can fetch the file from\n\
+   /LFILES through FTP and modify it with editor, then put it back to /LFILES through FTP).");
+  
+  print("Checking the Route Configuration\n");
+  tx("ZDDE:OMU,:\"ZL:U\";");
+  tx("ZDDE:OMU,:\"ZLP:U,RCBUGGGX\",\"ZUSI\";");
+  tx("ZDDE:OMU,:\"ZL:U\";");
+  pause(8,"REVISAR RUTAS");
+endfunction
+
+function TS_MSS_HW_0101(string Tel, string PCTime)
+  string filename; integer handle;
+    
+  filename= "TS_MSS_HW_0101_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("3.2 TS-MSS-HW-0101 - Ethernet Message Bus diagnostics" ); delay(1000);
+  tx("ZAHP::NR=1809;");
+  tx("ZAHO::NR=1809;");
+  tx("ZUSI:EMB;");
+  tx("ZUDQ;");
+  tx("ZUDH:EMB,0;"); tx("ZUDH:EMB,1;");
+  pause(8,"REALIZAR DIAG SI EMB ES FAULTY");  
+endfunction
+
+function TS_MSS_SW_0102(string Tel, string PCTime)
+  string filename; integer handle;
+    
+  filename= "TS_MSS_SW_0102_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("3.3.- TS-MSS-SW-0102 - CDR I/O improvement" ); delay(1000);
+  tx("ZAHO::NR=2503;");  tx("ZAHP::NR=2503;");
+  tx("ZAHO::NR=2504;");  tx("ZAHP::NR=2503;");
+  tx("ZW7I:FEA,FULL:FEA=1821,;");
+  pause(3,"CDR: activate the feature FN1821: Charging I/O Improvement");
+endfunction
+
+function TS_MSS_SW_0117(string Tel, string PCTime)
+  string filename; integer handle;
+    
+  filename= "TS_MSS_SW_0117_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("3.4 TS_MSS_SW_0117 _ SIP Call Failures" ); delay(1000);  
+  tx("ZWOI:52;");
+  tx("ZWOI:52,1;");
+endfunction
+
+function TS_MSS_SW_0118(string Tel, string PCTime)
+  string filename; integer handle;
+    
+  filename= "TS_MSS_SW_0118_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("3.5 TS_MSS_SW_0118 _ Time change in Open MSS Cloud after system restart" ); delay(1000);
+  tx("ZAHO::NR=3321;");  tx("ZAHP::NR=3321;");
+  tx("ZDCD;"); 
+endfunction
+
+function TS_MSS_SW_0133(string Tel, string PCTime)
+  string filename; integer handle;
+    
+  filename= "TS_MSS_SW_0133_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("3.6 TS_MSS_SW_0133 _ XoH configuration not converted during SW Upgrade/ SW Update" ); delay(1000);
+  tx("ZI2H:PROTOCOL=XOH;");  
+endfunction
+
+function TS_MSSTAS_SW_0077(string Tel, string PCTime)
+  string filename,line,TIPO[],CHU[]; 
+  integer x,y,z,handle;
+    
+  filename= "TS_MSSTAS_SW_0077_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("3.7 TS_MSSTAS_SW_0077 _ Increase in size of compressed files" ); delay(1000);
+  
+  TIPO[1] = "GSMCHA"; TIPO[2] = "GSMBIL"; TIPO[3] = "ACFCIG"; TIPO[4] = "ACFCSU";
+  TIPO[5] = "ACFCIR"; TIPO[6] = "ACFZON"; TIPO[7] = "ACFTOT";  TIPO[8] = "GENE07";
+  TIPO[9] = "GENE08"; TIPO[10] = "GENE09"; TIPO[11] = "GENE10"; TIPO[12] = "GENE11";
+  TIPO[13] = "GENE12"; TIPO[14] = "GENE13"; TIPO[15] = "GENE14"; TIPO[16] = "GENE15";
+  
+  tx("ZUSI:CHU;"); y=0;
+  while(getline(line,"'WO-EX'")) y++;
+    strscan(line,"%s",CHU[y]); CHU[y]=strreplace(CHU[y],"-"," "); strscan(CHU[y],"%s %s",CHU[y],CHU[y]);
+    print("CHU %s \n",CHU[y]);
+  endwhile
+  z=y;
+  
+  for(x=1;x<=16;x++)
+    tx("ZIFI:CHU,0:%s:B;\n",TIPO[x]);
+    if(getline(line,"'COMPRESSED FILE IS SAVED'")) print("CHU: 0 FILE: %s COMPRESSED\n",TIPO[x]); endif
+    if(getline(line,"'FILE IS NOT COMPRESSED'")) print("CHU: 0 FILE: %s IS NOT COMPRESSED OK\n",TIPO[x]); endif
+  endfor
+  
+  TIPO[1] = "GSMCHA"; TIPO[2] = "GSMBIL"; TIPO[3] = "GENE02"; TIPO[4] = "GENE03";
+  TIPO[5] = "GENE04"; TIPO[6] = "GENE05"; TIPO[7] = "GENE06";  TIPO[8] = "GENE07";
+  TIPO[9] = "GENE08"; TIPO[10] = "GENE09"; TIPO[11] = "GENE10"; TIPO[12] = "GENE11";
+  TIPO[13] = "GENE12"; TIPO[14] = "GENE13"; TIPO[15] = "GENE14"; TIPO[16] = "GENE15";
+  for(y=2;y<=z;y++)
+    for(x=1;x<=16;x++)
+      tx("ZIFI:CHU,%s:%s:B;\n",CHU[y],TIPO[x]);
+      if(getline(line,"'COMPRESSED FILE IS SAVED'")) print("CHU: %s FILE: %s COMPRESSED\n",CHU[y],TIPO[x]); endif
+       if(getline(line,"'FILE IS NOT COMPRESSED'")) print("CHU: %s FILE: %s IS NOT COMPRESSED OK\n",CHU[y],TIPO[x]);  endif
+    endfor
+  endfor
+endfunction
+
+string function BLOCKED_ALARMS(string Tel, string PCTime)
+  string filename; integer handle;
+    
+  filename= "4_1_BLOCKED_ALARMS" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_1_BLOCKED_ALARMS" ); delay(1000);
+  tx("ZABO;"); return filename;
+endfunction
+
+function Installed_Licenses(string Tel, string PCTime)
+  string filename,line,LIC_CODE[],LIC_FILE[],LIC_STAT[],LIC_STAT2[],LIC_CAPA[],LIC_NAME[]; 
+  integer handle,x,y;
+    
+  filename= "Installed_Licenses_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_2_Installed_Licenses" ); delay(1000);
+  tx("ZW7I:LIC,FULL;"); x=0; 
+  while(getline(line,"'LICENCE CODE'")) x++;
+    strscan(line,"%s %s",LIC_CODE[x],LIC_CODE[x]); LIC_CODE[x]=strreplace(LIC_CODE[x],"."," ");
+    strscan(LIC_CODE[x],"%s %s",LIC_CODE[x],LIC_CODE[x]);
+  endwhile   
+  y=x;
+  
+  for(x=1;x<=y;x++)
+    tx("ZW7I:LIC,FULL:LIC=%s,;",LIC_CODE[x]);
+    if(getline(line," 'LICENCE NAME' ")) strfetch(line,"32-",LIC_NAME[x]); endif
+    if(getline(line,"'LICENCE FILE NAME'"))
+      strscan(line,"%s %s %s",LIC_FILE[x],LIC_FILE[x],LIC_FILE[x]); LIC_FILE[x]=strreplace(LIC_FILE[x],"."," ");
+      strscan(LIC_FILE[x],"%s %s",LIC_FILE[x],LIC_FILE[x]); endif      
+    if(getline(line,"'LICENCE STATE'"))
+      strscan(line,"%s %s %s",LIC_STAT[x],LIC_STAT[x],LIC_STAT2[x]); LIC_STAT[x]=strreplace(LIC_STAT[x],"."," ");
+      strscan(LIC_STAT[x],"%s %s",LIC_STAT[x],LIC_STAT[x]); LIC_STAT[x]=LIC_STAT[x]+"_"+LIC_STAT2[x]; endif
+    LIC_CAPA[x]="NA";
+    if(getline(line,"'LICENCE CAPACITY'"))
+      strscan(line,"%s %s",LIC_CAPA[x],LIC_CAPA[x]); LIC_CAPA[x]=strreplace(LIC_CAPA[x],"."," ");
+      strscan(LIC_CAPA[x],"%s %s",LIC_CAPA[x],LIC_CAPA[x]); endif
+  endfor
+  logprint("LICENCE_CODE	LIC_FILE	LICENCE_STATUS	CAPACITY	LICENCE_NAME\n");
+  for(x=1;x<=y;x++)
+    logprint("%s %s %s %s %s\n",LIC_CODE[x],LIC_FILE[x],LIC_STAT[x],LIC_CAPA[x],LIC_NAME[x]); 
+  endfor 
+endfunction
+
+function Installed_Features(string Tel, string PCTime)
+ string filename,line,FEA_CODE[],FEA_CAPA[],FEA_UTIL[],FEA_NAME[]; 
+  integer handle,x,y; 
+  filename= "Installed_Features_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_2_Installed_Features" ); delay(1000);
+  tx("ZW7I:FEA,FULL:FSTATE=ON;"); x=0; 
+  while(getline(line,"'FEATURE CODE'")) x++;
+    strscan(line,"%s %s",FEA_CODE[x],FEA_CODE[x]); FEA_CODE[x]=strreplace(FEA_CODE[x],"."," ");
+    strscan(FEA_CODE[x],"%s %s",FEA_CODE[x],FEA_CODE[x]);
+  endwhile y=x;
+  for(x=1;x<=y;x++)
+    tx("ZW7I:FEA,FULL:FEA=%s;",FEA_CODE[x]);
+    if(getline(line," 'FEATURE NAME' ")) strfetch(line,"32-",FEA_NAME[x]); strreplace(FEA_NAME[x]," ","_"); endif
+    if(getline(line," 'FEATURE CAPACITY' ")) 
+      strfetch(line,"32-",FEA_CAPA[x]); strscan(FEA_CAPA[x],"%s",FEA_CAPA[x]); else FEA_CAPA[x]="NA"; endif 
+  endfor 
+  tx("ZW7I:UCAP,FULL;");
+  logprint("CODE CAPACITY USAGE UTIL_PERC NAME\n");
+  for(x=1;x<=y;x++)
+    tx("ZW7I:UCAP,FULL:FEA=%s;",FEA_CODE[x]);
+    if(getline(line,"'  %s  '",FEA_CODE[x])) strscan(line,"%s %s",FEA_UTIL[x],FEA_UTIL[x]); endif
+  endfor
+  for(x=1;x<=y;x++)
+    logprint("%s %s %s %s",FEA_CODE[x],FEA_CAPA[x],FEA_UTIL[x],FEA_NAME[x]); 
+  endfor
+  
+endfunction
+
+function MSS_have_correct_date_and_timezone(string Tel, string PCTime)
+  string filename; integer handle;    
+  filename= "MSS_have_correct_date_and_timezone_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_3_MSS_have_correct_date_and_timezone" ); delay(1000);
+  tx("ZDCD;"); tx("ZQNI;"); 
+endfunction
+
+function NETWORK_AND_NETWORK_ELEMENT_SPECIFIC_NUMBER(string Tel, string PCTime)
+  string filename; integer handle;    
+  filename= "NETWORK_AND_NETWORK_ELEMENT_SPECIFIC_NUMBER_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_4_NETWORK_AND_NETWORK_ELEMENT_SPECIFIC_NUMBER" ); delay(1000);
+  tx("ZWVI;");
+  tx("ZWVJ;"); 
+endfunction
+
+function Command_Caledar_configuration(string Tel, string PCTime)
+  string line,filename,COMCAL[],ID[],CMD[],Temp[]; integer x,y,z,handle;   
+  filename= "Command_Caledar_configuration_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_5_Command_Caledar_configuration"); delay(1000);
+  tx("ZICL;"); x=0; z=0;
+  while(getline(line,"' -  '")) x++; strscan(line,"%s %s %s",COMCAL[x],COMCAL[x],COMCAL[x]); logprint("%s",line); endwhile
+  y=x;
+  if(y==0) print("COMMAND CALENDAR IS EMPTY\n");
+  else 
+    for(x=1;x<=y;x++) 
+      tx("ZICL:CFILE=%s:COM:;",COMCAL[x]); 
+      while(getline(line,"'         ' AND ';' ")) z++; 
+        strscan(line,"%s %s",ID[z],CMD[z]); Temp[z]=COMCAL[x] +"-"+ ID[z] +"-"+ CMD[z]; 
+      endwhile
+    endfor 
+    for(x=1;x<=z;x++) logprint("%s\n",Temp[x]); endfor
+  endif
+endfunction
+
+function Logical_Files(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "Logical_Files_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_6_Logical_Files"); delay(1000);
+  tx("ZIID;"); 
+endfunction
+ 
+function Vlan_Configuration_ALL_Units(string Tel, string PCTime)
+  string line,filename,GISU[]; integer x,y,handle;   
+  filename= "Vlan_Configuration_ALL_Units_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_7_Vlan_Configuration_ALL_Units"); delay(1000);
+  tx("ZQRI;"); tx("ZQKB;"); tx("ZQKO;"); tx("ZQKQ;");
+  tx("ZUSI:GISU;"); x=0;
+    while(getline(line,"'GISU-'")) x++;
+      strscan(line,"%s",GISU[x]);
+      GISU[x]=strreplace(GISU[x],"GISU-","");
+    endwhile y=x;
+  for(x=1;x<=y;x++) tx("ZQRS:GISU,%s ::ALL::;",GISU[x]); endfor  
+endfunction
+
+string function DATABASE_STATE(string Tel, string PCTime)
+  string line,DB[],OCU[],UNIT[],filename,WO[],SP[]; 
+  string UPD_PREV_MEM[],UPD_PREV_DSK[],DSK_CONSIST[],WR_ERR_COUNT[];
+
+  integer x,y,handle;    
+  filename= "DATABASE_STATE_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("4_8_DATABASE_STATE"); delay(1000);
+  tx("ZDBL;"); x=0;
+    while(getline(line,"'0000'")) x++; strscan(line,"%s %s %s",DB[x],OCU[x],UNIT[x]); endwhile y=x;
+  for(x=1;x<=y;x++) 
+    tx("ZDBS:%s,%s;",DB[x],OCU[x]); 
+      if(getline(line,"' WO '")) strscan(line,"%s %s %s %s",WO[x],WO[x],WO[x],WO[x]); endif
+      if(getline(line,"' SP '")) strscan(line,"%s %s %s %s",SP[x],SP[x],SP[x],SP[x]); endif
+      if(getline(line,"'                    '")) 
+      strscan(line,"%s %s",UPD_PREV_MEM[x],UPD_PREV_DSK[x]);
+      DSK_CONSIST[x]="NA"; WR_ERR_COUNT[x]="NA"; endif    
+  endfor
+  tx("ZDBD:OMU;"); 
+  logprint("DATABASE OCURRENCE UNIT WO_STATE SP_STATE UPD_PREV_MEM UPD_PREV_DSK DSK_CONSIST WR_ERR_COUNT\n");
+  for(x=1;x<=y;x++) 
+    logprint("%s %s %s %s %s %s %s %s %s\n",DB[x],OCU[x],UNIT[x],WO[x],SP[x],UPD_PREV_MEM[x],UPD_PREV_DSK[x],DSK_CONSIST[x],WR_ERR_COUNT[x]);
+  endfor
+  return filename; 
+
+endfunction
+
+function SCCP_SIGNALLING_POINT_PARAMETER_SETS(string Tel, string PCTime)
+  string NUMB[],NAME[],line,filename; integer x,y,handle; 
+  filename= "SCCP_SIGNALLING_POINT_PARAMETER_SETS_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("5_1_SCCP_SIGNALLING_POINT_PARAMETER_SETS"); delay(1000);
+  tx("ZOCI;"); x=0;
+  while(getline(line,"'SET NAME'")) x++; strscan(line,"%s %s %s %s %s %s",NUMB[x],NUMB[x],NUMB[x],NAME[x],NAME[x],NAME[x]); endwhile y=x;
+  for(x=1;x<=y;x++) logprint("%s %s \n",NUMB[x],NAME[x]); endfor
+endfunction
+
+function All_Associations_are_ASP_ACTIVE_state_in_the_active_Association_Set(string Tel, string PCTime)
+  string line,NAME[],ID[],IND[],filename,UNIT[],STATE[],PARAM[],PRIM_DEST[],SEC_DEST[],RESUL[],IPDU[]; 
+  integer x,y,z,handle;
+    
+  filename = "All_Associations_are_ASP-ACTIVE_state_in_the_active_Association_Set_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("5_2_All_Associations_are_ASP-ACTIVE_state_in_the_active_Association_Set."); delay(1000);
+  tx("ZOYI::H;"); x=0;
+    while(getline(line,"'M3UA'")) x++; strscan(line,"%s",NAME[x]); endwhile y=x; z=0;
+  for(x=1;x<=y;x++) 
+    tx("ZOYI:NAME=%s:A:;",NAME[x]); 
+    while(getline(line))
+      if(getline(line,"'%s'",NAME[x])) strscan(line,"%s %s ",ID[x],ID[x]); endif  
+      if(getline(line,"'IPDU-'")) strscan(line,"%s %s %s %s %s ",IND[x],UNIT[x],PARAM[x],PARAM[x],STATE[x]); z++; endif
+      if(getline(line,"'SOURCE ADDRESS 1'")) 
+        strscan(line,"%s %s %s %s %s %s %s %s %s %s",PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x],PRIM_DEST[x]); 
+      endif
+      if(getline(line,"'SOURCE ADDRESS 2'")) 
+        strscan(line,"%s %s %s %s %s %s %s %s %s %s",SEC_DEST[x],SEC_DEST[x],SEC_DEST[x],SEC_DEST[x],SEC_DEST[x],SEC_DEST[x],SEC_DEST[x],SEC_DEST[x],SEC_DEST[x],SEC_DEST[x]); 
+        RESUL[z]=NAME[x] + " " + ID[x] + " " + IND[x] + " " + UNIT[x] + " " + STATE[x] + " " + PARAM[x] + " " + PRIM_DEST[x] + " " + SEC_DEST[x];
+      endif
+    endwhile
+  endfor
+  tx("ZUSI:IPDU;"); x=0;
+    while(getline(line," 'GRP2'"))x++; strscan(line,"%s",IPDU[x]); IPDU[x]=strreplace(IPDU[x],"IPDU-",""); endwhile 
+    y=x;
+  for(x=1;x<=y;x++) tx("ZQRS:IPDU,%s;",IPDU[x]); endfor
+  for(x=1;x<=z;x++) logprint("%d %s\n",x,RESUL[x]); endfor
+endfunction
+
+function Signaling_links_distributed(string Tel, string PCTime)
+  string line,filename,IPDU[]; integer x,y,handle;
+  filename= "Signaling_links_distributed_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("5_3_Signaling_links_distributed"); delay(1000);
+  tx("ZUSI:IPDU;"); x=0;
+    while(getline(line," 'GRP2'"))x++; strscan(line,"%s",IPDU[x]); IPDU[x]=strreplace(IPDU[x],"IPDU-",""); endwhile 
+    y=x;
+  for(x=1;x<=y;x++) tx("ZQRI:IPDU,%s;",IPDU[x]); endfor
+endfunction
+
+function Number_of_Signaling_Links_in_Link_Set(string Tel, string PCTime)
+  string line,filename,IPDU[]; integer x,y,handle;  
+  filename= "Number_of_Signaling_Links_in_Link_Set_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("5_4_Number_of_Signaling_Links_in_Link_Set"); delay(1000);
+  tx("ZNEL;"); tx("ZOYI::A;");
+  tx("ZUSI:IPDU;"); x=0;
+    while(getline(line," 'GRP2'"))x++; strscan(line,"%s",IPDU[x]); IPDU[x]=strreplace(IPDU[x],"IPDU-",""); endwhile 
+    y=x;
+  for(x=1;x<=y;x++) tx("ZQRS:IPDU,%s;",IPDU[x]); endfor
+  tx("ZNEL;"); while(getline(line)) logprint(line); endwhile
+endfunction
+
+function SIGNALING_ROUTE_SET(string Tel, string PCTime)
+  string filename; integer handle;
+  filename= "SIGNALING_ROUTE_SET_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("5_7 SIGNALING_ROUTE_SET"); delay(1000);
+  tx("ZNVI:NA0;"); tx("ZNVI:NA1;");
+endfunction
+
+function Used_SCTP_Parameter_Set(string Tel, string PCTime)
+  string filename; integer handle;
+  filename= "Used_SCTP_Parameter_Set_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("6_1 Used_SCTP_Parameter_Set"); delay(1000);
+  tx("ZOYI::A;"); tx("ZOYO;");
+endfunction
+
+function VMGW_configuration_is_distributed_to_different_GISU(string Tel, string PCTime)
+  string filename; integer handle;
+  filename= "VMGW_configuration_is_distributed_to_different_GISU_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("6_2 VMGW_configuration_is_distributed_to_different_GISU"); delay(1000);
+  tx("ZJGI;"); tx("ZJGI:MODE=1:MGWID=0&&99;");
+endfunction
+
+function SCTP_MODE(string Tel, string PCTime)
+  string filename,line,DEF[],TT[],SCTP[],MODE[]; integer handle,x,y;  
+  filename= "SCTP_MODE_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("6_3_SCTP_MODE_"); delay(1000);
+  tx("ZJGI;"); 
+  tx("ZJGI:MODE=1:MGWID=0&&99;"); x=0;
+  while(getline(line))
+    if(getline(line,"'DEFAULT PARAMETER SET'")) x++; strscan(line,"%s %s %s",DEF[x],DEF[x],DEF[x]); DEF[x]=strreplace(DEF[x],"."," "); strscan(DEF[x],"%s %s",DEF[x],DEF[x]); endif
+    if(getline(line,"'TRANSPORT TYPE'")) strscan(line,"%s %s",TT[x],TT[x]); TT[x]=strreplace(TT[x],"."," "); strscan(TT[x],"%s %s",TT[x],TT[x]); endif
+    if(getline(line,"'SCTP PARAMETER'")) strscan(line,"%s %s %s %s",SCTP[x],SCTP[x],SCTP[x],SCTP[x]); SCTP[x]=strreplace(SCTP[x],"."," "); strscan(SCTP[x],"%s %s",SCTP[x],SCTP[x]); endif
+    if(getline(line,"'SCTP MODE....'")) strscan(line,"%s %s",MODE[x],MODE[x]); MODE[x]=strreplace(MODE[x],"."," "); strscan(MODE[x],"%s %s",MODE[x],MODE[x]); endif
+  endwhile
+  y=x;
+  for(x=1;x<=y;x++) logprint("%d %s %s %s %s\n",x,TT[x],SCTP[x],MODE[x],DEF[x]); endfor
+endfunction
+
+function Control_Primary_IP_address_is_used(string Tel, string PCTime)
+  string filename,line,MGWID[],MGWPIP[],MGWSIP[]; integer handle,x,y;  
+  filename= "Control_Primary_IP_address_is_used_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("6_4_Control_Primary_IP_address_is_used"); delay(1000);
+  tx("ZJGI;"); 
+  tx("ZJGI:MODE=1:MGWID=0&&99;"); x=0;
+  while(getline(line))
+    if(getline(line,"'MGW ID'")) x++; strscan(line,"%s %s",MGWID[x],MGWID[x]);  MGWID[x]=strreplace(MGWID[x],"."," "); strscan(MGWID[x],"%s %s",MGWID[x],MGWID[x]); endif
+    if(getline(line,"'PRIMARY CTRL ADDRESS..........'")) strscan(line,"%s %s %s",MGWPIP[x],MGWPIP[x],MGWPIP[x]); MGWPIP[x]=strreplace(MGWPIP[x],"ADDRESS.........."," "); strscan(MGWPIP[x],"%s",MGWPIP[x]); endif
+    if(getline(line,"'SECONDARY CTRL ADDRESS........'")) strscan(line,"%s %s %s",MGWSIP[x],MGWSIP[x],MGWSIP[x]); MGWSIP[x]=strreplace(MGWSIP[x],"ADDRESS........"," "); strscan(MGWSIP[x],"%s",MGWSIP[x]); endif
+  endwhile
+  y=x;
+  for(x=1;x<=y;x++) logprint("%d MGWID: %s PIP: %s SIP: %s\n",x,MGWID[x],MGWPIP[x],MGWSIP[x]); endfor
+endfunction
+
+function Check_that_all_used_Circuits_are_in_unlocked_enabled_States(string Tel, string PCTime)
+  string filename,line,CGR[],NCGR[],TCGR[],NBCRCT[],STATE[],TDIR[],CKTNOWO; 
+  integer handle,x,y,CKTOOS[];  
+  filename= "Check_that_all_used_Circuits_are_in_unlocked_enabled_States_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("7_1_Check_that_all_used_Circuits_are_in_unlocked_enabled_States"); delay(1000);
+  tx("ZRCI;"); x=0; 
+  while(getline(line,"'ECCS' OR 'DCS' OR 'BICC' OR 'EDCS' OR 'SIP' ")) 
+    x++; strscan(line,"%s %s %s %s %s %s %s",CGR[x],NCGR[x],TCGR[x],TDIR[x],NBCRCT[x],NBCRCT[x],STATE[x]);
+  endwhile
+  y=x;
+  for(x=1;x<=y;x++)
+    tx("ZCEL:CGR=%s,ST=NO-WO;",CGR[x]); CKTOOS[x]=0;
+    while(getline(line," 'IDLE' ")) strscan(line,"%s %s %s %s",CKTNOWO,CKTNOWO,CKTNOWO,CKTNOWO); CKTOOS[x]=strtoint(CKTNOWO,DEC); endwhile
+  endfor  
+  for(x=1;x<=y;x++) tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR[x]); endfor  
+  logprint("\nCGR NCGR TYPE DIR NBCRCT CGR_STATE NO-WO_CRCKTS.\n"); 
+  for(x=1;x<=y;x++) logprint("%s %s %s %s %s %s %d\n",CGR[x],NCGR[x],TCGR[x],TDIR[x],NBCRCT[x],STATE[x],CKTOOS[x]); 
+  endfor
+endfunction
+
+function Check_that_all_used_Circuits_group_in_WO_EX(string Tel, string PCTime)
+  string filename,line,CGR[],NCGR[],TCGR[],NBCRCT[],STATE[],TDIR[],CKTNOWO; 
+  integer handle,x,y,CKTOOS[];  
+  filename= "Check_that_all_used_Circuits_group_in_WO-EX_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("7_2_Check_that_all_used_Circuits_group_in_WO-EX"); delay(1000);
+  tx("ZRCI;"); x=0; 
+  while(getline(line,"'ECCS' OR 'DCS' OR 'BICC' OR 'EDCS' OR 'SIP' ")) 
+    x++; strscan(line,"%s %s %s %s %s %s %s",CGR[x],NCGR[x],TCGR[x],TDIR[x],NBCRCT[x],NBCRCT[x],STATE[x]);
+  endwhile
+  y=x;
+  for(x=1;x<=y;x++)
+    tx("ZCEL:CGR=%s,ST=NO-WO;",CGR[x]); CKTOOS[x]=0;
+    while(getline(line," 'IDLE' ")) strscan(line,"%s %s %s %s",CKTNOWO,CKTNOWO,CKTNOWO,CKTNOWO); CKTOOS[x]=strtoint(CKTNOWO,DEC); endwhile
+  endfor  
+  for(x=1;x<=y;x++) tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR[x]); endfor  
+  for(x=1;x<=y;x++) tx("ZRCI:SEA=3:CGR=%s:PRINT=5;",CGR[x]); endfor 
+  logprint("\nCGR NCGR TYPE DIR NBCRCT CGR_STATE NO-WO_CRCKTS.\n"); 
+  for(x=1;x<=y;x++) logprint("%s %s %s %s %s %s %d\n",CGR[x],NCGR[x],TCGR[x],TDIR[x],NBCRCT[x],STATE[x],CKTOOS[x]); 
+  endfor
+endfunction
+
+function ECHO_CANCEL_parameter(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "ECHO_CANCEL_parameter_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("7_3_ECHO_CANCEL_parameter_should_be_activated_only_if_echo_cancellation_is_needed"); delay(1000);
+  tx("ZUFI:2&&8190:TSL;");   
+endfunction
+
+function Activate_Measurements_MEASUREMENT(string Tel, string PCTime)
+  string filename,line,MEAS[],OID; integer handle,x,y;  
+  filename= "Activate_Measurements_MEASUREMENT_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("8_1_Activate_Measurements_MEASUREMENT"); delay(1000);
+  tx("ZT2I:NAME=;"); x=0;
+  while(getline(line,"'      A' OR '      P'")) x++; 
+    strscan(line,"%s",MEAS[x]); 
+  endwhile y=x;
+  send(chr(3));  
+  for(x=1;x<=y;x++)  
+  send("ZT2I:NAME=%s:OID=\r",MEAS[x]); delay(2000);
+    if(getline(line,"'  */'")) strscan(line,"%s",OID); 
+      send("%s:ICH=A;\r",OID); delay(2000);
+    endif
+  endfor
+endfunction
+
+function GSM_MEASUREMENT(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "GSM_MEASUREMENT_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("8_2_GSM_MEASUREMENT"); delay(1000);
+  tx("ZTPI:HO;"); tx("ZTPI:VLR;"); tx("ZTPI:AUC;");
+endfunction
+
+function TRAFFIC_MEASUREMENT(string Tel, string PCTime)
+  string filename,line,STATE[],MEAS[]; integer handle,x,y;  
+  filename= "TRAFFIC_MEASUREMENT_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("8_3_TRAFFIC_MEASUREMENT"); delay(1000);
+  MEAS[1]="TRACGRA"; MEAS[2]="TRAVANA"; MEAS[3]="TRADESTA"; MEAS[4]="TRACNTL"; MEAS[5]="TRACATA"; MEAS[6]="TRABSA";
+  tx("ZTMI:;"); x=0;
+  while(getline(line,"'NAME:              '")) x++; strscan(line,"%s %s",MEAS[x],MEAS[x]); endwhile y=x;
+  for(x=1;x<=y;x++)  tx("ZTMI:%s;",MEAS[x]); 
+    if(getline(line,"'STATE'")) strscan(line,"%s %s",STATE[x],STATE[x]); endif
+  endfor
+  for(x=1;x<=6;x++) print("MEAS: %s STATE: %s\n",MEAS[x],STATE[x]); endfor
+endfunction
+
+function DEFINITION_LIST(string Tel, string PCTime)
+  string filename,line,STATE[],MEAS[]; integer handle,x;  
+  filename= "DEFINITION_LIST_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("8_4_DEFINITION_LIST"); delay(1000);
+  MEAS[1]="CGR"; MEAS[2]="CNTL"; MEAS[3]="COMP"; MEAS[4]="REJ";
+  tx("ZRCI;"); tx("ZUSI:GISU;"); tx("ZUSI:COMP;"); tx("ZUSI:IPDU;");
+  for(x=1;x<=4;x++)  tx("ZTLI:%s;",MEAS[x]); 
+    if(getline(line,"'STATE'")) strscan(line,"%s %s",STATE[x],STATE[x]); endif
+  endfor
+  for(x=1;x<=4;x++) print("MEAS: %s STATE: %s\n",MEAS[x],STATE[x]); endfor
+endfunction
+
+function VLRU_Memory_Checking(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "VLRU_Memory_Checking_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("9_1_VLRU_Memory_Checking"); delay(1000);
+  tx("ZUSI:VLRU;"); tx("ZMVI;"); tx("ZMXI;");
+endfunction
+
+function IMEI_Checking(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "IMEI_Checking_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("10_1_IMEI_Checking"); delay(1000);
+  tx("ZW7I:FEA,FULL:FEA=2165,FSTATE=ON,;"); 
+  tx("ZWOS:2,789:;"); tx("ZWOS:2,847:;"); tx("ZWOS:2,848:;");
+  tx("ZDFD:CMM,0:5AC0167,0&&5,,W;");
+  tx("ZDFD:CMM,0:5AC001E,0&&5,,W;");
+endfunction
+
+function EMB_checking_using_EBSTER(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "EMB_checking_using_EBSTER_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("11_1_EMB_checking_using_EBSTER"); delay(1000);
+  
+  tx("ZUSI;"); tx("ZUSI:EMB;"); tx("ZAHO:EMB;"); tx("ZUSI:OMU;");
+  tx("ZDDE:OMU,:\"ZGDC\",\"ZGSC\";");
+  
+  tx("ZDDE:OMU,:\"ZL:P\";");
+  tx("ZDDE:OMU,:\"ZLP:2,EBS\",\"Z2AT:0x007F,0\",\"Z2AT:0x007F,1\",\"Z2A:0x000:0xFFFF\";");
+  tx("ZDDE:OMU,:\"ZL:2\";");
+endfunction
+
+function eMLPP_Feature_Checking(string Tel, string PCTime)
+  string filename,FINALR[],line; integer handle,x,y;  
+  filename= "eMLPP_Feature_Checking_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("12_1_eMLPP_Feature_Checking"); delay(1000);
+  LOG_SQUARE("ATTRIBUTE ANALYSIS FINAL RESULT INTERROGATION"); delay(1000);
+  y=10; 
+  tx("ZRQQ:AIF,;"); x=0;
+  while(getline(line,"'RESULT NAME'")) x++; 
+    strscan(line,"%s %s %s %s",FINALR[x],FINALR[x],FINALR[x],FINALR[x]); 
+  endwhile y=x;
+  for(x=1;x<=y; x++) print("Final Result: %s\n",FINALR[x]); tx("ZRQQ:AIF,%s:;",FINALR[x]); endfor  
+  tx("ZWOI:2,00844;"); 
+  tx("ZWOI:2,00846;"); 
+  tx("ZWOI:2,00861;"); 
+  tx("ZWOI:2,00862;");
+  tx("ZWOI:2,00869;");  
+  tx("ZWOI:2,00870;");
+  tx("ZWOI:2,01503;");
+  tx("ZWOI:7,00148;");
+  tx("ZWOS:2,01548;"); 
+  tx("ZMXP:NAME=HPLMN_EAST;");
+  tx("ZMXP:NAME=HPLMN_COAST;");
+  tx("ZMXP:NAME=HPLMN_WEST;");
+  tx("ZMXO;");
+  tx("ZCPI:OUT:NCCP=MAS;");
+  tx("ZCPI:OUT:NCCP=CALLFORWARDING;");
+endfunction
+
+function PLMN_Definition_Checking(string Tel, string PCTime)
+  string filename,line,PLMN[],TYPE[],CAMEL[]; integer handle,x,y,IND[];  
+  filename= "PLMN_Definition_Checking_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("14_1_PLMN_Definition_Checking"); delay(1000);
+  LOG_SQUARE("VLR PARAMETERS"); delay(1000);
+  tx("ZMXO;"); tx("ZMXI;"); tx("ZMXL;"); x=0;
+  while(getline(line," '                       '")) x++;
+    strscan(line,"%s %d",PLMN[x],IND[x]);  
+  endwhile  y=x;
+  for(x=4;x<=y;x++) 
+    tx("ZMXP:IND=%d;",IND[x]); 
+    if(getline(line," 'FOREIGN COUNTRY' ")) 
+      TYPE[x]="VISITOR PLMN " + PLMN[x] + " IN FOREIGN COUNTRY"; TYPE[x]=strreplace(TYPE[x]," ","_"); strscan(TYPE[x],"%s",TYPE[x]); endif
+    if(getline(line,"'NATIVE COUNTRY'"))  
+      TYPE[x]="HOME PLMN " + PLMN[x] + " IN NATIVE COUNTRY"; TYPE[x]=strreplace(TYPE[x]," ","_"); strscan(TYPE[x],"%s",TYPE[x]); endif
+    if(getline(line,"'SUPPORTED CAMEL PHASE:'")) 
+      strfetch(line,"41-",CAMEL[x]); CAMEL[x]=strreplace(CAMEL[x]," ","_"); strscan(CAMEL[x],"%s",CAMEL[x]); endif
+  logprint("%s %d %s %s\n",PLMN[x],IND[x],CAMEL[x],TYPE[x]);
+  endfor
+  for(x=4;x<=y;x++) logprint("%s %d %s %s\n",PLMN[x],IND[x],CAMEL[x],TYPE[x]); endfor
+endfunction
+
+function National_Roaming_Checking(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "National_Roaming_Checking_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("15_1_National_Roaming_Checking"); delay(1000);
+  tx("ZWOI:2,272:;"); tx("ZELO;");
+endfunction
+
+function Alarms(string Tel, string PCTime)
+  string filename,line,CHU[],ALMID[],ALARM[],LEVEL[],FLAG="OFF"; integer handle,x,y;  
+  filename= "Alarms_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("16_1_Alarms"); delay(1000);
+  tx("ZAHO;"); x=0;   
+  
+  while(getline(line,"' ALARM  ' OR ' DISTUR ' OR (' OR ')'  "));  
+    if(getline(line,"' ALARM  ' OR ' DISTUR '")) x++; print(line);  strscan(line,"%s",LEVEL[x]); endif FLAG="ON";
+    if(FLAG=="ON");
+      //  if(getline(line,"' ALARM  ' OR ' DISTUR '")) print(line);  strscan(line,"%s",LEVEL[x]); endif
+      if(getline(line,"'(' AND ')' ")) 
+        print(line);
+        strscan(line,"%s %s",ALMID[x],ALMID[x]); strfetch(line,"18-",ALARM[x]); 
+        ALARM[x]=strreplace(ALARM[x]," ","_"); strscan(ALARM[x],"%s",ALARM[x]); FLAG="OFF";
+      endif
+    endif
+  endwhile
+  y=x;
+  for(x=1;x<=y;x++) logprint("%d %s %s %s\n",x,LEVEL[x],ALMID[x],ALARM[x]);  endfor
+   
+  pause(10,"CREAR A MANO TABLA EXCEL CON RESUMEN DE ALARMAS");
+ 
+ 
+  
+ /*
+  filename= "CDR_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  tx("ZUSI:CHU;"); y=0;
+  while(getline(line,"'WO-EX'")) y++;
+    strscan(line,"%s",CHU[y]); CHU[y]=strreplace(CHU[y],"-"," "); strscan(CHU[y],"%s %s",CHU[y],CHU[y]);
+    print("CHU %s \n",CHU[y]);
+  endwhile
+  tx("ZQRI:CHU;"); tx("ZQKO:CHU;"); tx("ZQKB:CHU;");
+  for(x=1;x<=y;x++) tx("ZIFO:CHU,%s:GSMCHA:1&&2000;",CHU[y]); endfor
+  
+  filename= "SGsAP_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  tx("ZOYV:SGSAP;"); tx("ZOYV:SGSAP::A;");   
+  
+  filename= "FIELD_REPORTING_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  tx("ZTML;"); tx("ZTUI;");   
+  tx("ZTUI:RES;");
+  tx("ZTUI:TRF;");
+  tx("ZTUI:CLR;");
+  tx("ZTUI:SSC;");
+  tx("ZTUI:DCL;");  
+  */
+  
+endfunction
+
+function NTP_Server_Configuration(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "NTP_Server_Configuration_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("17_1_NTP_Server_Configuration"); delay(1000);
+  tx("ZDCP;"); tx("ZDCI;");
+endfunction
+
+////////////////////////////
+
+function TS_MSS_SW_0094(string Tel, string PCTime)
+  LOG_SQUARE("TS-MSS-SW-0094 NO ACTIONS!!"); delay(1000);  
+endfunction
+
+function TS_MSS_SW_0016(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0016_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0016  SW Delivery model for MSS Releases"); delay(1000);
+  tx("ZWQO:CR;"); 
+  tx("ZWQO;");
+endfunction
+
+function TS_MSS_SW_0135(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0135_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0135 Security algorithm changes after CFP upgrades and updates"); delay(1000);
+  tx("ZI2B;"); 
+endfunction
+
+function TS_MSS_SW_0139(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0139_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0139 DMX units must be protected by firewall against DoS attacks "); delay(1000);
+  print("To protect the Open MSS from such attacks, Level 3 firewall(s) must be configured for those \
+            interfaces of the DMX units, where IPsec is configured. The firewall must filter the packets \
+            based on their origin (IP) and on port numbers.");
+endfunction
+
+function TS_MSS_SW_0140(string Tel, string PCTime)
+  string filename,GISU[],line; integer handle,x=0,y;  
+  filename= "TS-MSS-SW-0140_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0140 Dimensioning recommendation for Options Ping feature on SIP"); delay(1000);
+ 
+  tx("ZWOI:2,1399;");
+  tx("ZWOI:2;");
+  tx("ZAHO::NR=3686;");
+  tx("ZAHO::NR=3687;");
+  tx("ZUSI:GISU;"); 
+  while(getline(line,"'GISU-'")) x++; 
+    strscan(line,"%s",GISU[x]); 
+    GISU[x]=strreplace(GISU[x],"GISU-"," "); 
+    strscan(GISU[x],"%s",GISU[x]); 
+  endwhile y=x;
+  for(x=1; x<=y; x++) tx("ZJNS:GISU,%s;",GISU[x]); endfor 
+  
+endfunction
+
+function TS_MSS_SW_0142(string Tel, string PCTime)
+  
+  LOG_SQUARE("TS-MSS-SW-0142 Open MSS ATCA and Cloud products TSE SW platform Security "); delay(1000);
+  
+  print("To protect the Open MSS Level 3 firewall(s) must be configured to protect all MSS external \
+         interfaces. The firewall must filter the packets based on their origin (IP) and on port numbers."); 
+endfunction
+
+function TS_MSS_SW_0143(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0143_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0143 CAP protocol measurement (M200) might stop"); delay(1000);
+ 
+  tx("ZOAY:PROT=INAP;"); tx("ZOAY:PROT=CAP;");
+  tx("ZOAP:PROT=INAP;"); tx("ZOAP:PROT=CAP;"); 
+endfunction
+
+function TS_MSS_SW_0144(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0144_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0144 SIP process might crash if session refreshment parameter"); delay(1000);
+ 
+  tx("ZTUT:CLR;"); 
+endfunction
+
+function TS_MSS_SW_0145(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0145_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0145 Activation of SS by UE"); delay(1000);
+ 
+  tx("ZWOI:2,1839;"); tx("ZWOI:2;");
+endfunction
+
+function TS_MSS_SW_0146(string Tel, string PCTime)
+  LOG_SQUARE("TS-MSS-SW-0146 Compatibility change between CBIS 19 "); delay(1000);
+  print("TS-MSS-SW-0146 Compatibility change between CBIS 19 "); 
+endfunction
+
+function TS_MSS_SW_0148(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0148_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0148 MSS DNS handling is different in MSS 22.2 compared to MSS 21.11"); delay(1000);
+    tx("ZAHO::NR=3548;"); tx("ZAHP::NR=3548;");
+    tx("ZAHO::NR=3687;"); tx("ZAHP::NR=3687;");
+    tx("ZTUT:CLR;"); //CC 835
+endfunction
+
+function TS_MSS_SW_0150(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0150_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0150 Not Active SCTP Associations Without or After IPDU Restart"); delay(1000);
+    tx("ZTUT:CLR;"); //CC 30A B2C
+endfunction
+
+function TS_MSS_SW_0152(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0152_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0152 SW packages can get corrupted during SW update"); delay(1000);
+    tx("ZWQO:CR;"); 
+    tx("ZWKP:FULL:TOTAL:LATEST;"); 
+endfunction
+
+function TS_MSS_SW_0153(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0153_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0153 OMU restart or switchover can trigger IPDU"); delay(1000);
+    tx("ZAHO::NR=252;"); tx("ZAHP::NR=252;");
+    tx("ZAHO::NR=1007;"); tx("ZAHP::NR=1007;");
+    tx("ZAHO::NR=1023;"); tx("ZAHP::NR=1023;");
+    tx("ZAHO::NR=1001;"); tx("ZAHP::NR=1001;");
+    
+endfunction
+  
+function TS_MSS_SW_0154(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0154_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0154 14181 FILE VALIDATION ERROR for MML PRBs after SW upgrade"); delay(1000);
+    tx("ZAHO::NR=14181;"); tx("ZAHP::NR=14181;");    
+endfunction
+
+function TS_MSS_SW_0155(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0155_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0155 Open MSS Cloud instability during Data Center Network Outage"); delay(1000);
+    tx("ZAHO::NR=1010;"); tx("ZAHP::NR=1010;");   
+    tx("ZAHO::NR=1300;"); tx("ZAHP::NR=1300;");  
+endfunction
+
+function TS_MSS_SW_0156(string Tel, string PCTime)
+  string filename; integer handle;  
+  filename= "TS-MSS-SW-0156_" + Tel + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND);   
+  LOG_SQUARE("TS-MSS-SW-0156 Many FQDNs without IP address resolution"); delay(1000);
+    tx("ZAHO:;");  
+endfunction
+
+ 
+ 
+
+ 
+ 
+ 
+    //filename= "oMSS_CLOUD_D2C_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+ // handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 

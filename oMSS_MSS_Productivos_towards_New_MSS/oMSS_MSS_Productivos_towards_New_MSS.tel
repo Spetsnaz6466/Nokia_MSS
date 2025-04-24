@@ -1,0 +1,122 @@
+function oMSS_Single_MSS_Integration_Checking()
+  string MSS,SPC,GT,PCTime,PCTime2; integer x;  
+  
+  MSS="MSSVEN02"; ask(MSS,"Ingrese MSS Objetivo: "); MSS=strupper(MSS);
+  SPC="07A7"; ask(SPC,"Ingrese SPC del MSS Objetivo(HEX): "); 
+  GT="573103150025"; ask(GT,"Ingrese GLobal Title del MSS Objetivo: ");
+  
+  PCTime = getpctime(1); 
+  for(x=1;x<=46; x++) 
+    LOG_SQUARE(Claro_MSS(x));
+    print("ACCESING %d: %s\n",x,Claro_MSS(x) );
+    MSS_Productivo_to_New_MSS(Claro_MSS(x), MSS,  SPC, GT);
+  endfor
+  PCTime2 = getpctime(1);
+  print("Hora inicio de macro: %s\n",PCTime);
+  print("Hora fin de macro: %s\n",PCTime2);
+  print("FIN!!!!");
+  
+endfunction
+
+void function MSS_Productivo_to_New_MSS(string CLARO_MSS,string MSS, string SPC, string GT)
+  string PCTime,filename,A,B,line,RES,CGR;
+  integer handle;
+  
+  device(CLARO_MSS);
+  tx("ZDCD;"); if(getline(line,"':'")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; 
+  filename= CLARO_MSS + "_" + MSS + "_MML_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+    
+   
+  tx("ZNRI:NA0,%s:;",SPC);
+  tx("ZNBI:::%s:;",GT);
+    if(getline(line,"'ITU    '")) strscan(line,"%s %s %s %s %s %s %s",RES,RES,RES,RES,RES,RES,RES); 
+       tx("ZNAI:RES=%s;",RES); 
+       tx("ZNAI:RES=120;");
+    endif  
+  tx("ZRIH:TON=NAT,TREE=82,DIG=314494:;");
+  tx("ZRIH:TON=NAT,TREE=50,DIG=314494:;");
+  tx("ZRIH:TON=NAT,TREE=50,DIG=3144944:;");
+  
+  tx("ZRCI:SEA=15:NET=NA0,SPC=%s,CIC=0&&254;",SPC);
+    while(getline(line," 'UNKNOWN SIGNALLING POINT' "))  print("UNKNOWN SIGNALLING POINT\n"); break; endwhile
+    if(getline(line,"'CGR   : '")) 
+      strscan(line,"%s %s %s",CGR,CGR,CGR); 
+      tx("ZRRI:GSW:ROU=%s;",CGR);     
+      tx("ZRRI:GSW:ROU=2884;");
+    endif
+  deviceclose(CLARO_MSS);
+ 
+ endfunction 
+ 
+string function Claro_MSS (integer x)
+  string CLARO_MSS[];
+   CLARO_MSS[1]="MSS01ING";
+  CLARO_MSS[2]="MSS01PER";
+  CLARO_MSS[3]="MSS01SIN";
+  CLARO_MSS[4]="MSS01TOB";
+  CLARO_MSS[5]="MSS02ALK";
+  CLARO_MSS[6]="MSS02BUC";
+  CLARO_MSS[7]="MSS02CAL";
+  CLARO_MSS[8]="MSS02MED";
+  CLARO_MSS[9]="MSS02PER";
+  CLARO_MSS[10]="MSS02SIN";
+  CLARO_MSS[11]="MSS02TOB";
+  CLARO_MSS[12]="MSS02VEN";
+  CLARO_MSS[13]="MSS03ARA";
+  CLARO_MSS[14]="MSS03BAR";
+  CLARO_MSS[15]="MSS03CAL";
+  CLARO_MSS[16]="MSS03MED";
+  CLARO_MSS[17]="MSS03PRA";
+  CLARO_MSS[18]="MSS03VEN";
+  CLARO_MSS[19]="MSS04ARA";
+  CLARO_MSS[20]="MSS04CAL";
+  CLARO_MSS[21]="MSS04VEN";
+  CLARO_MSS[22]="MSS04VEN";
+  CLARO_MSS[23]="MSS05ARA";
+  CLARO_MSS[24]="MSS05MED";
+  CLARO_MSS[25]="MSS05VEN";
+  CLARO_MSS[26]="MSS06ARA";
+  CLARO_MSS[27]="MSS06MED";
+  CLARO_MSS[28]="MSS06VEN";
+  CLARO_MSS[29]="MSS07ARA";
+  CLARO_MSS[30]="MSS07VEN";
+  CLARO_MSS[31]="MSSALK01";
+  CLARO_MSS[32]="MSSALK02";
+  CLARO_MSS[33]="MSSARA01";
+  CLARO_MSS[34]="MSSBUC01";
+  CLARO_MSS[35]="MSSING01";
+  CLARO_MSS[36]="MSSMAR01";
+  CLARO_MSS[37]="MSSMGA01";
+  CLARO_MSS[38]="MSSPER01";
+  CLARO_MSS[39]="MSSTRI01";
+  CLARO_MSS[40]="MSSTRI02";
+  CLARO_MSS[41]="MSSTRI03";
+  CLARO_MSS[42]="MSSVEN01";
+  CLARO_MSS[43]="MSSMGA02";
+  CLARO_MSS[44]="MSS01ALK"; 
+  CLARO_MSS[45]="MSSARA02";
+  CLARO_MSS[46]="MSSING02";  
+  CLARO_MSS[47]="MSSVEN02"; 
+  CLARO_MSS[48]="MSS01CAR";   //SIN ACCESO.
+  return CLARO_MSS[x];
+endfunction
+
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

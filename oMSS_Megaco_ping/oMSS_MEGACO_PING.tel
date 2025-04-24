@@ -1,0 +1,118 @@
+function oMSS_Health_para_Pre_and_Post_check()
+  string filename,PCTime,Tel,line="",A,B,ASOC[],ASOC_NAME[];
+  string MGW,IPDU,OPIP,OSIP,PIP,SIP; 
+  integer handle,x,y;  
+  
+  Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; filename= Tel + "_MSS_ASSOCIATION_PING_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  LOG_SQUARE(" Media Gateway's "); 
+  tx("ZJGI;"); 
+  while(getline(line," '0/0' ")) print(line); endwhile
+  ask(MGW,"MGW ID Number: ??"); tx("ZJGI:MODE=1:MGWID=%s;",MGW);
+  while(getline(line)) 
+    if(getline(line," 'MGW NAME' ")) print(line);  endif
+    if(getline(line," 'MGW ADDRESS' ")) print(line);  endif
+    if(getline(line," 'PORT NUMBER' ")) print(line);  endif
+    if(getline(line," 'IPDU INDEX' ")) 
+      IPDU=strreplace(line,"IPDU INDEX....................",""); strscan(IPDU,"%s",IPDU);
+      print("IPDU %s\n",IPDU); endif
+    if(getline(line," 'PRIMARY CTRL ADDRESS' ")) OPIP=strreplace(line,"PRIMARY CTRL ADDRESS..........",""); endif
+    if(getline(line," 'SECONDARY CTRL ADDRESS' ")) OPIP=strreplace(line,"SECONDARY CTRL ADDRESS........",""); endif
+    if(getline(line," 'E.164 AESA' ")) print(line);  endif
+    if(getline(line," 'LOCAL PORT' ")) print(line);  endif  
+  endwhile
+  
+  tx("ZOYL:IPDU,%s;",IPDU); while(getline(line))  print(line); endwhile
+  
+  LOG_SQUARE("SIGTRAN ASOCIACIONES - ZOYI"); 
+  tx("ZOYI::H;"); x=0;
+  while(getline(line,"'M3UA'")) print(line); x++; strscan(line,"%s %s",ASOC_NAME[x],ASOC[x]); endwhile
+  y=x;
+  for(x=1;x<=y;x++)
+    print("ASOCIACION NUMERO %s:  %s\n",ASOC[x],ASOC_NAME[x]);
+    tx("ZOYI:NBR=%s:A;",ASOC[x]); 
+    while(getline(line," 'IPDU' ")) print(line);  endwhile
+    if(getline(line," 'REGISTRATION REQUEST' ")) print(line);  endif
+  endfor
+  
+  
+  
+  LOG_SQUARE("LINKSET STATES"); 
+  tx("ZNLI;"); while(getline(line)) print(line);  endwhile
+  
+  LOG_SQUARE("SUBSYSTEM STATES");  
+  tx("ZNHI;"); while(getline(line)) print(line); endwhile
+  
+  
+  LOG_SQUARE("ROUTE SET STATES"); 
+  tx("ZNVI:NA0;"); while(getline(line)) print(line); endwhile
+  tx("ZNVI:NA1;"); while(getline(line)) print(line); endwhile
+  tx("ZNSI:NA0;"); while(getline(line)) print(line); endwhile
+  tx("ZNSI:NA1;"); while(getline(line)) print(line); endwhile
+ 
+  LOG_SQUARE("ASOCIACIONES - ZOYI"); 
+  tx("ZOYI:NBR=0&&1023;"); x=0;
+  while(getline(line,"'M3UA'")) x++; strscan(line,"%s %s",ASOC_NAME[x],ASOC[x]); endwhile
+  y=x;
+  for(x=1;x<=y;x++)
+    print("ASOCIACION NUMERO %s:  %s\n",ASOC[x],ASOC_NAME[x]);
+    tx("ZOYI:NBR=%s:A;",ASOC[x]); 
+    while(getline(line," 'DOWN' OR 'UP-PROCEED' ")) print(line); endwhile
+  endfor
+  
+  LOG_SQUARE("ROUTE SET STATES"); 
+  tx("ZNER:NA0;"); while(getline(line)) print(line); endwhile
+  tx("ZNER:NA1;"); while(getline(line)) print(line); endwhile
+  
+  LOG_SQUARE(" SIGNALLING POINT DATA"); 
+  tx("ZNRI:NA0;"); while(getline(line)) print(line); endwhile
+  tx("ZNRI:NA1;"); while(getline(line)) print(line); endwhile
+  tx("ZNPI;"); while(getline(line)) print(line); endwhile
+  
+  LOG_SQUARE("LINKS ZNET_NA0"); 
+  tx("ZNET:NA0;"); while(getline(line)) print(line); endwhile
+  
+  LOG_SQUARE("LINKS ZNET_NA1"); 
+  tx("ZNET:NA1;"); while(getline(line)) print(line); endwhile
+  
+  LOG_SQUARE("ZQRI"); 
+  tx("ZQRI;"); 
+  
+  LOG_SQUARE("INFORMACION DE MGW's");  
+  tx("ZJGI:MODE=0:MGWID=0&&99;");  // Si desea mas detalle usar 1
+  while(getline(line,"'REGISTERED'")) print(line); endwhile
+  
+  LOG_SQUARE("INTERROGATING SOURCE IP ADDRESSES FOR SCTP");  
+  tx("ZOYL;");
+  
+  LOG_SQUARE("IP's OF DGW");  
+  tx("ZQKO;");
+  
+  LOG_SQUARE("STATIC ROUTES");  
+  tx("ZQKB;");
+  
+  
+  
+  
+endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

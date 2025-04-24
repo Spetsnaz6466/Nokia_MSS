@@ -1,0 +1,153 @@
+function oMSS_RNC_CREAR()
+  string filename,PCTime,Tel,line="",A,B,PRE,NETELEM,SPC,UPD;
+  integer handle,Color;  
+  
+  clr();
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_RNC_CREAR_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+    LOG_SQUARE(Tel); 
+    Color=Color("red"); LOG_SQUARE("RNC-Iu-CS CP / NODEB"); Color=Color("black"); 
+    Color=Color("blue"); LOG_SQUARE("ASSOCIATIONS SET NAME"); Color=Color("black");   
+    tx("ZOYI::H;");  
+      while(getline(line,"'M3UA'")) print(line); endwhile
+    ask(NETELEM,"Ingresar ASSOCIATION SET NAME: "); 
+    
+    print("\n"); 
+    Color=Color("blue"); LOG_SQUARE("ASSOCIATIONS STATE"); Color=Color("black");
+    tx("ZOYI:NAME=%s:A;",NETELEM);
+      while(getline(line,"'SIGTRAN'")) print(line); endwhile
+    
+    print("\n"); 
+    Color=Color("blue"); LOG_SQUARE("SIGNALLING LINK SET DATA"); Color=Color("black");
+    tx("ZNSI:NA0;");
+      while(getline(line,"'%s'",NETELEM)) print(line); endwhile
+    tx("ZNSI:NA1;");
+      while(getline(line,"'%s'",NETELEM)) print(line); endwhile
+      
+    print("\n"); 
+    Color=Color("blue"); LOG_SQUARE("SIGNALLING POINT DATA"); Color=Color("black");
+    tx("ZNRI:NA0;");
+      if(getline(line,"'%s'",NETELEM)) print(line); 
+        strscan(line,"%s %s",SPC,SPC); SPC=strreplace(SPC,"/"," "); strscan(line,"%s",SPC); 
+      endif
+    tx("ZNRI:NA1;");
+      if(getline(line,"'%s'",NETELEM)) print(line); 
+        strscan(line,"%s %s",SPC,SPC); SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC); 
+      endif
+      
+    print("\n"); 
+    Color=Color("blue"); LOG_SQUARE("SIGNALLING LINK SET STATE"); Color=Color("black");
+     tx("ZNLI;");
+      while(getline(line)) print(line); endwhile
+      
+    print("\n"); 
+    Color=Color("blue"); LOG_SQUARE("SIGNALLING ROUTE STATE"); Color=Color("black");
+    tx("ZNVI:NA0,%s;",SPC);
+      while(getline(line,"' %s'",SPC)) print(line); endwhile
+    tx("ZNVI:NA1,%s;",SPC);
+      while(getline(line,"' %s'",SPC)) print(line); endwhile
+      
+    print("\n");   
+    Color=Color("blue"); LOG_SQUARE("SCCP DATA OF SIGNALLING POINTS"); Color=Color("black");
+    tx("ZNFI:NA0,%s:A;",SPC);
+      while(getline(line)) print(line); endwhile
+    tx("ZNFI:NA1,%s:A;",SPC);
+      while(getline(line)) print(line); endwhile
+    tx("ZNGI:NA0,%s:A;",SPC);
+      while(getline(line)) print(line); endwhile
+    tx("ZNGI:NA1,%s:A;",SPC);
+      while(getline(line)) print(line); endwhile
+    
+    print("\n"); 
+    Color=Color("blue"); LOG_SQUARE("RADIO - Location Area"); Color=Color("black");
+    tx("ZELO;");
+      while(getline(line,"'LA    NAME :'")) print(line); endwhile
+      
+    Color=Color("blue"); LOG_SQUARE("RNC - UPD"); Color=Color("black"); 
+    tx("ZJFL;");
+      while(getline(line)) print(line); endwhile  
+    UPD="0"; ask(UPD,"Ingrese UPD: ");  
+    tx("ZJFI:UPD=%s;",UPD);
+      while(getline(line,"'YES    1    NO'")) print(line); endwhile
+    print("\n"); 
+    
+    RNC(UPD);
+    NodeB();
+    
+    
+  print("\nFIN!!!!");
+ 
+ endfunction
+ 
+//########################
+//# FUNCIONES - NO TOCAR #
+//########################
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+integer function Color(string color)
+integer OldColor,color2;
+
+ if(color == "red") color2 = settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") color2 = settextcolor(RGB(100,150,0));
+   elseif(color == "blue") color2 = settextcolor(RGB(0,0,250));
+   elseif(color == "green")  color2 = settextcolor(RGB(0,200,220));
+   elseif(color == "black")  color2 = settextcolor(RGB(0,0,0));
+ endif
+ return color2;
+  
+endfunction
+
+void function RNC(string UPD )
+string line;
+integer Color;
+Color=Color("blue"); LOG_SQUARE("RNC"); Color=Color("black");
+    tx("ZE2I:UPD=%s;",UPD);
+      while(getline(line)) 
+        if(getline(line,"'RNCID'")) print(line); endif
+        if(getline(line,"'RNCNAME'")) print(line); endif
+        if(getline(line,"'STATE ... :'")) print(line); endif
+        if(getline(line,"'UPD ..... :'")) print(line); endif
+        if(getline(line,"'NUPD .... :'")) print(line); endif
+        if(getline(line,"'UTYPE ... :'")) print(line); endif
+        if(getline(line,"'VER ..... :'")) print(line); endif
+        if(getline(line,"'AMR ..... :'")) print(line); endif
+        if(getline(line,"'NI ...... :'")) print(line); endif
+        if(getline(line,"'SPC ..... :'")) print(line); endif
+        if(getline(line,"'AMR CODEC CAPABILITY AND MODE SETS....... :'")) print(line); endif
+      endwhile
+endfunction
+
+void function NodeB()
+string line;
+integer Color;
+Color=Color("blue"); LOG_SQUARE("NodeB"); Color=Color("black");
+    tx("ZEPO:TYPE=SA;");
+      while(getline(line)) 
+        if(getline(line,"'SA    NAME :'")) print(line); endif
+        if(getline(line,"'LA    NAME :'")) print(line); endif
+        if(getline(line,"'SERVICE AREA CODE'")) print(line); endif
+        if(getline(line,"'ADMINISTRATIVE STATE '")) print(line); endif
+      endwhile
+endfunction

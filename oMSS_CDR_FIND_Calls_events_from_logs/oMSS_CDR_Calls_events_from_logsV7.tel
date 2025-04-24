@@ -1,0 +1,181 @@
+function oMSS_CDR_Calls_events_from_logs()
+  string NumberA,NumberB,Date,Date1,DD,MO,YYYY,HH,MM,SS; 
+  string filter,file,PCTime,A,B,filename,CHU;
+  integer x,y,handle; 
+  
+ 
+ // clr(); 
+  y=59;  /// PONER CANTIDAD DE LINEAS A BUSCAR
+  
+  filter="All0 files(*.*)|*.*"; file=askfile(filter); 
+  PCTime=getpctime(1); strscan(PCTime,"%s %s",A,B); B=strreplace(B,":","-"); 
+  CHU="0-0"; ask(CHU,"Ingrese CHU number (as reference): ");
+  PCTime = A + "_" + B; 
+  filename= "oMSS_CDR_Calls_events_from_logs" + "_CHU_" + CHU + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); // Creacion de log de coincidencias
+  
+  for(x=1; x<=y; x++)
+    NumberA=MISSING_INFO(x); // Buscar la informacion del Numero A, B y Fecha.
+      NumberA = strreplace(NumberA,"-"," "); 
+      strscan(NumberA,"%s %s %s",NumberA,NumberB,Date); 
+      Date=strreplace(Date,"."," "); Date=strreplace(Date,":"," "); strscan(Date,"%s %s %s %s %s %s",DD,MO,YYYY,HH,MM,SS); 
+      Date=YYYY+MO+DD+HH+MM+SS; 
+    CDRs_Validation(NumberA,NumberB,Date,file,filename); // Envio de numero A, B, Fecha, Archivo que contiene listado de files y file para guardar resultados
+  endfor
+  print("\nFIN!!!!");  
+ endfunction
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+void function CDRs_Validation(string NumberA,string NumberB,string Date, string file,string filename)
+  string line="",FILE0[],FILE1[];
+  string PRE,DIR,Temp[]; 
+  integer x,y,m,n,file_handle,file_handle2,handle,OldColor;  
+  
+  OldColor = settextcolor(RGB(0,0,0));   
+  handle = fileopen(filename,APPEND);  //Abrir log para guardar coincidencias
+  
+  PRE="NumeroA " + NumberA + " NumeroB " + NumberB + " - Fecha " + Date; LOG_SQUARE("blue",PRE);  // Numeros a buscar
+   
+  file_handle = fileopen(file,READ); //lectura del listado de archivos a leer
+   
+  x=0; y=0; //print("\nListado de archivos en: %s\n",file);  //El listado debe tener 1 solo argumento!!
+  
+  // Directorio
+  for(x=1;x<=20;x++) Temp[x]=""; endfor //Setear todas las variables a vacío.
+  file=strreplace(file,"\\"," ");
+  strscan(file,"%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s",Temp[1],Temp[2],Temp[3],Temp[4],Temp[5],Temp[6],Temp[7],Temp[8],Temp[9],Temp[10],Temp[11],Temp[12],Temp[13],Temp[14],Temp[15],Temp[16],Temp[17],Temp[18],Temp[19],Temp[20]);    
+  for(x=1;x<=20;x++) if(Temp[x]<>"") y++; endif endfor y=y-1;
+  DIR="";
+  for(x=1;x<=y;x++) if(Temp[x]<>"") DIR=DIR+Temp[x]+"\\"; endif endfor
+  //print("Directorio de trabajo: %s\n",DIR);
+   
+  x=0;
+  while(filegetline(file_handle,line)) x++;  //Conteo de CDRs Files dentro del archivo de listado
+    FILE0[x]=DIR+line; strscan(FILE0[x],"%s",FILE0[x]); //DIR+FILE y Se remueve el Carrier return
+    FILE1[x]=line; strscan(FILE1[x],"%s",FILE1[x]); //Se remueve el Carrier return
+    //print("FILE0: %s\n",FILE0[x]);  print("FILE1 %s\n",FILE1[x]);
+  endwhile y=x; //fileclose(file_handle); 
+  print("Existen %d CDR Files\n",y);
+ 
+  for(x=1; x<=y; x++) //Conteo de cantidad de tarificaciones en un CDR File
+    print("\n*%d/%d- %s\n",x,y,FILE1[x]);  
+    file_handle2 = fileopen(FILE0[x],READ);  m=0;    
+    while(filegetline(file_handle2,line)) 
+      m++; FILE0[x]=line;
+    endwhile n=m;
+    print("Documento contiene %d linea(s)\n",n);  filesetpos(file_handle2,1,FILE_BEGIN); m=0;   //fileprint(handle,"\n*%d/%d- %s\n",x,y,FILE1[x]);
+    
+    // BUSQUEDA DE LAS COINCIDENCIAS SOLICITADAS EN LOS 3 ARGUMENTOS DE UN FILE
+    
+    while(filegetline(file_handle2,line,"'%s' AND '%s' AND '%s' ",NumberA,NumberB,Date)) 
+      fileprint(handle,"\n*%d/%d- NumeroA %s NumeroB %s Date %s en FILE %s \n",x,y,NumberA,NumberB,Date,FILE1[x]);
+      settextcolor(RGB(0,150,250)); m++; 
+      print("\n*%d/%d- Numero A %s NumeroB %s Date %s File %s\n",x,y,NumberA,NumberB,Date,FILE1[x]);
+      print(line); fileprint(handle,line); settextcolor(OldColor);
+    endwhile n=m;
+    print("Doc contains %d coincidencia(s)\n",n);
+  endfor
+  fileclose(file_handle2);
+
+endfunction
+
+string function MISSING_INFO(integer x)
+string NumberA[],NumberB[],Date[];
+
+//NumberA[1]="50763067386"; NumberB[1]="3103096666"; Date[1]="03.02.2023 17:13:50"; 
+
+//////////////////////////// LLENAR DESDE AQUI
+
+NumberA[1]="50763067386"; NumberB[1]="3103096666"; Date[1]=""; 
+NumberA[2]="50763067386"; NumberB[2]="3103096666"; Date[2]=""; 
+NumberA[3]="50763067386"; NumberB[3]="3144166454"; Date[3]=""; 
+NumberA[4]="50763067386"; NumberB[4]="6023307777"; Date[4]=""; 
+NumberA[5]="50763067386"; NumberB[5]="3022103968"; Date[5]=""; 
+NumberA[6]="50763067386"; NumberB[6]="6044445151"; Date[6]=""; 
+NumberA[7]="50763067386"; NumberB[7]="6063358650"; Date[7]=""; 
+NumberA[8]="50763067386"; NumberB[8]="3054567720"; Date[8]=""; 
+NumberA[9]="3103477777";  NumberB[9]="3215000000"; Date[9]=""; 
+NumberA[10]="3103477777"; NumberB[10]="3215000000"; Date[10]=""; 
+NumberA[11]="3103477777"; NumberB[11]="3005357215"; Date[11]=""; 
+NumberA[12]="3103477777"; NumberB[12]="167"; Date[12]=""; 
+NumberA[13]="3103477777"; NumberB[13]="C369"; Date[13]=""; 
+NumberA[14]="3103477777"; NumberB[14]="3103158719"; Date[14]=""; 
+NumberA[15]="3103096666"; NumberB[15]="3215000000"; Date[15]=""; 
+NumberA[16]="3103096666"; NumberB[16]="167"; Date[16]=""; 
+NumberA[17]="3103096666"; NumberB[17]="B229"; Date[17]=""; 
+NumberA[18]="3103096666"; NumberB[18]="C307"; Date[18]=""; 
+NumberA[19]="3103096666"; NumberB[19]="3227692688"; Date[19]=""; 
+NumberA[20]="3127677777"; NumberB[20]="3215000000"; Date[20]=""; 
+NumberA[21]="3127677777"; NumberB[21]="3215000000"; Date[21]=""; 
+NumberA[22]="3127677777"; NumberB[22]="3005357215"; Date[22]=""; 
+NumberA[23]="3127677777"; NumberB[23]="167"; Date[23]=""; 
+NumberA[24]="3127677777"; NumberB[24]="B160"; Date[24]=""; 
+NumberA[25]="3223122367"; NumberB[25]="C369"; Date[25]=""; 
+NumberA[26]="3127674444"; NumberB[26]="3103096666"; Date[26]=""; 
+NumberA[27]="3127674444"; NumberB[27]="3103096666"; Date[27]=""; 
+NumberA[28]="3117106666"; NumberB[28]="B160"; Date[28]=""; 
+NumberA[29]="3117106666"; NumberB[29]="C307"; Date[29]=""; 
+NumberA[30]="3117106666"; NumberB[30]="C369"; Date[30]=""; 
+NumberA[31]="3117026666"; NumberB[31]="C301"; Date[31]=""; 
+NumberA[32]="3117026666"; NumberB[32]="C369"; Date[32]=""; 
+NumberA[33]="3135307777"; NumberB[33]="3232091800"; Date[33]=""; 
+NumberA[34]="3135307777"; NumberB[34]="C307"; Date[34]=""; 
+NumberA[35]="3135307777"; NumberB[35]="C369"; Date[35]=""; 
+NumberA[36]="3135307777"; NumberB[36]="3103158719"; Date[36]=""; 
+NumberA[37]="3228763043"; NumberB[37]="3005357215"; Date[37]=""; 
+NumberA[38]="3228763043"; NumberB[38]="B160"; Date[38]=""; 
+NumberA[39]="3228763043"; NumberB[39]="B997"; Date[39]=""; 
+NumberA[40]="3228763043"; NumberB[40]="3232091800"; Date[40]=""; 
+NumberA[41]="3228763043"; NumberB[41]="C307"; Date[41]=""; 
+NumberA[42]="3228763043"; NumberB[42]="C369"; Date[42]=""; 
+NumberA[43]="3148209567"; NumberB[43]="C301"; Date[43]=""; 
+NumberA[44]="3122666666"; NumberB[44]="3103096666"; Date[44]=""; 
+NumberA[45]="3122666666"; NumberB[45]="B160"; Date[45]=""; 
+NumberA[46]="3122666666"; NumberB[46]="C307"; Date[46]=""; 
+NumberA[47]="3122666666"; NumberB[47]="3103158719"; Date[47]=""; 
+NumberA[48]="3112646666"; NumberB[48]="3103096666"; Date[48]=""; 
+NumberA[49]="3112646666"; NumberB[49]="167"; Date[49]=""; 
+NumberA[50]="3112646666"; NumberB[50]="B229"; Date[50]=""; 
+NumberA[51]="3112646666"; NumberB[51]="C369"; Date[51]=""; 
+NumberA[52]="3215000000"; NumberB[52]="B229"; Date[52]=""; 
+NumberA[53]="3215000000"; NumberB[53]="3103158719"; Date[53]=""; 
+NumberA[54]="3207276660"; NumberB[54]="B229"; Date[54]=""; 
+NumberA[55]="3207276660"; NumberB[55]="C307"; Date[55]=""; 
+NumberA[56]="3207276660"; NumberB[56]="C369"; Date[56]=""; 
+NumberA[57]="3207276660"; NumberB[57]="3103158719"; Date[57]=""; 
+NumberA[58]="3207276663"; NumberB[58]="B229"; Date[58]=""; 
+NumberA[59]="3207276663"; NumberB[59]="C307"; Date[59]=""; 
+
+//////////////////////////////////////// LIMITE INFERIOR
+
+
+print("\n*%d NumeroA %s NumeroB %s Date %s\n",x,NumberA[x],NumberB[x],Date[x]);
+return NumberA[x] + "-" + NumberB[x]+ "-" + Date[x];
+endfunction
+
+
+//## DEFINA EL DIRECTORIO DE TRABAJO, ENTRE COMILLAS
+  //DIR="C:\\Users\\Juan\\Documents\\Colombia\\Macros_HIT\\Nokia\\oMSS\\oMSS_CDR_Calls_events_from_logs\\CHUS_20230621\\10.61.160.129\\Salidas_BDRION1\\";
+  //ask(DIR,"dir");

@@ -1,0 +1,81 @@
+function oMSS_CGR_Levantar_Circuitos_CIC()
+  string filename,PCTime,Tel,line="",A,B,PRE;
+  string CGR[],NCGR[],CGR2; 
+  integer handle,x,y,NBCRCT[];  
+  
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); 
+    if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+    PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; 
+    filename= "oMSS_CGR_Levantar_Circuitos_CIC_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+    handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+    LOG_SQUARE(Tel); 
+  
+  tx("ZUSI;"); tx("ZUSI:GISU;"); tx("ZRCI;"); x=0;
+    while(getline(line,"'BICC'")) x++;
+      strscan(line,"%s %s %s %s %d %d",CGR[x],NCGR[x],NBCRCT[x],NBCRCT[x],NBCRCT[x],NBCRCT[x]); 
+      print("CGR: %s NCGR: %s NBCRCT:%d\n",CGR[x],NCGR[x],NBCRCT[x]); 
+    endwhile
+  y=x;
+  for(x=1; x<=y; x++) print("CGR: %s NCGR: %s NBCRCT:%d\n",CGR[x],NCGR[x],NBCRCT[x]); endfor
+  CGR2=CGR[1]; ask(CGR2,"CGR donde se levantaran CIC caídos: "); 
+
+  oMSS_Levantar_CIC_CGR( CGR2 );
+  
+  print("FIN!!!!");
+ 
+endfunction
+ 
+function oMSS_Levantar_CIC_CGR(string CGR)
+ string line,SPC,temp,NET; integer x,y,CICLAST,CIC[],CIC_BEGIN; 
+ temp="CGR: "+ CGR; LOG_SQUARE(temp);
+ tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGR);
+ while(getline(line,"'SPC(H/D) :'"))
+   strscan(line,"%s %s %s %s %s %s %s %s %s",SPC,SPC,SPC,SPC,SPC,NET,SPC,SPC,SPC); 
+   SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC); 
+ endwhile
+ tx("ZNRI:%s,%s;",NET,SPC); while(getline(line)) print(line); endwhile
+ tx("ZCEL:CGR=%s;",CGR);
+ if(getline(line," '%s   ' ",CGR)) strscan(line,"%s %s %d",CIC_BEGIN,CIC_BEGIN,CIC_BEGIN); 
+   print("CGR:%s tiene %d\n",CGR,CIC_BEGIN);  
+ endif
+ CIC_BEGIN=8000; CICLAST=0; x=0;
+ tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR);
+ while(getline(line," '  IDLE  ' ")) x++;
+   strscan(line,"%d",CIC[x]); print("%d CGR: %s CIC:%d\n",x,CGR,CIC[x]); 
+   if(CIC_BEGIN > CIC[x]) CIC_BEGIN=CIC[x]; endif
+   if(CICLAST < CIC[x])   CICLAST =CIC[x];  endif 
+ endwhile
+ print("CGR:%s PRIMER_CIC %d ULTIMO_CIC:%d\n",CGR,CIC_BEGIN,CICLAST); 
+ 
+ for(y=0;y<=x;y++)  
+   y=CIC_BEGIN; ask(y,"Primer CIC: "); CICLAST=y+30; ask(CICLAST,"Ultimo CIC [0=1 solo CIC]: ");
+   if(CICLAST==0)
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:SE;\n",SPC,y); 
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:NU;\n",SPC,y);
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:SE;\n",SPC,y); 
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:WO;\n",SPC,y);
+     tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR);
+     if(getline(line," '  IDLE  ' ")) y=0; endif   
+   else
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:SE;\n",SPC,y,CICLAST); 
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:NU;\n",SPC,y,CICLAST);
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:SE;\n",SPC,y,CICLAST); 
+     tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:WO;\n",SPC,y,CICLAST);
+     y=CICLAST;
+     tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR);
+     if(getline(line," '  IDLE  ' ")) y=0; endif 
+   endif  
+ endfor
+endfunction
+ 
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction

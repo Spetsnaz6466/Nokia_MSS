@@ -1,0 +1,22 @@
+function OSI()
+
+LOG_SQUARE("RANAP");
+LOG_SQUARE("SCCP");
+LOG_SQUARE("M3UA");
+LOG_SQUARE("SCTP/IP");
+
+LOG_SQUARE("RANAP\nSCCP\nM3UA\nSCTP/IP\n");
+
+endfunction
+
+//########################
+//# FUNCIONES - NO TOCAR #
+//########################
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction

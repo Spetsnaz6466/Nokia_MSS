@@ -1,0 +1,266 @@
+function oMSS_BSC_BTS()
+string filename,PCTime,Tel,line="",A,B,PRE,NETELEM,SPC;
+integer handle;  
+  
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_map_parameters_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  LOG_SQUARE("blue",Tel);  LOG_SQUARE("blue","BSC - IP/SCTP"); 
+    
+  NETELEM=ASSOCIATION_IP_SCTP();
+  SPC=M3UA_SIGNALLING_LINK_SET(NETELEM);
+  SCCP_DATA_OF_SIGNALLING_POINTS(SPC);
+  MGW_INFORMATION();
+  LAC();
+  BSC_INFORMATION(UPD());
+    
+  print("FIN!!!!");
+ 
+ endfunction
+
+//########################
+//# FUNCIONES - NO TOCAR #
+//########################
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; print("\n"); 
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+integer function Color(string color)
+integer color2;
+ if(color == "red") color2 = settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") color2 = settextcolor(RGB(100,150,0));
+   elseif(color == "blue") color2 = settextcolor(RGB(0,0,250));
+   elseif(color == "green")  color2 = settextcolor(RGB(0,200,220));
+   elseif(color == "black")  color2 = settextcolor(RGB(0,0,0));
+ endif
+ return color2;
+endfunction
+
+string function ASSOCIATION_IP_SCTP()
+ string line,NETELEM,ID[],IPDU[],IPDUV,UNIT,FRASE;
+ string SIP1[],SIP1V,SIP2[],SIP2V,DIP1[],DIP1V,DIP2[],DIP2V,TRACE="Y";
+ integer x,y;
+
+  LOG_SQUARE("blue","ASSOCIATIONS SET NAME"); 
+    tx("ZOYI::H;");  
+      while(getline(line,"'M3UA'")) print(line); endwhile
+    NETELEM="BTO11"; ask(NETELEM,"Ingresar ASSOCIATION SET NAME: ");      
+    LOG_SQUARE("blue","ASSOCIATIONS STATE"); 
+    tx("ZOYI:NAME=%s:A;",NETELEM); x=0;
+      while(getline(line)) 
+        if(getline(line,"'SIGTRAN'")) x++; print(line); strscan(line,"%s %s",ID[x],IPDU[x]); 
+          IPDU[x]=strreplace(IPDU[x],"-"," "); strscan(IPDU[x],"%s %s",UNIT,IPDU[x]); endif        
+        FRASE="SOURCE ADDRESS 1 . . . . . : ";    
+        if(getline(line,"'%s'",FRASE)) print(line); SIP1[x]=IP(line,FRASE); endif 
+        FRASE="SOURCE ADDRESS 2 . . . . . : ";    
+        if(getline(line,"'%s'",FRASE)) print(line); SIP2[x]=IP(line,FRASE); endif    
+        FRASE="PRIMARY DEST. ADDRESS  . . : ";    
+        if(getline(line,"'%s'",FRASE)) print(line); DIP1[x]=IP(line,FRASE); endif   
+        FRASE="SECONDARY DEST. ADDRESS  . : ";    
+        if(getline(line,"'%s'",FRASE)) print(line); DIP2[x]=IP(line,FRASE); endif    
+        y=x;
+      endwhile
+    for(x=1 ; x<=y ; x++) 
+      print("\n*%d/%d- ASSC_NAME: %s ID: %s UNIT %s-%s OPIP %s OSIP %s DOPIP %s DOSIP %s\n",x,y,NETELEM,ID[x],UNIT,IPDU[x],SIP1[x],SIP2[x],DIP1[x],DIP2[x]);       
+      IPDUV=IPDU[x]; SIP1V=SIP1[x]; DIP1V=DIP1[x]; PING(UNIT,IPDUV,SIP1V,DIP1V,TRACE);
+      if(SIP2[x]<>"") SIP2V=SIP2[x]; DIP2V=DIP2[x]; PING(UNIT,IPDUV,SIP2V,DIP2V,TRACE); 
+      endif       
+    endfor     
+    return NETELEM;    
+endfunction
+
+string function M3UA_SIGNALLING_LINK_SET(string NETELEM)
+ string SPC,line;
+  LOG_SQUARE("blue","SIGNALLING LINK SET STATE"); 
+  tx("ZNLI;"); while(getline(line)) print(line); endwhile  
+  LOG_SQUARE("blue","M3UA - SIGNALLING LINK SET DATA"); 
+  tx("ZNSI:NA0;"); while(getline(line,"'%s'",NETELEM)) print(line); endwhile
+  tx("ZNSI:NA1;"); while(getline(line,"'%s'",NETELEM)) print(line); endwhile    
+  LOG_SQUARE("blue","SIGNALLING POINT DATA"); 
+  tx("ZNRI:NA0;");
+    if(getline(line,"'%s'",NETELEM)) print(line); 
+      strscan(line,"%s %s",SPC,SPC); SPC=strreplace(SPC,"/"," "); strscan(line,"%s",SPC); 
+    endif
+  tx("ZNRI:NA1;");
+    if(getline(line,"'%s'",NETELEM)) print(line); 
+      strscan(line,"%s %s",SPC,SPC); SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC); 
+    endif      
+  LOG_SQUARE("blue","SIGNALLING ROUTE STATE"); 
+  tx("ZNVI:NA0,%s;",SPC); while(getline(line,"' %s'",SPC)) print(line); endwhile
+  tx("ZNVI:NA1,%s;",SPC); while(getline(line,"' %s'",SPC)) print(line); endwhile
+ return SPC;
+endfunction
+
+void function SCCP_DATA_OF_SIGNALLING_POINTS(string SPC)
+ string line;   
+   LOG_SQUARE("blue","SCCP - DATA OF SIGNALLING POINTS"); 
+   tx("ZNFI:NA0,%s:A;",SPC); while(getline(line)) print(line); endwhile
+   tx("ZNFI:NA1,%s:A;",SPC); while(getline(line)) print(line); endwhile     
+   tx("ZNGI:NA0,%s:A;",SPC); while(getline(line)) print(line); endwhile
+   tx("ZNGI:NA1,%s:A;",SPC); while(getline(line)) print(line); endwhile
+   tx("ZNHI:NA0,%s:;",SPC);  while(getline(line)) print(line); endwhile
+   tx("ZNHI:NA1,%s:;",SPC);  while(getline(line)) print(line); endwhile   
+endfunction
+
+void function MGW_INFORMATION()
+ string line,MGW[],ID[],MGW_ID[],IPDU_ID[],OPIP[],OSIP[],AESA[];
+ integer x,y,m,n; 
+  LOG_SQUARE("blue","MGW_INFORMATION"); 
+  tx("ZJGI:;"); x=0; 
+    while(getline(line,"'GISU'")) x++;
+      print(line); strscan(line,"%s %s",MGW[x],MGW[x]);
+    endwhile 
+    y=x;
+    for(x=1; x<=y; x++)
+      print("\nZJGI:MODE=1:NAME=%s:;\n",MGW[x]); 
+      tx("ZJGI:MODE=1:NAME=%s:;",MGW[x]); m=0;
+        while(getline(line)) 
+          if(getline(line,"'MGW ID........................'")) m++; print(line); 
+            strscan(line,"%s",ID[m]); 
+            ID[m]=strreplace(ID[m],"MGW ID........................",""); strscan(ID[m],"%s",ID[m]); endif            
+          if(getline(line,"'MGW ADDRESS...................'")) print(line);
+            strscan(line,"%s",MGW_ID[m]);
+            MGW_ID[m]=strreplace(line,"SOURCE ADDRESS 1 . . . . . : ",""); strscan(MGW_ID[m],"%s",MGW_ID[m]); endif            
+          if(getline(line,"'IPDU INDEX....................'")) print(line);
+            strscan(line,"%s",IPDU_ID[m]);
+            IPDU_ID[m]=strreplace(IPDU_ID[m],"IPDU INDEX....................",""); 
+            strscan(IPDU_ID[m],"%s",IPDU_ID[m]); 
+            endif               
+          if(getline(line,"'PRIMARY CTRL ADDRESS..........'")) print(line);   
+            strscan(line,"%s",OPIP[m]);
+            OPIP[x]=strreplace(OPIP[m],"PRIMARY DEST. ADDRESS  . . ","");   strscan(OPIP[m],"%s",OPIP[m]); endif         
+          if(getline(line,"'SECONDARY CTRL ADDRESS........'")) print(line); 
+            strscan(line,"%s",OSIP[m]);
+            OSIP[m]=strreplace(line,"SECONDARY CTRL ADDRESS........","");  strscan(OSIP[m],"%s",OSIP[m]); endif
+          if(getline(line,"'E.164 AESA....................'")) print(line);
+            strscan(line,"%s",AESA[m]); 
+            AESA[m]=strreplace(line,"PRIMARY DEST. ADDRESS  . . : ","");   strscan(AESA[m],"%s",AESA[m]); endif 
+        endwhile    
+    endfor n=y;
+    print("\nExiste %d MGW\n",n);
+endfunction
+
+string function UPD()
+ string line,UPD;
+  LOG_SQUARE("blue","BSC - UPD"); 
+  tx("ZJFL;"); while(getline(line)) print(line); endwhile  
+  UPD="0"; ask(UPD,"Ingrese UPD: ");  
+  tx("ZJFI:UPD=%s;",UPD);
+    while(getline(line,"'YES    1    NO'")) print(line); endwhile
+ return UPD;
+endfunction
+
+void function LAC()
+ string line;
+  LOG_SQUARE("blue","RADIO - Location Area"); 
+  tx("ZELO;");
+    while(getline(line,"'LA    NAME :'")) print(line); endwhile
+endfunction
+
+void function BSC_INFORMATION(string UPD)
+ string line,BSC[],ID[],BSC_ADN[],BSC_OPER[],SNC[],SPC[],SSN[],VER[];
+ string U_TYPE[],FRASE;
+ integer x,y;    
+  LOG_SQUARE("blue","BSC_INFORMATION"); 
+  tx("ZEDO:TYPE=BSC,UPD=%s;",UPD); x=0; 
+    while(getline(line,"'BSC NAME' ")) x++;
+      print(line); strscan(line,"%s",BSC[x]); 
+      BSC[x]=strreplace(line,"BSC NAME .......................(NAME). :","");   
+      strscan(BSC[x],"%s",BSC[x]); 
+    endwhile y=x;
+    print("\nExiste %d BSC under UPD %s\n",y,UPD);   
+    for(x=1; x<=y; x++)
+      print("\nZEDO:TYPE=BSC,NAME=%s:;\n",BSC[x]); 
+      tx("ZEDO:TYPE=BSC,NAME=%s:;",BSC[x]); 
+        while(getline(line)) 
+          FRASE="BSC NUMBER .....................(NO)... :";   
+          if(getline(line,"'%s'",FRASE)) print(line); ID[x]=PHRASE(line,FRASE); endif          
+          FRASE="BSC ADMINISTRATIVE STATE .............. :";   
+          if(getline(line,"'%s'",FRASE)) print(line); BSC_ADN[x]=PHRASE(line,FRASE); endif                    
+          FRASE="BSC OPERATIONAL STATE ................. :";   
+          if(getline(line,"'%s'",FRASE)) print(line); BSC_OPER[x]=PHRASE(line,FRASE); endif                                                   
+          FRASE="SIGNALLING NETWORK CODE ........(SNC).. :";   
+          if(getline(line,"'%s'",FRASE)) print(line); SNC[x]=PHRASE(line,FRASE); endif        
+          FRASE="SIGNALLING POINT CODE ..........(SPC).. :";   
+          if(getline(line,"'%s'",FRASE)) print(line); SPC[x]=PHRASE(line,FRASE); endif
+          FRASE="BSSAP SUBSYSTEM NUMBER .........(SSN).. :";   
+          if(getline(line,"'%s'",FRASE)) print(line); SSN[x]=PHRASE(line,FRASE); endif
+          FRASE="BSSAP VERSION ..................(VER).. :";   
+          if(getline(line,"'%s'",FRASE)) print(line); VER[x]=PHRASE(line,FRASE); endif  
+          FRASE="USER PLANE TYPE.................(UTYPE) :";   
+          if(getline(line,"'%s'",FRASE)) print(line); U_TYPE[x]=PHRASE(line,FRASE); endif
+          while(getline(line,"' LOCKED ' OR ' UNLOCKED' OR 'AMR' ")) 
+            print(line);
+          endwhile 
+        endwhile        
+        print("\n"); print("ZEDB:VER=%s;\n",VER[x]);  
+        tx("ZEDB:VER=%s;",VER[x]);         
+          while(getline(line,"'AOIP' OR 'AMR SPEECH CODEC SUPPORTED' ")) print(line); endwhile        
+        print("\n"); print("ZE9O:TYPE=NB,;\n"); 
+        tx("ZE9O:TYPE=NB,;");  
+          while(getline(line,"'2G' OR '3G' ")) print(line); endwhile      
+        print("\n"); print("ZCPI:IN:NCCP=MAS:;\n"); 
+        tx("ZCPI:IN:NCCP=MAS:;");  
+          while(getline(line,"'ARAB' ")) print(line); endwhile     
+        print("\n"); print("ZWOI:53;\n"); 
+        tx("ZWOI:53;");  
+          while(getline(line,"'BICC' ")) print(line); endwhile            
+    endfor 
+    
+    LOG_SQUARE("green","BSC's under selected UPD"); 
+    for(x=1; x<=y; x++)
+      print("*%d/*%d BSC %s NUM %s STATE %s OPER %s, SNC %s SPC %s SSN %s VER %s UTYPE %s\n",x,y,BSC[x],ID[x],BSC_ADN[x],BSC_OPER[x],SNC[x],SPC[x],SSN[x],VER[x],U_TYPE[x]);
+    endfor
+   
+endfunction
+
+void function PING(string UNIT,string IPDU,string SIP1,string DIP1,string TRACE)
+ string line;  
+  tx("ZQRX:%s,%s::PING:SRC=\"%s\",HOST=\"%s\",;",UNIT,IPDU,SIP1,DIP1);
+    if(getline(line,"', 1 received,'"))  
+      print("  # PRIMARY PING OPIP %s OSIP %s OK\n",SIP1,DIP1); 
+    elseif(getline(line,"', 0 received,'")) 
+      print("  # PRIMARY PING FAIL OPIP %s OSIP %s OK\n",SIP1,DIP1);        
+      if(TRACE=="Y") print("##** TRACING FROM %s to %s\n",SIP1,DIP1);  
+        tx("ZQRX:%s,%s::TRACE:SRC=\"%s\",HOST=\"%s\",MAX=3;",UNIT,IPDU,SIP1,DIP1); 
+          while(getline(line)) print(line); endwhile
+      endif
+    endif 
+endfunction
+
+string function IP(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); 
+  FRASE=strreplace(FRASE,"/"," ");
+  strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction
+
+string function PHRASE(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); 
+  FRASE=strreplace(FRASE,"/"," ");
+  strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction

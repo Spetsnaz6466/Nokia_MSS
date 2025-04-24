@@ -1,0 +1,177 @@
+function oMSS_REVIEW_AND_CHECK_RNC_NODEB()
+  string filename,PCTime,Tel,line="",A,B,PRE,NETELEM,SPC,UPD,ID[],IPDU[],UNIT;
+  string FRASE,SIP1[],SIP2[],DIP1[],DIP2[],IPDUV,SIP1V,SIP2V,DIP1V,DIP2V,TRACE="",NA="N";
+  integer handle,x,y;  
+  
+  //clr(); 
+  x=0;
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_RNC_NODEB_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  LOG_SQUARE("blue",Tel); 
+  LOG_SQUARE("blue","ASSOCIATIONS SET NAME"); 
+  ask(NA,"Realizar PING [Y/N]: ??");
+  tx("ZOYI::H;");  
+    while(getline(line,"'M3UA'")) print(line); endwhile
+  ask(NETELEM,"Ingresar ASSOCIATION SET NAME: "); print("\n"); 
+  LOG_SQUARE("blue","ASSOCIATIONS STATE"); 
+  tx("ZOYI:NAME=%s:A;",NETELEM);
+     while(getline(line)) 
+       if(getline(line,"'SIGTRAN'")) x++; print(line); 
+         strscan(line,"%s %s",ID[x],IPDU[x]); 
+         IPDU[x]=strreplace(IPDU[x],"-"," "); strscan(IPDU[x],"%s %s",UNIT,IPDU[x]); 
+       endif        
+       FRASE="SOURCE ADDRESS 1 . . . . . : "; if(getline(line,"'%s'",FRASE)) print(line); SIP1[x]=IP(line,FRASE); endif 
+       FRASE="SOURCE ADDRESS 2 . . . . . : "; if(getline(line,"'%s'",FRASE)) print(line); SIP2[x]=IP(line,FRASE); endif    
+       FRASE="PRIMARY DEST. ADDRESS  . . : "; if(getline(line,"'%s'",FRASE)) print(line); DIP1[x]=IP(line,FRASE); endif   
+       FRASE="SECONDARY DEST. ADDRESS  . : "; if(getline(line,"'%s'",FRASE)) print(line); DIP2[x]=IP(line,FRASE); endif y=x;
+     endwhile
+     for(x=1 ; x<=y ; x++) 
+       print("\n*%d/%d- ASSC_NAME: %s ID: %s UNIT %s-%s OPIP %s OSIP %s DOPIP %s DOSIP %s\n",x,y,NETELEM,ID[x],UNIT,IPDU[x],SIP1[x],SIP2[x],DIP1[x],DIP2[x]);       
+       IPDUV=IPDU[x]; SIP1V=SIP1[x]; DIP1V=DIP1[x]; if(NA=="Y") PING(UNIT,IPDUV,SIP1V,DIP1V,TRACE,"PRIMARY"); endif
+       if(SIP2[x]<>"") 
+        SIP2V=SIP2[x]; DIP2V=DIP2[x]; if(NA=="Y") PING(UNIT,IPDUV,SIP2V,DIP2V,TRACE,"SECONDARY"); endif
+       endif       
+     endfor print("\n");
+    
+  LOG_SQUARE("blue","SIGNALLING LINK SET DATA"); 
+  tx("ZNSI:NA0;");
+    if(getline(line,"'%s'",NETELEM)) 
+      strscan(line,"%s %s",NA,SPC); SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC);
+      tx("ZNSI:%s,%s;",NA,SPC); while(getline(line)) print(line); endwhile endif
+  tx("ZNSI:NA1;");
+    if(getline(line,"'%s'",NETELEM)) 
+      strscan(line,"%s %s",NA,SPC); SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC);
+      tx("ZNSI:%s,%s;",NA,SPC); while(getline(line)) print(line); endwhile
+    endif print("\n"); 
+    
+  LOG_SQUARE("blue","SIGNALLING LINK SET STATE"); 
+  tx("ZNLI;"); while(getline(line)) print(line); endwhile
+  tx("ZNEL;"); while(getline(line)) print(line); endwhile print("\n");
+      
+  LOG_SQUARE("blue","SIGNALLING POINT DATA"); 
+  tx("ZNRI:%s,%s;",NA,SPC);  
+    while(getline(line)) print(line); endwhile print("\n"); 
+    
+  LOG_SQUARE("blue","SIGNALLING ROUTE STATE"); 
+  tx("ZNVI:%s,%s;",NA,SPC);
+    while(getline(line)) print(line); endwhile print("\n");
+   
+  LOG_SQUARE("blue","SCCP DATA OF SIGNALLING POINTS"); 
+  tx("ZNFI:%s,%s:A;",NA,SPC); while(getline(line)) print(line); endwhile
+  tx("ZNGI:%s,%s:A;",NA,SPC); while(getline(line)) print(line); endwhile 
+  tx("ZNHI:%s,%s:;",NA,SPC); while(getline(line)) print(line); endwhile print("\n");
+  
+  LOG_SQUARE("blue","RADIO - Location Area"); 
+  tx("ZELO;");
+    while(getline(line,"'LA    NAME :'")) print(line); endwhile
+      
+  LOG_SQUARE("blue","RNC - UPD");  
+  tx("ZJFL;");
+    while(getline(line)) print(line); endwhile  
+  UPD="0"; ask(UPD,"Ingrese UPD: ");  
+  tx("ZJFI:UPD=%s;",UPD);  while(getline(line,"'YES    1    NO'")) print(line); endwhile  print("\n"); 
+  
+  RNC(UPD);
+  NodeB();
+    
+  print("\nFIN!!!!");
+ 
+ endfunction
+ 
+//########################
+//# FUNCIONES - NO TOCAR #
+//########################
+
+void function LOG_SQUARE(string color,string information )
+ integer x,y=1;
+ if(color == "red") settextcolor(RGB(200,0,0));
+   elseif(color == "yellow") settextcolor(RGB(100,150,0));
+   elseif(color == "blue") settextcolor(RGB(0,0,250));
+   elseif(color == "green")  settextcolor(RGB(0,200,220));
+ endif
+ x = strlength(information); x= x + 4; print("\n"); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n"); settextcolor(RGB(0,0,0));
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+void function RNC(string UPD )
+ string line;
+ LOG_SQUARE("blue","RNC"); 
+ tx("ZE2I:UPD=%s;",UPD);
+   while(getline(line)) 
+     if(getline(line,"'RNCID'")) print(line); endif
+     if(getline(line,"'RNCNAME'")) print(line); endif
+     if(getline(line,"'STATE ... :'")) print(line); endif
+     if(getline(line,"'UPD ..... :'")) print(line); endif
+     if(getline(line,"'NUPD .... :'")) print(line); endif
+     if(getline(line,"'UTYPE ... :'")) print(line); endif
+     if(getline(line,"'VER ..... :'")) print(line); endif
+     if(getline(line,"'AMR ..... :'")) print(line); endif
+     if(getline(line,"'NI ...... :'")) print(line); endif
+     if(getline(line,"'SPC ..... :'")) print(line); endif
+     if(getline(line,"'AMR CODEC CAPABILITY AND MODE SETS....... :'")) print(line); endif
+   endwhile
+endfunction
+
+void function PING(string UNIT,string IPDU,string SIP1,string DIP1,string TRACE,string link)
+string line;
+  tx("ZQRX:%s,%s::PING:SRC=\"%s\",HOST=\"%s\",;",UNIT,IPDU,SIP1,DIP1);
+    if(getline(line,"', 1 received,'"))  
+      print(" -->> # PING %s OPIP %s OSIP %s OK\n",link,SIP1,DIP1); 
+    elseif(getline(line,"', 0 received,'")) 
+      print(" -->> # PING %s OPIP %s OSIP %s FAIL\n",link,SIP1,DIP1);        
+      if(TRACE=="Y") print(" -->>>> ##** TRACING %s FROM %s to %s\n",link,SIP1,DIP1);  
+        tx("ZQRX:%s,%s::TRACE:SRC=\"%s\",HOST=\"%s\",MAX=7;",UNIT,IPDU,SIP1,DIP1); 
+          while(getline(line,"'ms'")) print(line); endwhile
+        tx("ZQRS:%s,%s;",UNIT,IPDU,SIP1,DIP1); 
+          while(getline(line,"'%s'",DIP1)) print(line); endwhile       
+      endif
+    endif 
+endfunction
+
+string function IP(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); FRASE=strreplace(FRASE,"/"," ");
+  strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction
+
+string function PHRASE(string line,string FRASE)
+  FRASE=strreplace(line,FRASE,""); strscan(FRASE,"%s",FRASE);  
+  return FRASE;
+endfunction
+
+void function NodeB()
+ string line,FRASE,SAC[],SA[],LAC[],RZ[],STATE[];
+ integer x=0,y,z=0;
+ LOG_SQUARE("blue","NodeB"); 
+ tx("ZEPO:TYPE=SA;");
+   while(getline(line))      
+     FRASE="SA    NAME :"; if(getline(line,"'%s'",FRASE)) x++; SA[x]=PHRASE(line,FRASE); endif     
+     FRASE="LA    NAME :"; if(getline(line,"'%s'",FRASE)) LAC[x]=PHRASE(line,FRASE); endif       
+     FRASE="SERVICE AREA CODE ......................(SAC)... :"; if(getline(line,"'%s'",FRASE)) SAC[x]=PHRASE(line,FRASE); endif     
+     FRASE="ADMINISTRATIVE STATE ........................... :"; if(getline(line,"'%s'",FRASE)) STATE[x]=PHRASE(line,FRASE);  endif     
+     FRASE="ROUTING ZONE ...........................(RZ).... :"; if(getline(line,"'%s'",FRASE)) RZ[x]=PHRASE(line,FRASE); endif
+     if(STATE[x]=="UNLOCKED") z++; endif
+   endwhile y=x;
+   for(x=1; x<=y; x++) 
+     logprint("*%d/%d- %s %s %s %s %s\n",x,y,SA[x],LAC[x],SAC[x],STATE[x],RZ[x]);
+   endfor
+   print("\nExisten %d SA UNLOCKED\n",z);
+   print("FIN DE MACRO\n");
+endfunction

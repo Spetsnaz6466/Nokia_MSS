@@ -1,0 +1,89 @@
+function oMSS_CGR_Levantar_Circuitos_CIC()
+  string filename,PCTime,Tel,line="",A,B,PRE,CGR[],NCGR[],CGR2,temp; 
+  integer handle,x,y,NBCRCT[];  
+  
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+  tx("ZDCD;"); 
+    if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+    PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; 
+    filename= "oMSS_CGR_Levantar_Circuitos_CIC_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+    handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+    LOG_SQUARE(Tel);   
+  tx("ZUSI;"); tx("ZUSI:GISU;"); tx("ZRCI;"); x=0;
+    while(getline(line,"'BICC'")) x++;
+      strscan(line,"%s %s %s %s %d %d",CGR[x],NCGR[x],NBCRCT[x],NBCRCT[x],NBCRCT[x],NBCRCT[x]); 
+      print("CGR: %s NCGR: %s NBCRCT:%d\n",CGR[x],NCGR[x],NBCRCT[x]); 
+    endwhile
+  y=x;
+  for(x=1; x<=y; x++) print("CGR: %s NCGR: %s TOTAL_ NBCRCT:%d\n",CGR[x],NCGR[x],NBCRCT[x]); endfor
+  temp="SINGLE"; ask(temp,"Levantar CGR [ALL / SINGLE]: ");
+  if(temp=="ALL")
+    for(x=1; x<=y; x++) oMSS_Levantar_CIC_CGR(CGR[x]); endfor
+  elseif(temp=="SINGLE")
+    CGR2=CGR[1]; ask(CGR2,"CGR donde se levantaran CIC caídos: "); oMSS_Levantar_CIC_CGR( CGR2 );
+  endif   
+  print("FIN!!!!");
+endfunction
+ 
+function oMSS_Levantar_CIC_CGR(string CGR)
+  string line,SPC,temp,NET,NCGR; integer x=0,y,CICLAST,CIC[],CIC_BEGIN,CIC_END,z; 
+  
+  temp="CGR: "+ CGR; LOG_SQUARE(temp); CIC_BEGIN=0;
+  tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGR);  //Nombre del CGR , SPC
+    while(getline(line,"'NCGR     : '")) 
+      strscan(line,"%s %s %s %s %s %s",NCGR,NCGR,NCGR,NCGR,NCGR,NCGR); 
+    endwhile
+    while(getline(line,"'SPC(H/D) :'"))  //SPC
+      strscan(line,"%s %s %s %s %s %s %s %s %s",SPC,SPC,SPC,SPC,SPC,NET,SPC,SPC,SPC); 
+      SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC); 
+    endwhile
+  tx("ZNRI:%s,%s;",NET,SPC); 
+    while(getline(line)) print(line); endwhile
+  tx("ZCEL:CGR=%s;",CGR); //Cuantos circuitos tiene en total.
+    if(getline(line," '%s   ' ",NCGR)) strscan(line,"%s %s %d",CICLAST,CICLAST,CICLAST); 
+      print("CGR: %s - NCGR: %s CKTS_TOT: %d\n",CGR,NCGR,CICLAST);  
+    endif  
+  tx("ZCEL:CGR=%s,FORM=EXT;",CGR); y=0;  //llenado de matrix con número de CIC
+    while(getline(line," 'WO-EX' ")) y++; strscan(line,"%d",x); CIC[x]=x; endwhile
+    print("Existen %d Circuitos en WO-EX\n",y);
+    
+  tx("ZCEL:CGR=%s,FORM=EXT;",CGR); delay(2000); y=0;
+    while(getline(line," '      BA-' OR '       BL-' OR '       SE-' OR '       NU-' OR '       TE-' "))   
+      y++; strscan(line,"%d",x); CIC[x]=9999; print("%d CGR: %s CIC:%d VALOR: %d\n",y,CGR,x,CIC[x]); 
+      if(y==1) CIC_BEGIN=x; CIC_END=x; endif if(x>CIC_END) CIC_END=x; endif if(x<CIC_BEGIN) CIC_BEGIN=x; endif
+    endwhile 
+    print("Existen %d Circuitos en NO-EX\n",y);   
+  if(y==0) 
+    print("\nCGR: %s NAME: %s SPC: %s - NO CKTS OUT OF SERVICE\n",CGR,NCGR,SPC); 
+  else 
+    print("CGR:%s PRIMER_CIC_OOS %d ULTIMO_CIC_OOS:%d\n",CGR,CIC_BEGIN,CIC_END); z=0;  
+    for(y=CIC_BEGIN; y<=CIC_END; y++)  
+      y=CIC_BEGIN; 
+      ask(y,"Primer CIC: "); CICLAST=y+30; if(CICLAST > CIC_END) CICLAST=CIC_END; endif 
+      ask(CICLAST,"Ultimo CIC: ");
+      if(CIC_BEGIN==CIC_END OR y==CICLAST)
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:SE;\n",SPC,y); 
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:NU;\n",SPC,y);
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:SE;\n",SPC,y); 
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:WO;\n",SPC,y); 
+        if(getline(line,"'%s'",NCGR)) print(line); endif   
+      else
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:SE;\n",SPC,y,CICLAST); 
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:NU;\n",SPC,y,CICLAST);
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:SE;\n",SPC,y,CICLAST); 
+        tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:WO;\n",SPC,y,CICLAST); 
+        while(getline(line,"'WO-EX'",NCGR)) z++; endwhile  
+        CIC_BEGIN=CICLAST+1; if(CIC_BEGIN > CIC_END) y=CIC_END +1; endif      
+      endif  
+    endfor print("Suben %d circuitos\n",z);
+  endif
+endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction

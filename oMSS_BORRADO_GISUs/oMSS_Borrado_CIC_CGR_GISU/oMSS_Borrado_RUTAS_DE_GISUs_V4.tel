@@ -1,0 +1,70 @@
+function oMSS_Borrado_RUTAS_GISUs_IPs()
+  string filename,PCTime,Tel,line="",A,B,PRE;
+  string GISU[]; 
+  integer handle,x,Q;  
+  
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_Borrado_GISUs_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  tx("ZUSI;"); tx("ZUSI:GISU;"); tx("ZQRI:GISU;");
+  Q=25; ask(Q,"Catidad de GISUS a Borrar"); 
+   
+  
+  GISU[1]="61"; GISU[2]="62"; GISU[3]="63"; GISU[4]="64"; GISU[5]="65";
+  GISU[6]="66"; GISU[7]="67"; GISU[8]="68"; GISU[9]="69"; GISU[10]="70";
+  GISU[11]="71"; GISU[12]="72"; GISU[13]="73"; GISU[14]="74"; GISU[15]="75";
+  GISU[16]="76"; GISU[17]="77"; GISU[18]="78"; GISU[19]="79"; GISU[20]="80";
+  GISU[21]="81"; GISU[22]="82"; GISU[23]="83"; GISU[24]="84"; GISU[25]="85";
+
+  
+  for(x=1;x<=Q;x++)  Borrado_RUTAS(GISU[x]); endfor
+ // ask(GISU[x],"Ingresar GISU: "); Borrado_Gisus_IP(GISU);
+ // Validacion();
+  
+  print("FIN!!!!");
+ endfunction
+ 
+function Borrado_RUTAS(string GISU)
+ string line,RUTA[],temp; integer x,y;
+ question(1, "CONFIRM COMMAND EXECUTION: Y/N ? "); answer(1, "Y\r");
+
+ temp="GISU: "+ GISU; LOG_SQUARE(temp);
+ tx("ZQKO:GISU,%s;",GISU); x=0;
+   while(getline(line,"'GISU-'")) x++;
+     strscan(line,"%s %s %s",RUTA[x],RUTA[x],RUTA[x]); RUTA[x]=strreplace(RUTA[x],"(",""); RUTA[x]=strreplace(RUTA[x],")","");  
+   endwhile
+   y=x;
+   for(x=1; x<=y; x++) 
+   tx("ZQKP:%s:;\n",RUTA[x]); delay(1000); endfor
+   tx("ZQKO:GISU,%s;",GISU);
+endfunction
+
+/* 
+function Validacion()
+  tx("ZJGI;");
+  tx("ZOYV:SGSAP;");
+  tx("ZRCI:SEA=3:CGR=1&&5999:PRINT=5;");
+endfunction
+*/
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

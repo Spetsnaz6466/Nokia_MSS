@@ -1,0 +1,111 @@
+function oMSS_Borrado_CGR_GISUs()
+  string filename,PCTime,Tel,line="",A,B,PRE;
+  string filter,file,CGR[],NCGR[],NBCRCT[],TEMP,CGR2; 
+  integer handle,x,y,file_handle,cuenta=300; 
+  integer r,g,b,OldColor;
+
+  OldColor = settextcolor(RGB(0,0,0)); 
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_Borrado_GISUs_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  tx("ZUSI;"); tx("ZUSI:GISU;"); tx("ZQRI:GISU;");
+  tx("ZRCI;"); x=0;
+    while(getline(line,"'BICC'")) x++;
+      strscan(line,"%s %s %s %s %s %s",CGR[x],NCGR[x],NBCRCT[x],NBCRCT[x],NBCRCT[x],NBCRCT[x]); 
+      print("%d*- CGR: %s NCGR: %s NBCRCT:%s\n",x,CGR[x],NCGR[x],NBCRCT[x]); 
+    endwhile
+  y=x;
+  
+  TEMP="ALL"; ask(TEMP,"All MSS CGR's OR SINGLE CGR: [ALL/S] "); 
+  if(TEMP=="ALL")
+    for(x=1; x<=y; x++) 
+      print("\n*%d/%d*-CGR: %s NCGR: %s NBCRCT:%s\n",x,y,CGR[x],NCGR[x],NBCRCT[x]); 
+      Borrado_Gisus(CGR[x]);
+    endfor
+  elseif(TEMP=="S") 
+    ask(CGR2,"CGR donde se borran los ckts-GISU: "); 
+    Borrado_Gisus(CGR2);
+  endif
+  
+  settextcolor(RGB(0,250,0));
+  LOG_SQUARE("FIN");
+  settextcolor(OldColor);
+ endfunction
+ 
+function Borrado_Gisus(string CGR)
+ string line,SPC,temp,GISU[];
+ integer x,x1,y,Q,CICENT[],CICMENOR,CIC[],CIC2;
+ integer r,g,b,OldColor;
+
+  OldColor = settextcolor(RGB(0,0,0)); 
+ 
+ Q=3; //ask(Q,"Catidad de GISUS a Borrar"); 
+ GISU[1]="58";  GISU[2]="59"; GISU[3]="60"; GISU[4]="64"; GISU[5]="65";
+ GISU[6]="66";  GISU[7]="67"; GISU[8]="68"; GISU[9]="69"; GISU[10]="70";
+ GISU[11]="71"; GISU[12]="72"; GISU[13]="73"; GISU[14]="74"; GISU[15]="75";
+ GISU[16]="76"; GISU[17]="77"; GISU[18]="78"; GISU[19]="79"; GISU[20]="80";
+ GISU[21]="81"; GISU[22]="82"; GISU[23]="83"; GISU[24]="84"; GISU[25]="85"; 
+  
+ //for(x=1;x<=Q;x++) ask(GISU[x],"Ingresar GISU: "); endfor
+ temp="CGR: "+ CGR; 
+ settextcolor(RGB(0,0,250));
+ LOG_SQUARE(temp); settextcolor(OldColor);
+ 
+ tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGR);
+ while(getline(line,"'SPC(H/D) :'"))
+   strscan(line,"%s %s %s %s %s %s %s %s %s",SPC,SPC,SPC,SPC,SPC,SPC,SPC,SPC,SPC); 
+   SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC); print("SPC %s\n",SPC);
+ endwhile
+ 
+ for(x=1;x<=Q;x++)
+   tx("ZRCI:SEA=3:CGR=%s:PRINT=5;",CGR); temp="GISU, " + GISU[x];
+   y=0;
+   while(getline(line," '%s' ",temp)) y++;
+     strscan(line,"%d",CIC[y]); print("%d CGR: %s CIC:%d\n",y,CGR,CIC[y]); CICENT[y]=CIC[y]; 
+   endwhile
+   print("Existen %d CIC asociados al GISU %s\n",y,GISU[x]);
+   
+   if(y>0) CICMENOR=CIC[1]; endif
+   for(x1=2 ; x1<=y ; x1++) if(CICMENOR > CIC[x1]) CICMENOR = CIC[x1]; endif endfor
+   for(x1=1;x1<=y;x1++)
+     if(y <= 30)
+       print("%d CIC: %d\n",x1,CIC[x1]);
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:SE;\n",SPC,CIC[x1]);
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:NU;\n",SPC,CIC[x1]);
+       tx("ZRCR:CGR=%s:CIC=%d;\n",CGR,CIC[x1]);
+     else
+       ask(CICMENOR,"CIC_BEGIN:"); CIC2 = CICMENOR + 30;
+       ask(CIC2,"CIC_END:");
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:SE;\n",SPC,CICMENOR,CIC2);
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:NU;\n",SPC,CICMENOR,CIC2);
+       tx("ZRCR:CGR=%s:CIC=%d&&%d;\n",CGR,CICMENOR,CIC2);
+       x1=y; x=x-1;
+     endif 
+   endfor
+ endfor
+
+endfunction
+ 
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

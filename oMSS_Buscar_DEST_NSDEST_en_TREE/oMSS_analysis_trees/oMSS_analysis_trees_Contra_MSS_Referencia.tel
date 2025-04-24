@@ -1,0 +1,161 @@
+
+function oMSS_analysis_trees_contra_MSS_REFRENCIA()
+  string filename,PCTime,Tel,Tel2,line="",A,B,PRE,VAR,TEMP[],TREE[],TON[];
+  string DIG[],ALT[],NDEST[],CH[],CNT[],NSDEST[],CORG[],NCHA[];
+  string ATYPE[],filename2;
+  integer handle,handle2,x,y,z,z0,z1;  
+  integer handle3,TUPLAS_MSS_ORIGEN,TUPLAS_MSS_REFERENCIA;
+  string filename3;
+  
+  Tel="MSSVEN02"; ask(Tel,"INGRESE MSS ORIGEN: ? "); Tel=strupper(Tel); 
+  PRE="ALL"; ask(PRE,"TREE #/ALL TREES[ALL]");  device(Tel); VAR="analysis_trees";
+  Tel2="MSSVEN01"; ask(Tel2,"INGRESE MSS DE REFERENCIA: "); Tel2=strupper(Tel2); 
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; 
+  filename= "oMSS_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  filename2= "oMSS_" + VAR + "_" + Tel + "_RESULTADOS_" + PCTime + "_.CSV" ; 
+  handle = fileopen(filename,NEW);  fileclose(handle); handle2 = fileopen(filename2,NEW);  //fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); LOG_SQUARE(VAR); 
+  
+  x=0; z0=0; 
+  if(PRE=="ALL") B="1&&9999"; else B=PRE; endif
+  
+  B="ZRIH:TREE="+B+";";
+  tx(B);
+    while(getline(line,"'TREE= '")) x++;
+       strscan(line,"%s %s %s %s",TREE[x],TREE[x],ATYPE[x],TON[x]);
+       ATYPE[x]=strreplace(ATYPE[x],"ATYPE=","");
+       TON[x]=strreplace(TON[x],"TON=",""); 
+    endwhile y=x; 
+    VAR=""; 
+    fileprint(handle2,"TREE,ATYPE,TON,DIG,ALT,NDEST,CH,CNT,NSDEST,CORG,NCHA\n");
+    print("\nTREE,ATYPE,TON\n");
+    for(x=1; x<=y; x++)
+      print("%d*- %s %s %s\n",x,TREE[x],ATYPE[x],TON[x]);
+    endfor
+    
+    for(x=1; x<=y; x++)
+      TEMP[x]= "TREE " + TREE[x]; 
+      if(TEMP[x]<>VAR) z=0; LOG_SQUARE(TEMP[x]); VAR=TEMP[x]; endif 
+      TEMP[x]="ZRIH:TREE=" + TREE[x] + ",ATYPE=" + ATYPE[x] + ",TON=" +TON[x] + ";";  
+      print("%d*- %s\n",x,TEMP[x]); tx(TEMP[x]);  
+      while(getline(line,"'CHARGE'"))
+        strfetch(line,"27",TEMP[x]);
+        if(TEMP[x]=="0") z++; //  print(line);
+          strscan(line,"%s %s %s %s %s %s %s %s",DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+          print("TUPLA#%d*- %s %s %s %s %s %s %s %s %s %s %s\n",z,TREE[x],ATYPE[x],TON[x],DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+          fileprint(handle2,"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",TREE[x],ATYPE[x],TON[x],DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+        endif
+      endwhile
+      print("TREE %s ATYPE %s TON %s tiene %d tuplas\n",TREE[x],ATYPE[x],TON[x],z);
+      z0=z+z0; z=0;
+    endfor
+    print("Existen %d tuplas insertadas\n",z0); TUPLAS_MSS_ORIGEN=z0;   
+  fileclose(handle2); 
+  deviceclose(Tel);
+  
+  ///// MSS DE REFERENCIA
+  device(Tel2); VAR="analysis_trees";
+  filename3= "oMSS_REFERENCIA_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle3 = fileopen(filename3,NEW);  fileclose(handle3);  
+  logenable(LOG_ENABLE_ALL); logset(filename3,APPEND); 
+  LOG_SQUARE(Tel2); LOG_SQUARE(VAR); 
+  
+  tx(B); x=0;
+    while(getline(line,"'TREE= '")) x++;
+       strscan(line,"%s %s %s %s",TREE[x],TREE[x],ATYPE[x],TON[x]);
+       ATYPE[x]=strreplace(ATYPE[x],"ATYPE=","");
+       TON[x]=strreplace(TON[x],"TON=",""); 
+    endwhile y=x; 
+    VAR=""; 
+    print("\nTREE,ATYPE,TON\n");
+    for(x=1; x<=y; x++)
+      print("%d*- %s %s %s\n",x,TREE[x],ATYPE[x],TON[x]);
+    endfor
+    for(x=1; x<=y; x++)
+      TEMP[x]= "TREE " + TREE[x]; 
+      if(TEMP[x]<>VAR) z=0; LOG_SQUARE(TEMP[x]); VAR=TEMP[x]; endif 
+      TEMP[x]="ZRIH:TREE=" + TREE[x] + ",ATYPE=" + ATYPE[x] + ",TON=" +TON[x] + ";";  
+      print("%d*- %s\n",x,TEMP[x]); tx(TEMP[x]);  
+      while(getline(line,"'CHARGE'"))
+        strfetch(line,"27",TEMP[x]);
+        if(TEMP[x]=="0") z++;
+          strscan(line,"%s %s %s %s %s %s %s %s",DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+          print("TUPLA#%d*- %s %s %s %s %s %s %s %s %s %s %s\n",z,TREE[x],ATYPE[x],TON[x],DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+          //fileprint(handle3,"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",TREE[x],ATYPE[x],TON[x],DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+        endif
+      endwhile
+      print("TREE %s ATYPE %s TON %s tiene %d tuplas\n",TREE[x],ATYPE[x],TON[x],z);
+      z0=z+z0; z=0;
+    endfor
+    print("Existen %d tuplas insertadas\n",z0); TUPLAS_MSS_REFERENCIA=z0; 
+    
+    print("MSS ORIGEN %s TIENE %d TUPLAS\n",Tel,TUPLAS_MSS_ORIGEN);
+    print("MSS RERERENCIA %s TIENE %d TUPLAS\n",Tel2,TUPLAS_MSS_REFERENCIA);
+ 
+  print("FIN!!!!");
+  
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+/*
+void function MSS_TREE(string Tel2, string PRE, string PCTime);
+
+  device(Tel2); VAR="analysis_trees";
+  filename3= "oMSS_REFERENCIA_" + VAR + "_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle3 = fileopen(filename3,NEW);  fileclose(handle3);  
+  logenable(LOG_ENABLE_ALL); logset(filename3,APPEND); 
+  LOG_SQUARE(Tel2); LOG_SQUARE(VAR); 
+  
+  tx(B); x=0;
+    while(getline(line,"'TREE= '")) x++;
+       strscan(line,"%s %s %s %s",TREE[x],TREE[x],ATYPE[x],TON[x]);
+       ATYPE[x]=strreplace(ATYPE[x],"ATYPE=","");
+       TON[x]=strreplace(TON[x],"TON=",""); 
+    endwhile y=x; 
+    VAR=""; 
+    print("\nTREE,ATYPE,TON\n");
+    for(x=1; x<=y; x++)
+      print("%d*- %s %s %s\n",x,TREE[x],ATYPE[x],TON[x]);
+    endfor
+    for(x=1; x<=y; x++)
+      TEMP[x]= "TREE " + TREE[x]; 
+      if(TEMP[x]<>VAR) z=0; LOG_SQUARE(TEMP[x]); VAR=TEMP[x]; endif 
+      TEMP[x]="ZRIH:TREE=" + TREE[x] + ",ATYPE=" + ATYPE[x] + ",TON=" +TON[x] + ";";  
+      print("%d*- %s\n",x,TEMP[x]); tx(TEMP[x]);  
+      while(getline(line,"'CHARGE'"))
+        strfetch(line,"27",TEMP[x]);
+        if(TEMP[x]=="0") z++;
+          strscan(line,"%s %s %s %s %s %s %s %s",DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+          print("TUPLA#%d*- %s %s %s %s %s %s %s %s %s %s %s\n",z,TREE[x],ATYPE[x],TON[x],DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+          //fileprint(handle3,"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",TREE[x],ATYPE[x],TON[x],DIG[x],ALT[x],NDEST[x],CH[x],CNT[x],NSDEST[x],CORG[x],NCHA[x]);
+        endif
+      endwhile
+      print("TREE %s ATYPE %s TON %s tiene %d tuplas\n",TREE[x],ATYPE[x],TON[x],z);
+      z0=z+z0; z=0;
+    endfor
+    print("Existen %d tuplas insertadas\n",z0); TUPLAS_MSS_REFERENCIA=z0; 
+    
+    print("MSS ORIGEN %s TIENE %d TUPLAS\n",Tel,TUPLAS_MSS_ORIGEN);
+    print("MSS RERERENCIA %s TIENE %d TUPLAS\n",Tel2,TUPLAS_MSS_REFERENCIA);
+
+endfunction
+
+*/

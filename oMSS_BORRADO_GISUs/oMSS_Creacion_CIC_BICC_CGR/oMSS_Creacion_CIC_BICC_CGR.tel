@@ -1,0 +1,111 @@
+function oMSS_Creacion_CIC_BICC_CGR()
+  string filename,PCTime,Tel,line="",A,B,PRE;
+  string CGR[],NCGR[],CGR2; 
+  integer handle,x,y,NBCRCT[];  
+  
+  Tel="MSSING02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); 
+    if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+    PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+    PCTime = A + "_" + B; 
+    filename= "oMSS_CREAR_CKTS_GISUs_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+    handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+    LOG_SQUARE(Tel); 
+  
+  tx("ZUSI;"); tx("ZUSI:GISU;"); tx("ZRCI;"); x=0;
+    while(getline(line,"'BICC'")) x++;
+      strscan(line,"%s %s %s %s %d %d",CGR[x],NCGR[x],NBCRCT[x],NBCRCT[x],NBCRCT[x],NBCRCT[x]); 
+      print("CGR: %s NCGR: %s NBCRCT:%d\n",CGR[x],NCGR[x],NBCRCT[x]); 
+    endwhile
+  y=x;
+  for(x=1; x<=y; x++) print("CGR: %s NCGR: %s NBCRCT:%d\n",CGR[x],NCGR[x],NBCRCT[x]); endfor
+  CGR2=CGR[1]; ask(CGR2,"CGR donde se crearan CIC: "); 
+
+  oMSS_Crear_CIC_CGR( CGR2 );
+  
+  print("FIN!!!!");
+ 
+endfunction
+ 
+function oMSS_Crear_CIC_CGR(string CGR)
+ string line,SPC,temp;
+ integer x,x1,y,Q,CICLAST,CIC[],CIC2,CIC_BEGIN,CIC_QTY,GISU_INDEX;
+ 
+ temp="CGR: "+ CGR; LOG_SQUARE(temp);
+ Q=2048; ask(Q,"Cantidad Total de Circuitos del CGR"); CIC_QTY=0; Q=Q-1;
+ 
+ tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGR);
+ while(getline(line,"'SPC(H/D) :'"))
+   strscan(line,"%s %s %s %s %s %s %s %s %s",SPC,SPC,SPC,SPC,SPC,SPC,SPC,SPC,SPC); 
+   SPC=strreplace(SPC,"/"," "); strscan(SPC,"%s",SPC); 
+ endwhile
+ 
+ tx("ZCEL:CGR=%s;",CGR);
+ if(getline(line," '%s   ' ",CGR)) strscan(line,"%s %s %d",CIC_BEGIN,CIC_BEGIN,CIC_BEGIN); 
+   print("CGR:%s tiene %d Objetivo:%d\n",CGR,CIC_BEGIN,Q);  
+ endif
+ 
+ for(x=0; x<=Q ; x++) CIC[x]=9999; endfor
+ 
+ tx("ZRCI:SEA=3:CGR=%s:PRINT=5;",CGR); y=0;
+ CIC_BEGIN=8000; CICLAST=0;
+ while(getline(line," 'GISU,' ",temp)) y++;
+   strscan(line,"%d",CIC2); print("%d CGR: %s CIC:%d\n",y,CGR,CIC2); 
+   x1=CIC2; CIC[x1]=x1;
+   if(CIC_BEGIN > CIC[x1]) CIC_BEGIN=CIC[x1]; endif
+   if(CICLAST < CIC[x1])   CICLAST =CIC[x1];  endif 
+ endwhile
+ 
+ print("CGR:%s PRIMER_CIC %d ULTIMO_CIC:%d OBJETIVO:%d\n",CGR,CIC_BEGIN,CICLAST,Q); 
+ 
+ for(y=0; y<=Q ; y++) 
+   if( CIC[y]==9999 ) print("CGR %s CIC: %d Valor Temporal:%d\n",CGR,y,CIC[y]); endif
+ endfor
+ 
+ Q=Q - CIC_QTY;
+ for(y=0; y<=Q ; y++)  
+   if( CIC[y]==9999 )  
+    // CICLAST=y+30;
+    // for(x=y;x<=CICLAST;x++) print("CIC: %d Valor Temporal:%d\n",x,CIC[x]); endfor
+     
+     ask(y,"CIC de Inicio: "); CICLAST=y+30; if(CICLAST>Q) CICLAST=Q; endif ask(CICLAST,"CIC final: "); 
+     print("CGR %s RANGO CIC A CREAR DE: %d a %d \n",CGR,y,CICLAST);
+     //ask(GISU_INDEX,"GISU INDEX: "); print("GISU %d\n",GISU_INDEX);
+     if(y==CICLAST)
+       //tx("ZRCA:CGR=%s:CIC=%d:UNIT=GISU,INDEX=%d:;\n",CGR,y,GISU_INDEX);
+       tx("ZRCA:CGR=%s:CIC=%d:UNIT=GISU:;\n",CGR,y);
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:SE;\n",SPC,y);
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d,:WO;\n",SPC,y);
+       tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR); 
+     else
+       //tx("ZRCA:CGR=%s:CIC=%d&&%d:UNIT=GISU,INDEX=%d:;\n",CGR,y,CICLAST,GISU_INDEX);
+       tx("ZRCA:CGR=%s:CIC=%d&&%d:UNIT=GISU:;\n",CGR,y,CICLAST);
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:SE;\n",SPC,y,CICLAST);
+       tx("ZCEC:NET=NA0,SPC=%s,CIC=%d&&%d,:WO;\n",SPC,y,CICLAST);
+       tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR); 
+       y=CICLAST;
+     endif
+     //GISU_INDEX=GISU_INDEX+1; if(GISU_INDEX > 85) GISU_INDEX=1; endif
+   endif
+ endfor
+
+endfunction
+ 
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

@@ -1,0 +1,134 @@
+function oMSS_Cloud_TCP_IP_Parameters()
+  string filename,filename2,PCTime,Tel,line="",A,B,ASOC[],ASOC_NAME[],FEBU,PRE;
+  string temp="",CHU[],CGR[],NCGR[],TCGR[],TDIR[],NBCRCT[],STATE[],CKTNOWO="",COMCAL[]; 
+  integer handle,handle2,x,y,a,b,PORC[],CKTOOS[],m1,m2;  
+  
+  Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_CLOUD_TCP_IP_PARAM_" + Tel + "_MSS_" + PRE + "_" + PCTime + "_.TXT" ; 
+  //filename2= "oMSS_CLOUD_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ;
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  //handle2 = fileopen(filename2,NEW); 
+  
+  OMSS_TCP_IP_PARAM("IPDU");
+ 
+  
+  print("FIN!!!!");
+ 
+ endfunction 
+
+void function OMSS_TCP_IP_PARAM( string UNIT_ELX)
+ string line,Unit[],m,n;
+ integer x=0,y1; 
+ LOG_SQUARE(UNIT_ELX); 
+ tx("ZUSI:%s;",UNIT_ELX); 
+ while(getline(line," '%s-' ",UNIT_ELX)) x++; strscan(line,"%s",Unit[x]); endwhile
+ y1=x; m=UNIT_ELX+"-";
+ for(x=1;x<=y1;x++) Unit[x]=strreplace(Unit[x],m,""); print("%s %s\n",UNIT_ELX,Unit[x]); endfor
+ for(x=1;x<=y1;x++)
+  if((UNIT_ELX=="IPDU")) tx("ZQRH:%s,%s;",UNIT_ELX,Unit[x]); endif
+ endfor
+ 
+endfunction 
+ 
+void function OMSS_POLICY_ROUTE( string UNIT_ELX)
+ string line,Unit[],m,n;
+ integer x=0,y1; 
+ LOG_SQUARE(UNIT_ELX); 
+ tx("ZUSI:%s;",UNIT_ELX); 
+ while(getline(line," '%s-' ",UNIT_ELX)) x++; strscan(line,"%s",Unit[x]); endwhile
+ y1=x; m=UNIT_ELX+"-";
+ for(x=1;x<=y1;x++) Unit[x]=strreplace(Unit[x],m,""); print("%s %s\n",UNIT_ELX,Unit[x]); endfor
+ for(x=1;x<=y1;x++)
+  if((UNIT_ELX=="IPDU")) tx("ZQKQ:%s,%s;",UNIT_ELX,Unit[x]); endif
+ endfor
+ 
+endfunction 
+ 
+void function OMSS_STATIC_ROUTE( string UNIT_ELX)
+ string line,Unit[],m,n;
+ integer x=0,y1;
+  
+ LOG_SQUARE(UNIT_ELX); 
+ tx("ZUSI:%s;",UNIT_ELX); 
+ while(getline(line," '%s-' ",UNIT_ELX)) x++; strscan(line,"%s",Unit[x]); endwhile
+ y1=x; m=UNIT_ELX+"-";
+ for(x=1;x<=y1;x++)
+  Unit[x]=strreplace(Unit[x],m,""); print("%s %s\n",UNIT_ELX,Unit[x]); 
+ endfor
+ 
+ for(x=1;x<=y1;x++)
+  if((UNIT_ELX=="OMU") OR (UNIT_ELX=="STU") OR (UNIT_ELX=="CMU") OR (UNIT_ELX=="CMM") OR (UNIT_ELX=="GISU") OR (UNIT_ELX=="IPDU") )
+   tx("ZQKB:%s,%s;",UNIT_ELX,Unit[x]);   
+  elseif((UNIT_ELX=="CHU") OR (UNIT_ELX=="VLRU"))
+   Unit[x]=strreplace(Unit[x],"-"," "); strscan(Unit[x],"%s %s",Unit[x],n);
+   tx("ZQKB:%s,%s,%s;",UNIT_ELX,Unit[x],n); 
+  endif
+ endfor
+ 
+endfunction
+
+void function OMSS_UNIT( string UNIT_ELX)
+ string line,Unit[],m,n;
+ integer x=0,y1;
+  
+ LOG_SQUARE(UNIT_ELX); 
+ tx("ZUSI:%s;",UNIT_ELX); 
+ while(getline(line," '%s-' ",UNIT_ELX)) x++; strscan(line,"%s",Unit[x]); endwhile
+ y1=x; m=UNIT_ELX+"-";
+ for(x=1;x<=y1;x++)
+  Unit[x]=strreplace(Unit[x],m,""); print("%s %s\n",UNIT_ELX,Unit[x]); 
+ endfor
+ 
+ for(x=1;x<=y1;x++)
+  if(UNIT_ELX=="OMU")
+   tx("ZQRI:%s,%s::EL0;",UNIT_ELX,Unit[x]);  tx("ZQRI:%s,%s::EL1;",UNIT_ELX,Unit[x]);
+   tx("ZQRI:%s,%s::EL4;",UNIT_ELX,Unit[x]);  tx("ZQRI:%s,%s::EL5;",UNIT_ELX,Unit[x]);
+   tx("ZQRI:%s,%s::EMB0;",UNIT_ELX,Unit[x]); tx("ZQRI:%s,%s::EMB1;",UNIT_ELX,Unit[x]);
+  elseif((UNIT_ELX=="STU") OR (UNIT_ELX=="CMU") OR (UNIT_ELX=="CMM") OR (UNIT_ELX=="GISU") OR (UNIT_ELX=="IPDU") )
+   tx("ZQRI:%s,%s::EL0;",UNIT_ELX,Unit[x]);  tx("ZQRI:%s,%s::EL1;",UNIT_ELX,Unit[x]); 
+  elseif((UNIT_ELX=="CHU"))
+   Unit[x]=strreplace(Unit[x],"-"," "); strscan(Unit[x],"%s %s",Unit[x],n);
+   tx("ZQRI:%s,%s,%s::EL0;",UNIT_ELX,Unit[x],n); tx("ZQRI:%s,%s,%s::EL1;",UNIT_ELX,Unit[x],n);
+   tx("ZQRI:%s,%s,%s::EL5;",UNIT_ELX,Unit[x],n);
+  elseif((UNIT_ELX=="VLRU"))
+   Unit[x]=strreplace(Unit[x],"-"," "); strscan(Unit[x],"%s %s",Unit[x],n);
+   tx("ZQRI:%s,%s,%s::EL0;",UNIT_ELX,Unit[x],n); tx("ZQRI:%s,%s,%s::EL1;",UNIT_ELX,Unit[x],n);
+  endif
+ endfor
+ 
+endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction
+
+void function OMSS_OMU_ELX( string OMU_ELX )
+  tx("ZQRI:OMU,%s::EL0;",OMU_ELX); 
+  tx("ZQRI:OMU,%s::EL1;",OMU_ELX);
+  tx("ZQRI:OMU,%s::EL4;",OMU_ELX);
+  tx("ZQRI:OMU,%s::EL5;",OMU_ELX);
+  tx("ZQRI:OMU,%s::EMB0;",OMU_ELX);
+  tx("ZQRI:OMU,%s::EMB1;",OMU_ELX);  
+endfunction
+
+void function OMSS_STU_ELX( string STU_ELX )
+  tx("ZQRI:STU,%s::EL0;",STU_ELX); 
+  tx("ZQRI:STU,%s::EL1;",STU_ELX);
+    
+endfunction

@@ -1,0 +1,118 @@
+function oMSS_TRAFFICA_Verification()
+  string filename,PCTime,Tel,line="",A,B,PRE,IPDU,EL6,IPDU_EL0,DGW,TNES_NAME[],TNESIP[],GISU[],GISU_IP[];
+  integer handle,x,y,z;  
+  
+  Tel="MSSARA02"; ask(Tel,"INGRESE MSS ? "); Tel=strupper(Tel); device(Tel); 
+
+  tx("ZDCD;"); if(getline(line,"'TIME  '")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PRE="PRE"; ask(PRE,"PRE OR POST CHECK (PRE/POST/COMMENT) ?? "); PRE=strupper(PRE);
+  PCTime = A + "_" + B; filename= "oMSS_TRAFFICA_Verification_" + Tel + "_" + PRE + "_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW);   fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  LOG_SQUARE(Tel); 
+  
+  LOG_SQUARE("oMSS_TRAFFICA_Verification"); 
+  TNES_NAME[1]="TraffMSSALK02"; TNESIP[1]="10.71.71.33";
+  TNES_NAME[2]="TraffMSSARA02"; TNESIP[2]="10.66.92.225";
+  TNES_NAME[3]="TraffMSSING02"; TNESIP[3]="10.68.46.193";
+  TNES_NAME[4]="TraffMSSTRI03"; TNESIP[4]="10.67.156.97";
+  TNES_NAME[5]="TraffMSSVEN02"; TNESIP[5]="10.66.114.33";
+  TNES_NAME[6]="TraffMSSMGA03"; TNESIP[6]="10.69.67.97";  y=6;
+    
+  LOG_SQUARE("TRAFFICA  & IPDU INFORMATION");
+  tx("ZWOI:9;");  
+    while(getline(line,"'TRAFFICA'")) 
+      print(line); 
+    endwhile 
+  tx("ZC1I:NAME=TRAFFICA;");  
+    while(getline(line)) 
+      print(line); 
+      if(getline(line,"'IPDU-'"))
+        strscan(line,"%s %s %s %s",IPDU,IPDU,IPDU,IPDU); 
+        IPDU=strreplace(IPDU,"IPDU-","");
+      endif
+    endwhile print("\n");
+  tx("ZQRI:IPDU,%s;",IPDU);
+    while(getline(line,"' LI '")) 
+       strscan(line,"%s %s",IPDU_EL0,IPDU_EL0); 
+       IPDU_EL0=strreplace(IPDU_EL0,"/"," "); strscan(IPDU_EL0,"%s",IPDU_EL0);
+       print("IPDU EL0: %s\n",IPDU_EL0);
+    endwhile
+    while(getline(line,"'EL6'")) 
+       strscan(line,"%s %s %s %s %s",EL6,EL6,EL6,EL6,EL6); 
+       EL6=strreplace(EL6,"/"," "); strscan(EL6,"%s",EL6);
+        print("IPDU EL6: %s\n",EL6);
+    endwhile
+ 
+   LOG_SQUARE("COLLECTING GISU IP INFORMATION");
+   tx("ZUSI:GISU;"); x=0;
+    while(getline(line,"'WO-EX'")) x++;
+       strscan(line,"%s",GISU[x]); 
+       GISU[x]=strreplace(GISU[x],"-"," "); strscan(GISU[x],"%s %s",GISU[x],GISU[x]);
+    endwhile z=x;
+    for(x=1; x<=z; x++)
+      tx("ZQRI:GISU,%s::EL0;",GISU[x]);
+      if(getline(line,"' LI '")) 
+        print("*%d ",x);
+        strscan(line,"%s %s",GISU_IP[x],GISU_IP[x]); 
+        GISU_IP[x]=strreplace(GISU_IP[x],"/"," "); strscan(GISU_IP[x],"%s",GISU_IP[x]);
+      endif
+    endfor 
+    
+    print("\n");
+    
+    LOG_SQUARE("PING FROM GISU TO TRAFFICA_IPDU");
+    for(x=1; x<=z; x++)
+      tx("ZQRX:GISU,%s::PING:SRC=\"%s\",HOST=\"%s\";\n",GISU[x],GISU_IP[x],IPDU_EL0);
+      if(getline(line,"'100% packet loss'")) print ("PING FROM GISU %s %s to IPDU %s %s FAILED\n",GISU[x],GISU_IP[x],IPDU);
+    endif
+    if(getline(line,"'1 packets received'")) print ("PING FROM GISU %s to IPDU %s OK\n",GISU[x],IPDU);
+    endif 
+    endfor
+ 
+  
+  LOG_SQUARE("PING FROM IPDU TO GATEWAY ");  
+  tx("ZQKO:IPDU,%s;",IPDU);
+    while(getline(line,"'DEFAULT GW    :'")) 
+      strscan(line,"%s %s %s %s",DGW,DGW,DGW,DGW); 
+    endwhile
+  tx("ZQRX:IPDU,%s::PING:SRC=\"%s\",HOST=\"%s\";\n",IPDU,EL6,DGW);
+    if(getline(line,"'100% packet loss'")) print ("PING FROM IPDU %s IP %s TO DGW %s FAILED\n",IPDU,EL6,DGW);
+    endif
+    if(getline(line,"'1 received'")) print ("PING FROM IPDU %s IP %s TO DGW %s OK\n",IPDU,EL6,DGW);
+    endif  
+  
+  LOG_SQUARE("PING FROM IPDU TO TNES ");
+  for(x=1;x<=y;x++)
+    tx("ZQRX:IPDU,%s::PING:SRC=\"%s\",HOST=\"%s\";\n",IPDU,EL6,TNESIP[x]);
+      if(getline(line,"'0 received'")) print ("PING FROM IPDU %s IP %s TO TNES %s TNES_IP %s FAILED\n",IPDU,EL6,TNES_NAME[x],TNESIP[x]);   
+        tx("ZQRX:IPDU,%s::TRACE:SRC=\"%s\",HOST=\"%s\";\n",IPDU,EL6,TNESIP[x]);
+          while(getline(line)) print(line); endwhile
+      endif
+      if(getline(line,"'1 received'")) print ("PING FROM IPDU %s IP %s TO TNES %s TNES_IP %s OK\n",IPDU,EL6,TNES_NAME[x],TNESIP[x]);
+      endif
+  endfor
+  
+  LOG_SQUARE("UDP TRAFFIC - TRAFFICA");
+  tx("ZQRS:IPDU,%s::PRO;\n",IPDU); 
+    while(getline(line)) print(line); endwhile
+    
+  print("\nFIN!!!!");
+ 
+ endfunction
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

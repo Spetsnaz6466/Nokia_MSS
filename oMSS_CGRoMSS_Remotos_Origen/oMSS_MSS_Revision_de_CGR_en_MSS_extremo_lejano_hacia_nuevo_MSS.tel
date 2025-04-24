@@ -1,0 +1,190 @@
+function oMSS_Single_MSS_Integration_Checking()
+  string MSS,PCTime,PCTime2,line,SPC0,MSS_A,RESULT[];
+  string CGR[],CGR_NAME[],CGR_STAT[],CKTS[],SPC[]; 
+  integer x,y,m,n;  
+ 
+  // MSS INICIO & MSS FIN
+  m=1; n=46;  
+  
+  PCTime = getpctime(1);
+  MSS="MSSING02"; ask(MSS,"Ingrese MSS Objetivo: "); MSS=strupper(MSS); //MSS es el nuevo MSS
+  device(MSS); LOG_SQUARE(MSS); 
+  print("%s Colecting CGR's Information: Name, Ckts, CGR Stat\n",MSS);
+  tx("ZRCI;"); x=0;
+    while(getline(line,"'BICC'")) x++;
+      strscan(line,"%s %s %s %s %s %s %s",CGR[x],CGR_NAME[x],CKTS[x],CKTS[x],CKTS[x],CKTS[x],CGR_STAT[x]);
+    endwhile y=x;
+  
+  print("%s Colecting CGR's OPC\n",MSS);
+  for(x=1; x<=y; x++)
+    tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGR[x]);  print("#");
+    if(getline(line,"'SPC(H/D) : '"))
+       strfetch(line,"62-65",SPC[x]); SPC[x]=strreplace(SPC[x],"/"," "); strscan(SPC[x],"%s",SPC[x]);
+    endif
+    tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR[x]);
+  endfor print("\n");
+   for(x=1; x<=y; x++)
+   print("CGR: %s CGR-NAME: %s CKTS: %s SPC: %s CGR-STAT: %s\n",CGR[x],CGR_NAME[x],CKTS[x],SPC[x],CGR_STAT[x]);
+  endfor  
+  
+  print("%s Colecting OWN OPC\n",MSS);
+  tx("ZNET:NA0;");
+    while(getline(line,"'OWN SIGNALLING POINT AS TRANSFER POINT'")) 
+      strscan(line,"%s %s",SPC0,MSS_A); 
+      SPC0=strreplace(SPC0,"/"," "); strscan(SPC0,"%s",SPC0);
+      print("\nMSS_ORIGEN: %s SPC: %s\n",MSS_A,SPC0); endwhile  
+  for(x=m; x<=n; x++) 
+    if(Claro_MSS(x) <> MSS) 
+      LOG_SQUARE(Claro_MSS(x));  print("ACCESING %d: %s\n",x,Claro_MSS(x));   
+      RESULT[x]= REVISION_CGR_EN_MSS_Productivo_to_New_MSS(Claro_MSS(x),MSS,SPC0);  
+    else
+      print("### Mismo MSS\n");
+    endif  
+  endfor 
+  LOG_SQUARE("Imprimiendo resultados");
+  for(x=m; x<=n; x++)
+    if(Claro_MSS(x) <> MSS) 
+      print("%s\n",RESULT[x]); 
+    endif 
+  endfor     
+  PCTime2 = getpctime(1); print("Hora inicio de macro: %s\n",PCTime); print("Hora fin de macro: %s\n",PCTime2);
+  print("FIN!!!!");
+  
+endfunction
+
+//#############
+//# FUNCIONES #
+//#############
+
+
+string function REVISION_CGR_EN_MSS_Productivo_to_New_MSS(string CLARO_MSS,string MSS, string SPC)
+  string PCTime,filename,A,B,line,WO,OOS="0",CKT_TOT,CGRD[],CGR,SPC0,MSS_A,CGR3[];
+  integer handle,x,y,z;
+  
+  deviceopen(CLARO_MSS);  
+  if( sniff())
+    print("Acceso probado a MSS: %s\n",CLARO_MSS);
+  else
+    A="Sin acceso a MSS " + CLARO_MSS; deviceclose();
+    print("Sin acceso a MSS: %s\n",CLARO_MSS);
+    return A;
+  endif
+  
+  tx("ZDCD;"); 
+  if(getline(line,"':'")) strscan(line,"%s %s %s",A,A,B); B=strreplace(B,":","-"); endif
+  PCTime = A + "_" + B; 
+  
+  print("%s Colecting CGR's that match MSS %s OPC %s\n",CLARO_MSS,MSS, SPC);
+  tx("ZRCI;"); x=0;
+    while(getline(line,"'BICC'")) x++; 
+      strscan(line,"%s",CGRD[x]); endwhile y=x; 
+      
+  print("Buscando CGRs que match SPC %s\n",SPC); z=0;
+  for(x=1; x<=y; x++)
+    print("*"); tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGRD[x]);
+    if(getline(line,"'%s'",SPC)) z++; 
+      print("\nCGR %s SPC %s\n",CGRD[x],SPC); CGR3[z]=CGRD[x];
+    endif
+  endfor
+   
+  CGR=CGR3[1];
+  
+  filename= MSS + "_"  + CLARO_MSS + "_CGR_"+ CGR + "_"+ PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); FILE_SQUARE("FAR END MSS "+ MSS+" SPC "+SPC, handle ); fileclose(handle); 
+  logenable(LOG_ENABLE_ALL); logset(filename,APPEND);  
+    
+  print("MSS: %s Colecting OPC \n",CLARO_MSS);
+  tx("ZNET:NA0;");
+    while(getline(line,"'OWN SIGNALLING POINT AS TRANSFER POINT'")) 
+      strscan(line,"%s %s",SPC0,MSS_A); 
+      SPC0=strreplace(SPC0,"/"," "); strscan(SPC0,"%s",SPC0);
+      print("\nMSS_REMOTO: %s SPC: %s\n",MSS_A,SPC0); endwhile  
+      
+  for(x=1; x<=z; x++)    
+    tx("ZRCI:SEA=3:CGR=%s:PRINT=1;",CGR3[x]);
+      if(getline(line,"'BICC'"))
+        strscan(line,"%s %s %s %s %s %s %s",WO,WO,WO,WO,WO,CKT_TOT,WO);
+      endif
+    tx("ZRCI:SEA=3:CGR=%s:PRINT=2;",CGR3[x]);
+    tx("ZCEL:CGR=%s,ST=NO-WO,FORM=EXT;",CGR3[x]);
+    if(getline(line,"'BA-SY     IDLE    SIG-'"))
+      strscan(line,"%s %s %s %s ",OOS,OOS,OOS,OOS);
+    endif
+    A= "MSS: " + CLARO_MSS + " SPC: "+ SPC0 +" CGR: " + CGR3[x] + " CGR-STAT: " + WO + " CKT_TOT: " + CKT_TOT +  " CKTS_OOS: "+ OOS  ;
+    print("MSS: %s CGR %s CGR_STAT %s CKT_TOT: %s CKTS_OOS: %s \n",CLARO_MSS,CGR3[x],WO,CKT_TOT,OOS);   OOS="0";
+  endfor
+  
+  logclose(); deviceclose(CLARO_MSS);
+  return A;
+ endfunction 
+ 
+string function Claro_MSS(integer x)
+  string CLARO_MSS[];
+     
+CLARO_MSS[1]="MSS01ING";
+CLARO_MSS[2]="MSS01PER";
+CLARO_MSS[3]="MSS01SIN";
+CLARO_MSS[4]="MSS01TOB";
+CLARO_MSS[5]="MSS02ALK";
+CLARO_MSS[6]="MSS02BUC";
+CLARO_MSS[7]="MSS02CAL";
+CLARO_MSS[8]="MSS02MED";
+CLARO_MSS[9]="MSS02PER";
+CLARO_MSS[10]="MSS02TOB";
+CLARO_MSS[11]="MSS02VEN";
+CLARO_MSS[12]="MSS03ARA";
+CLARO_MSS[13]="MSS03BAR";
+CLARO_MSS[14]="MSS03CAL";
+CLARO_MSS[15]="MSS03MED";
+CLARO_MSS[16]="MSS03PRA";
+CLARO_MSS[17]="MSS03VEN";
+CLARO_MSS[18]="MSS04ARA";
+CLARO_MSS[19]="MSS04CAL";
+CLARO_MSS[20]="MSS04VEN";
+CLARO_MSS[21]="MSS05ARA";
+CLARO_MSS[22]="MSS05MED";
+CLARO_MSS[23]="MSS05VEN";
+CLARO_MSS[24]="MSS06ARA";
+CLARO_MSS[25]="MSS06MED";
+CLARO_MSS[26]="MSS06VEN";
+CLARO_MSS[27]="MSS07ARA";
+CLARO_MSS[28]="MSS07VEN";
+CLARO_MSS[29]="MSSALK01";
+CLARO_MSS[30]="MSSALK02";
+CLARO_MSS[31]="MSSARA01";
+CLARO_MSS[32]="MSSBUC01";
+CLARO_MSS[33]="MSSING01";
+CLARO_MSS[34]="MSSMAR01";
+CLARO_MSS[35]="MSSMGA01";
+CLARO_MSS[36]="MSSPER01";
+CLARO_MSS[37]="MSSTRI01";
+CLARO_MSS[38]="MSSTRI02";
+CLARO_MSS[39]="MSSTRI03";
+CLARO_MSS[40]="MSSVEN01";
+CLARO_MSS[41]="MSSMGA02";
+CLARO_MSS[42]="MSS01ALK";
+CLARO_MSS[43]="MSSARA02";
+CLARO_MSS[44]="MSSVEN02";
+CLARO_MSS[45]="MSSING02";
+CLARO_MSS[46]="MSS01CAR";
+
+  return CLARO_MSS[x];
+endfunction
+
+
+void function LOG_SQUARE(string information )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4; 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor logprint("\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) logprint("#"); endfor 
+ logprint("\n");
+endfunction
+
+void function FILE_SQUARE(string information, integer handle2 )
+ integer x,y=1; 
+ x = strlength(information); x= x + 4;
+ fileprint(handle2,"\n"); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor fileprint(handle2,"\n# %s #\n",information); 
+ for(y=1 ; y<=x ; y++) fileprint(handle2,"#"); endfor 
+ fileprint(handle2,"\n");
+endfunction

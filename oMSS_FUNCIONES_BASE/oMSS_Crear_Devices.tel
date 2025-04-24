@@ -1,0 +1,48 @@
+function main()
+ string DEV,IP;
+
+ DEV="MSSING02_2"; IP="10.68.46.129";
+ oMSS_Crear_Devices( DEV,  IP);
+ if(sniff())
+   tx("ZAHO;");
+ else print("Sin acceso a %s\n",DEV);
+ endif
+endfunction
+
+void function oMSS_Crear_Devices(string DEV, string IP)
+ if(devicecreate(1,DEV, IP+":22", 1, 1, 2,2)) //TCPIP=1, NAME, IP/PORT, NO_DX=0, PERMANENT=1, SSH=2, SSH_VER=2
+   setloginq("MSSING02_2", "ENTER USERNAME <", "ENTER PASSWORD <", 1);
+   setlogin("MSSING02_2", "SYSTEM", "SYSTEM", 1);
+   settransmitdelay(1,500,550);
+   print("device create ... OK\n");
+   device("MSSING02_2"); dxprompts(ST_PROMPTS,ON);promptcheck(2);
+ else
+   abort("devicecreate FAILED\n");
+ endif
+endfunction
+
+
+/*
+function main()
+ string DEV,IP;
+
+ DEV="MSSING02_2"; IP="192.168.141.38";
+oMSS_Crear_Devices( DEV,  IP);
+if(sniff())
+  tx("ZUSI;");
+endif
+endfunction
+
+void function oMSS_Crear_Devices(string DEV, string IP)
+ if(devicecreate(1,DEV, IP+":22", 1, 1, 2,2)) //TCPIP=1, NAME, IP/PORT, NO_DX=0, PERMANENT=1, SSH=2, SSH_VER=2
+   setloginq("MSSING02_2", "ENTER USERNAME <", "ENTER PASSWORD <", 1);
+   setlogin("MSSING02_2", "SYSTEM", "SYSTEM", 1);
+   settransmitdelay(1,500,550);
+   print("device create ... OK\n");
+   device("MSSING02_2"); promptcheck(2);
+ else
+   abort("devicecreate FAILED\n");
+ endif
+endfunction
+
+*/
