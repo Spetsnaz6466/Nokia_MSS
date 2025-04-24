@@ -1,0 +1,2890 @@
+#HIT_SYSPRINT: "23.11.2023 12:36:36" HIT 2.10-3
+#HIT_PRINT:############
+#HIT_PRINT:# MSS04CAL #
+#HIT_PRINT:############
+ZUSL:,INCO:ALL:;
+
+LOADING PROGRAM VERSION 27.59-0
+
+EXECUTION STARTED
+
+
+MSCi      MSS04CAL                  2023-11-23  12:36:35
+
+UNITS IN SPECIFIED WORKING STATE
+ UNIT       PHYS STATE LOCATION              INFO
+ BSU-4      004D SE-OU                       FLTY                          
+ CHU-3-0    0016 SE-NH                       INAC                          
+ CHU-3-1    0017 SE-NH                       INAC                          
+
+TOTAL OF 3     UNITS
+ FAULTY UNIT                 1                                                 
+ INACTIVE UNIT               2                                                 
+ INCORRECT STATES            3                                                 
+
+COMMAND EXECUTED
+
+
+WORKING STATE AND RESTART HANDLING COMMAND <US_>
+<  ZUSI;
+
+LOADING PROGRAM VERSION 27.59-0
+
+EXECUTION STARTED
+
+
+MSCi      MSS04CAL                  2023-11-23  12:36:36
+
+WORKING STATE OF UNITS
+ UNIT       PHYS STATE LOCATION              INFO
+ OMU-0      0000 WO-EX                        -                            
+ OMU-1      0001 SP-EX                        -                            
+ STU-0      0002 SP-EX                        -                            
+ STU-1      0003 WO-EX                        -                            
+ CHU-0-0    0010 WO-EX                        -                            
+ CHU-0-1    0011 SP-EX                        -                            
+ CLS-0           WO-EX                        -                            
+ CLS-1           SP-EX                        -                            
+ BSU-0      0045 WO-EX                        -                            
+ BSU-1      0047 WO-EX                        -                            
+ BSU-2      0049 WO-EX                        -                            
+ BSU-3      004B WO-EX                        -                            
+ BSU-4      004D SE-OU                       FLTY                          
+ BSU-5      004F WO-EX                        -                            
+ BSU-6      0051 WO-EX                        -                            
+ BSU-7      0053 WO-EX                        -                            
+ BSU-8      0055 WO-EX                        -                            
+ BSU-9      0057 WO-EX                        -                            
+ BSU-10     005D WO-EX                        -                            
+ BSU-11     005F WO-EX                        -                            
+ BSU-12     0061 WO-EX                        -                            
+ BSU-13     0063 WO-EX                        -                            
+ BSU-14     0065 WO-EX                        -                            
+ BSU-15     0067 WO-EX                        -                            
+ CMU-0      000A WO-EX                        -                            
+ CMU-1      000B SP-EX                        -                            
+ VLRU-0-0   001A WO-EX                        -                            
+ VLRU-0-1   001B SP-EX                        -                            
+ BDCU-0     0042 WO-EX                        -                            
+ BDCU-1     0043 WO-EX                        -                            
+ VLRU-1-0   001C WO-EX                        -                            
+ VLRU-1-1   001D SP-EX                        -                            
+ VLRU-2-0   001E SP-EX                        -                            
+ VLRU-2-1   001F WO-EX                        -                            
+ VLRU-3-0   0020 WO-EX                        -                            
+ VLRU-3-1   0021 SP-EX                        -                            
+ VLRU-4-0   0022 WO-EX                        -                            
+ VLRU-4-1   0023 SP-EX                        -                            
+ CLAB-0          SP-EX                        -                            
+ CLAB-1          WO-EX                        -                            
+ CLAB-2          WO-EX                        -                            
+ CLAB-3          SP-EX                        -                            
+ CLAB-4          SP-EX                        -                            
+ CLAB-5          WO-EX                        -                            
+ CLAB-6          WO-EX                        -                            
+ CLAB-7          SP-EX                        -                            
+ CLAB-8          WO-EX                        -                            
+ CLAB-9          SP-EX                        -                            
+ CLAB-10         WO-EX                        -                            
+ CLAB-11         SP-EX                        -                            
+ CLAB-12         WO-EX                        -                            
+ CLAB-13         SP-EX                        -                            
+ CLAB-14         WO-EX                        -                            
+ CLAB-15         SP-EX                        -                            
+ CLAB-16         SP-EX                        -                            
+ CLAB-17         WO-EX                        -                            
+ SBUS-0          SP-EX                        -                            
+ SBUS-1          WO-EX                        -                            
+ VLRU-5-0   0024 WO-EX                        -                            
+ VLRU-5-1   0025 SP-EX                        -                            
+ VLRU-6-0   0026 WO-EX                        -                            
+ VLRU-6-1   0027 SP-EX                        -                            
+ VLRU-7-0   0028 WO-EX                        -                            
+ VLRU-7-1   0029 SP-EX                        -                            
+ VLRU-8-0   002A WO-EX                        -                            
+ VLRU-8-1   002B SP-EX                        -                            
+ VLRU-9-0   002C WO-EX                        -                            
+ VLRU-9-1   002D SP-EX                        -                            
+ CHU-1-0    0012 WO-EX                        -                            
+ CHU-1-1    0013 SP-EX                        -                            
+ CHU-2-0    0014 WO-EX                        -                            
+ CHU-2-1    0015 SP-EX                        -                            
+ CHU-3-0    0016 SE-NH                       INAC                          
+ CHU-3-1    0017 SE-NH                       INAC                          
+ CMM-0      0004 WO-EX                        -                            
+ CMM-1      0005 SP-EX                        -                            
+ SIGU-0     0044 WO-EX                        -                            
+ SIGU-1     0046 WO-EX                        -                            
+ SIGU-2     0048 WO-EX                        -                            
+ SIGU-3     004A WO-EX                        -                            
+ SIGU-4     004C WO-EX                        -                            
+ SIGU-5     004E WO-EX                        -                            
+ SIGU-6     0050 WO-EX                        -                            
+ SIGU-7     0052 SP-EX                       IDLE                          
+ SIGU-8     0054 WO-EX                        -                            
+ SIGU-9     0056 WO-EX                        -                            
+ SIGU-10    0058 WO-EX                        -                            
+ SIGU-11    0059 WO-EX                        -                            
+ SIGU-12    005A WO-EX                        -                            
+ SIGU-13    005B WO-EX                        -                            
+ SIGU-14    005C WO-EX                        -                            
+ SIGU-15    005E WO-EX                        -                            
+ SIGU-16    0060 WO-EX                        -                            
+ SIGU-17    0062 WO-EX                        -                            
+ SIGU-18    0064 WO-EX                        -                            
+ SIGU-19    0066 WO-EX                        -                            
+ SIGU-20    0068 WO-EX                        -                            
+ SIGU-21    0069 WO-EX                        -                            
+ SIGU-22    006A WO-EX                        -                            
+ SIGU-23    006B WO-EX                        -                            
+ SIGU-24    006C WO-EX                        -                            
+ SIGU-25    006D WO-EX                        -                            
+ SIGU-26    006E WO-EX                        -                            
+ SIGU-27    006F WO-EX                        -                            
+ SIGU-28    0070 WO-EX                        -                            
+ SIGU-29    0071 WO-EX                        -                            
+ SIGU-30    0073 WO-EX                        -                            
+ SIGU-31    0074 WO-EX                        -                            
+ SIGU-32    0076 WO-EX                        -                            
+ SIGU-33    0077 WO-EX                        -                            
+ SWU-50          WO-EX  1B002-04-3  EMB-0     -                            
+ SWU-51          WO-EX  1B002-06-3  EMB-1     -                            
+ SWU-60          WO-EX  1A002-04-2  EMB-0     -                            
+ SWU-61          WO-EX  1A002-06-2  EMB-1     -                            
+ SWU-62          WO-EX  1B002-04-5  EMB-0     -                            
+ SWU-63          WO-EX  1B002-06-5  EMB-1     -                            
+ SWU-64          WO-EX  1C002-04-5  EMB-0     -                            
+ SWU-65          WO-EX  1C002-06-5  EMB-1     -                            
+ SWU-66          WO-EX  1D002-04-5  EMB-0     -                            
+ SWU-67          WO-EX  1D002-06-5  EMB-1     -                            
+ SWU-68          WO-EX  1E002-00-4  EMB-0     -                            
+ SWU-69          WO-EX  1E002-02-4  EMB-1     -                            
+ SWU-70          WO-EX  1E002-00-5  EMB-0     -                            
+ SWU-71          WO-EX  1E002-02-5  EMB-1     -                            
+ EMB-0           SP-EX                        -                            
+ EMB-1           WO-EX                        -                            
+
+TOTAL OF 126   UNITS
+ FAULTY UNIT                 1                                                 
+ INACTIVE UNIT               2                                                 
+ INCORRECT STATES            3                                                 
+
+COMMAND EXECUTED
+
+
+WORKING STATE AND RESTART HANDLING COMMAND <US_>
+<  ZOYV:SGSAP:;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:36:37
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01VEN01           0 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01VEN02           1 BSU-0   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01VEN03           2 BSU-12  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01VEN04           3 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ING01           4 BSU-7   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ING02           5 BSU-8   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ING03           6 BSU-3   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ING04           7 BSU-10  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ALK01           8 BSU-11  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ALK02           9 BSU-9   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ALK03          10 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ALK04          11 BSU-14  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01SIN01          12 BSU-15  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01SIN02          13 BSU-6   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01SIN03          14 BSU-1   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01SIN04          15 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01MEG01          16 BSU-0   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01MEG02          17 BSU-12  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01MEG03          18 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01MEG04          19 BSU-7   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01TRI01          20 BSU-8   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01TRI02          21 BSU-3   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01TRI03          22 BSU-10  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01TRI04          23 BSU-11  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ARA01          24 BSU-1   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ARA02          25 BSU-15  SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ARA03          26 BSU-0   SGSAP SERVER SGS              ASP-ACTIVE    
+MME01ARA04          27 BSU-14  SGSAP SERVER SGS              ASP-ACTIVE    
+MME02TRI01          28 BSU-6   SGSAP SERVER SGS              ASP-ACTIVE    
+MME02TRI02          29 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+MME02TRI03          30 BSU-3   SGSAP SERVER SGS              ASP-ACTIVE    
+MME02TRI04          31 BSU-12  SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ALK01          32 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ALK02          33 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ALK03          34 BSU-9   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ALK04          35 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03TRI1           36 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03TRI2           37 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03TRI3           38 BSU-9   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03TRI4           39 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03MEG1           40 BSU-7   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03MEG2           41 BSU-8   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03MEG3           42 BSU-10  SGSAP SERVER SGS              ASP-ACTIVE    
+CMM03MEG4           43 BSU-11  SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ING1           44 BSU-14  SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ING2           45 BSU-15  SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ING3           46 BSU-6   SGSAP SERVER SGS              ASP-ACTIVE    
+CMM01ING4           47 BSU-1   SGSAP SERVER SGS              ASP-ACTIVE    
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZOYV:SGSAP:NAME=MME01VEN01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:36:56
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01VEN01           0 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.33                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.33                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.1.108                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.1.116                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,2::PING:SRC="10.40.43.33",HOST="10.224.1.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:36:57
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.224.1.108 (10.224.1.108) from 10.40.43.33: 56 data bytes
+64 bytes from 10.224.1.108: icmp_seq=0 ttl=61 time=9.151 ms
+
+--- 10.224.1.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.151/9.151/9.151/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,2::PING:SRC="10.41.43.33",HOST="10.224.1.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:36:57
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.224.1.116 (10.224.1.116) from 10.41.43.33: 56 data bytes
+64 bytes from 10.224.1.116: icmp_seq=0 ttl=61 time=8.963 ms
+
+--- 10.224.1.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 8.963/8.963/8.963/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01VEN02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:36:58
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01VEN02           1 BSU-0   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.34                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.34                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.1.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.1.108                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,0::PING:SRC="10.41.43.34",HOST="10.224.1.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:36:59
+
+PING, SENDING UNIT: BSU-0              
+
+PING 10.224.1.116 (10.224.1.116) from 10.41.43.34: 56 data bytes
+64 bytes from 10.224.1.116: icmp_seq=0 ttl=61 time=9.313 ms
+
+--- 10.224.1.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.313/9.313/9.313/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,0::PING:SRC="10.40.43.34",HOST="10.224.1.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:00
+
+PING, SENDING UNIT: BSU-0              
+
+PING 10.224.1.108 (10.224.1.108) from 10.40.43.34: 56 data bytes
+64 bytes from 10.224.1.108: icmp_seq=0 ttl=61 time=8.787 ms
+
+--- 10.224.1.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 8.787/8.787/8.787/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01VEN03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:01
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01VEN03           2 BSU-12  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.35                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.35                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.1.108                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.1.116                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,12::PING:SRC="10.40.43.35",HOST="10.224.1.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:01
+
+PING, SENDING UNIT: BSU-12             
+
+PING 10.224.1.108 (10.224.1.108) from 10.40.43.35: 56 data bytes
+64 bytes from 10.224.1.108: icmp_seq=0 ttl=61 time=9.060 ms
+
+--- 10.224.1.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.060/9.060/9.060/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,12::PING:SRC="10.41.43.35",HOST="10.224.1.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:02
+
+PING, SENDING UNIT: BSU-12             
+
+PING 10.224.1.116 (10.224.1.116) from 10.41.43.35: 56 data bytes
+
+--- 10.224.1.116 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01VEN04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:14
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01VEN04           3 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.36                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.36                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.1.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.1.108                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,5::PING:SRC="10.41.43.36",HOST="10.224.1.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:15
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.224.1.116 (10.224.1.116) from 10.41.43.36: 56 data bytes
+64 bytes from 10.224.1.116: icmp_seq=0 ttl=61 time=9.028 ms
+
+--- 10.224.1.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.028/9.028/9.028/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,5::PING:SRC="10.40.43.36",HOST="10.224.1.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:15
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.224.1.108 (10.224.1.108) from 10.40.43.36: 56 data bytes
+64 bytes from 10.224.1.108: icmp_seq=0 ttl=61 time=8.401 ms
+
+--- 10.224.1.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 8.401/8.401/8.401/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ING01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:16
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ING01           4 BSU-7   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.37                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.37                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.0.108                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.0.116                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,7::PING:SRC="10.40.43.37",HOST="10.224.0.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:17
+
+PING, SENDING UNIT: BSU-7              
+
+PING 10.224.0.108 (10.224.0.108) from 10.40.43.37: 56 data bytes
+64 bytes from 10.224.0.108: icmp_seq=0 ttl=61 time=8.570 ms
+
+--- 10.224.0.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 8.570/8.570/8.570/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,7::PING:SRC="10.41.43.37",HOST="10.224.0.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:18
+
+PING, SENDING UNIT: BSU-7              
+
+PING 10.224.0.116 (10.224.0.116) from 10.41.43.37: 56 data bytes
+64 bytes from 10.224.0.116: icmp_seq=0 ttl=61 time=5.751 ms
+
+--- 10.224.0.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 5.751/5.751/5.751/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ING02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:18
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ING02           5 BSU-8   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.38                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.38                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.0.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.0.108                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,8::PING:SRC="10.41.43.38",HOST="10.224.0.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:19
+
+PING, SENDING UNIT: BSU-8              
+
+PING 10.224.0.116 (10.224.0.116) from 10.41.43.38: 56 data bytes
+64 bytes from 10.224.0.116: icmp_seq=0 ttl=61 time=4.980 ms
+
+--- 10.224.0.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.980/4.980/4.980/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,8::PING:SRC="10.40.43.38",HOST="10.224.0.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:20
+
+PING, SENDING UNIT: BSU-8              
+
+PING 10.224.0.108 (10.224.0.108) from 10.40.43.38: 56 data bytes
+64 bytes from 10.224.0.108: icmp_seq=0 ttl=61 time=5.388 ms
+
+--- 10.224.0.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 5.388/5.388/5.388/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ING03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:20
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ING03           6 BSU-3   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.39                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.39                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.0.108                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.0.116                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,3::PING:SRC="10.40.43.39",HOST="10.224.0.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:21
+
+PING, SENDING UNIT: BSU-3              
+
+PING 10.224.0.108 (10.224.0.108) from 10.40.43.39: 56 data bytes
+64 bytes from 10.224.0.108: icmp_seq=0 ttl=61 time=0.832 ms
+
+--- 10.224.0.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.832/0.832/0.832/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,3::PING:SRC="10.41.43.39",HOST="10.224.0.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:22
+
+PING, SENDING UNIT: BSU-3              
+
+PING 10.224.0.116 (10.224.0.116) from 10.41.43.39: 56 data bytes
+64 bytes from 10.224.0.116: icmp_seq=0 ttl=61 time=12.546 ms
+
+--- 10.224.0.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 12.546/12.546/12.546/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ING04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:23
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ING04           7 BSU-10  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.40                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.40                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.0.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.0.108                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,10::PING:SRC="10.41.43.40",HOST="10.224.0.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:24
+
+PING, SENDING UNIT: BSU-10             
+
+PING 10.224.0.116 (10.224.0.116) from 10.41.43.40: 56 data bytes
+64 bytes from 10.224.0.116: icmp_seq=0 ttl=61 time=0.742 ms
+
+--- 10.224.0.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.742/0.742/0.742/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,10::PING:SRC="10.40.43.40",HOST="10.224.0.108",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:24
+
+PING, SENDING UNIT: BSU-10             
+
+PING 10.224.0.108 (10.224.0.108) from 10.40.43.40: 56 data bytes
+64 bytes from 10.224.0.108: icmp_seq=0 ttl=61 time=5.185 ms
+
+--- 10.224.0.108 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 5.185/5.185/5.185/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ALK01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:25
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ALK01           8 BSU-11  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.41                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.41                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.7.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.7.124                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,11::PING:SRC="10.40.43.41",HOST="10.224.7.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:26
+
+PING, SENDING UNIT: BSU-11             
+
+PING 10.224.7.116 (10.224.7.116) from 10.40.43.41: 56 data bytes
+64 bytes from 10.224.7.116: icmp_seq=0 ttl=61 time=21.790 ms
+
+--- 10.224.7.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 21.790/21.790/21.790/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,11::PING:SRC="10.41.43.41",HOST="10.224.7.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:27
+
+PING, SENDING UNIT: BSU-11             
+
+PING 10.224.7.124 (10.224.7.124) from 10.41.43.41: 56 data bytes
+64 bytes from 10.224.7.124: icmp_seq=0 ttl=61 time=17.214 ms
+
+--- 10.224.7.124 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 17.214/17.214/17.214/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ALK02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:28
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ALK02           9 BSU-9   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.42                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.42                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.7.124                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.7.116                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,9::PING:SRC="10.41.43.42",HOST="10.224.7.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:28
+
+PING, SENDING UNIT: BSU-9              
+
+PING 10.224.7.124 (10.224.7.124) from 10.41.43.42: 56 data bytes
+64 bytes from 10.224.7.124: icmp_seq=0 ttl=61 time=16.415 ms
+
+--- 10.224.7.124 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 16.415/16.415/16.415/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,9::PING:SRC="10.40.43.42",HOST="10.224.7.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:29
+
+PING, SENDING UNIT: BSU-9              
+
+PING 10.224.7.116 (10.224.7.116) from 10.40.43.42: 56 data bytes
+64 bytes from 10.224.7.116: icmp_seq=0 ttl=61 time=19.184 ms
+
+--- 10.224.7.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.184/19.184/19.184/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ALK03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:30
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ALK03          10 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.43                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.43                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.7.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.7.124                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,13::PING:SRC="10.40.43.43",HOST="10.224.7.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:31
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.224.7.116 (10.224.7.116) from 10.40.43.43: 56 data bytes
+64 bytes from 10.224.7.116: icmp_seq=0 ttl=61 time=22.267 ms
+
+--- 10.224.7.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 22.267/22.267/22.267/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,13::PING:SRC="10.41.43.43",HOST="10.224.7.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:32
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.224.7.124 (10.224.7.124) from 10.41.43.43: 56 data bytes
+
+--- 10.224.7.124 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ALK04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:43
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ALK04          11 BSU-14  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.44                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.44                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.7.124                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.7.116                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,14::PING:SRC="10.41.43.44",HOST="10.224.7.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:44
+
+PING, SENDING UNIT: BSU-14             
+
+PING 10.224.7.124 (10.224.7.124) from 10.41.43.44: 56 data bytes
+
+--- 10.224.7.124 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,14::PING:SRC="10.40.43.44",HOST="10.224.7.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:55
+
+PING, SENDING UNIT: BSU-14             
+
+PING 10.224.7.116 (10.224.7.116) from 10.40.43.44: 56 data bytes
+64 bytes from 10.224.7.116: icmp_seq=0 ttl=61 time=19.396 ms
+
+--- 10.224.7.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.396/19.396/19.396/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01SIN01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:56
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01SIN01          12 BSU-15  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.45                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.45                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.8.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.8.124                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,15::PING:SRC="10.40.43.45",HOST="10.224.8.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:57
+
+PING, SENDING UNIT: BSU-15             
+
+PING 10.224.8.116 (10.224.8.116) from 10.40.43.45: 56 data bytes
+64 bytes from 10.224.8.116: icmp_seq=0 ttl=61 time=26.784 ms
+
+--- 10.224.8.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 26.784/26.784/26.784/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,15::PING:SRC="10.41.43.45",HOST="10.224.8.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:37:58
+
+PING, SENDING UNIT: BSU-15             
+
+PING 10.224.8.124 (10.224.8.124) from 10.41.43.45: 56 data bytes
+
+--- 10.224.8.124 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01SIN02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:09
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01SIN02          13 BSU-6   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.46                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.46                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.8.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.8.124                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,6::PING:SRC="10.40.43.46",HOST="10.224.8.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:10
+
+PING, SENDING UNIT: BSU-6              
+
+PING 10.224.8.116 (10.224.8.116) from 10.40.43.46: 56 data bytes
+64 bytes from 10.224.8.116: icmp_seq=0 ttl=61 time=26.460 ms
+
+--- 10.224.8.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 26.460/26.460/26.460/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,6::PING:SRC="10.41.43.46",HOST="10.224.8.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:11
+
+PING, SENDING UNIT: BSU-6              
+
+PING 10.224.8.124 (10.224.8.124) from 10.41.43.46: 56 data bytes
+64 bytes from 10.224.8.124: icmp_seq=0 ttl=61 time=16.444 ms
+
+--- 10.224.8.124 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 16.444/16.444/16.444/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01SIN03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:12
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01SIN03          14 BSU-1   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.47                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.47                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.8.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.8.124                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,1::PING:SRC="10.40.43.47",HOST="10.224.8.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:13
+
+PING, SENDING UNIT: BSU-1              
+
+PING 10.224.8.116 (10.224.8.116) from 10.40.43.47: 56 data bytes
+64 bytes from 10.224.8.116: icmp_seq=0 ttl=61 time=19.360 ms
+
+--- 10.224.8.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.360/19.360/19.360/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,1::PING:SRC="10.41.43.47",HOST="10.224.8.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:14
+
+PING, SENDING UNIT: BSU-1              
+
+PING 10.224.8.124 (10.224.8.124) from 10.41.43.47: 56 data bytes
+64 bytes from 10.224.8.124: icmp_seq=0 ttl=61 time=16.413 ms
+
+--- 10.224.8.124 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 16.413/16.413/16.413/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01SIN04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:14
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01SIN04          15 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.33                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.33                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29119
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.8.116                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.8.124                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,2::PING:SRC="10.40.43.33",HOST="10.224.8.116",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:15
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.224.8.116 (10.224.8.116) from 10.40.43.33: 56 data bytes
+64 bytes from 10.224.8.116: icmp_seq=0 ttl=61 time=19.445 ms
+
+--- 10.224.8.116 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.445/19.445/19.445/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,2::PING:SRC="10.41.43.33",HOST="10.224.8.124",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:16
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.224.8.124 (10.224.8.124) from 10.41.43.33: 56 data bytes
+64 bytes from 10.224.8.124: icmp_seq=0 ttl=61 time=11.338 ms
+
+--- 10.224.8.124 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 11.338/11.338/11.338/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01MEG01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:17
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01MEG01          16 BSU-0   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.34                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.34                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.17.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.17.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,0::PING:SRC="10.40.43.34",HOST="10.224.17.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:18
+
+PING, SENDING UNIT: BSU-0              
+
+PING 10.224.17.20 (10.224.17.20) from 10.40.43.34: 56 data bytes
+64 bytes from 10.224.17.20: icmp_seq=0 ttl=61 time=4.954 ms
+
+--- 10.224.17.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.954/4.954/4.954/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,0::PING:SRC="10.41.43.34",HOST="10.224.17.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:19
+
+PING, SENDING UNIT: BSU-0              
+
+PING 10.224.17.28 (10.224.17.28) from 10.41.43.34: 56 data bytes
+64 bytes from 10.224.17.28: icmp_seq=0 ttl=61 time=4.452 ms
+
+--- 10.224.17.28 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.452/4.452/4.452/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01MEG02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:19
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01MEG02          17 BSU-12  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.35                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.35                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.17.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.17.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,12::PING:SRC="10.40.43.35",HOST="10.224.17.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:20
+
+PING, SENDING UNIT: BSU-12             
+
+PING 10.224.17.20 (10.224.17.20) from 10.40.43.35: 56 data bytes
+64 bytes from 10.224.17.20: icmp_seq=0 ttl=61 time=4.965 ms
+
+--- 10.224.17.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.965/4.965/4.965/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,12::PING:SRC="10.41.43.35",HOST="10.224.17.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:21
+
+PING, SENDING UNIT: BSU-12             
+
+PING 10.224.17.28 (10.224.17.28) from 10.41.43.35: 56 data bytes
+
+--- 10.224.17.28 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01MEG03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:32
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01MEG03          18 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.36                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.36                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.17.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.17.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,5::PING:SRC="10.40.43.36",HOST="10.224.17.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:33
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.224.17.20 (10.224.17.20) from 10.40.43.36: 56 data bytes
+64 bytes from 10.224.17.20: icmp_seq=0 ttl=61 time=4.939 ms
+
+--- 10.224.17.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.939/4.939/4.939/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,5::PING:SRC="10.41.43.36",HOST="10.224.17.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:34
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.224.17.28 (10.224.17.28) from 10.41.43.36: 56 data bytes
+64 bytes from 10.224.17.28: icmp_seq=0 ttl=61 time=4.477 ms
+
+--- 10.224.17.28 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.477/4.477/4.477/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01MEG04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:35
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01MEG04          19 BSU-7   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.37                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.37                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.17.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.17.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,7::PING:SRC="10.40.43.37",HOST="10.224.17.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:35
+
+PING, SENDING UNIT: BSU-7              
+
+PING 10.224.17.20 (10.224.17.20) from 10.40.43.37: 56 data bytes
+64 bytes from 10.224.17.20: icmp_seq=0 ttl=61 time=4.942 ms
+
+--- 10.224.17.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.942/4.942/4.942/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,7::PING:SRC="10.41.43.37",HOST="10.224.17.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:36
+
+PING, SENDING UNIT: BSU-7              
+
+PING 10.224.17.28 (10.224.17.28) from 10.41.43.37: 56 data bytes
+64 bytes from 10.224.17.28: icmp_seq=0 ttl=61 time=4.504 ms
+
+--- 10.224.17.28 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 4.504/4.504/4.504/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01TRI01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:37
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01TRI01          20 BSU-8   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.38                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.38                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.16.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.16.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,8::PING:SRC="10.40.43.38",HOST="10.224.16.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:38
+
+PING, SENDING UNIT: BSU-8              
+
+PING 10.224.16.20 (10.224.16.20) from 10.40.43.38: 56 data bytes
+64 bytes from 10.224.16.20: icmp_seq=0 ttl=61 time=16.553 ms
+
+--- 10.224.16.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 16.553/16.553/16.553/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,8::PING:SRC="10.41.43.38",HOST="10.224.16.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:38
+
+PING, SENDING UNIT: BSU-8              
+
+PING 10.224.16.28 (10.224.16.28) from 10.41.43.38: 56 data bytes
+
+--- 10.224.16.28 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01TRI02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:50
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01TRI02          21 BSU-3   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.39                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.39                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.16.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.16.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,3::PING:SRC="10.40.43.39",HOST="10.224.16.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:51
+
+PING, SENDING UNIT: BSU-3              
+
+PING 10.224.16.20 (10.224.16.20) from 10.40.43.39: 56 data bytes
+64 bytes from 10.224.16.20: icmp_seq=0 ttl=61 time=9.500 ms
+
+--- 10.224.16.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.500/9.500/9.500/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,3::PING:SRC="10.41.43.39",HOST="10.224.16.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:38:51
+
+PING, SENDING UNIT: BSU-3              
+
+PING 10.224.16.28 (10.224.16.28) from 10.41.43.39: 56 data bytes
+
+--- 10.224.16.28 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01TRI03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:03
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01TRI03          22 BSU-10  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.40                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.40                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.16.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.16.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,10::PING:SRC="10.40.43.40",HOST="10.224.16.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:04
+
+PING, SENDING UNIT: BSU-10             
+
+PING 10.224.16.20 (10.224.16.20) from 10.40.43.40: 56 data bytes
+64 bytes from 10.224.16.20: icmp_seq=0 ttl=61 time=9.610 ms
+
+--- 10.224.16.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.610/9.610/9.610/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,10::PING:SRC="10.41.43.40",HOST="10.224.16.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:04
+
+PING, SENDING UNIT: BSU-10             
+
+PING 10.224.16.28 (10.224.16.28) from 10.41.43.40: 56 data bytes
+
+--- 10.224.16.28 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01TRI04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:16
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01TRI04          23 BSU-11  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.41                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.41                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.16.20                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.16.28                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,11::PING:SRC="10.40.43.41",HOST="10.224.16.20",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:17
+
+PING, SENDING UNIT: BSU-11             
+
+PING 10.224.16.20 (10.224.16.20) from 10.40.43.41: 56 data bytes
+64 bytes from 10.224.16.20: icmp_seq=0 ttl=61 time=9.463 ms
+
+--- 10.224.16.20 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.463/9.463/9.463/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,11::PING:SRC="10.41.43.41",HOST="10.224.16.28",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:18
+
+PING, SENDING UNIT: BSU-11             
+
+PING 10.224.16.28 (10.224.16.28) from 10.41.43.41: 56 data bytes
+
+--- 10.224.16.28 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ARA01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:29
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ARA01          24 BSU-1   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.47                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.47                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.22.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.22.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,1::PING:SRC="10.40.43.47",HOST="10.224.22.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:30
+
+PING, SENDING UNIT: BSU-1              
+
+PING 10.224.22.66 (10.224.22.66) from 10.40.43.47: 56 data bytes
+64 bytes from 10.224.22.66: icmp_seq=0 ttl=61 time=19.150 ms
+
+--- 10.224.22.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.150/19.150/19.150/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,1::PING:SRC="10.41.43.47",HOST="10.224.22.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:31
+
+PING, SENDING UNIT: BSU-1              
+
+PING 10.224.22.74 (10.224.22.74) from 10.41.43.47: 56 data bytes
+64 bytes from 10.224.22.74: icmp_seq=0 ttl=61 time=19.904 ms
+
+--- 10.224.22.74 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.904/19.904/19.904/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ARA02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:31
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ARA02          25 BSU-15  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.45                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.45                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.22.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.22.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,15::PING:SRC="10.40.43.45",HOST="10.224.22.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:32
+
+PING, SENDING UNIT: BSU-15             
+
+PING 10.224.22.66 (10.224.22.66) from 10.40.43.45: 56 data bytes
+64 bytes from 10.224.22.66: icmp_seq=0 ttl=61 time=7.786 ms
+
+--- 10.224.22.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 7.786/7.786/7.786/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,15::PING:SRC="10.41.43.45",HOST="10.224.22.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:33
+
+PING, SENDING UNIT: BSU-15             
+
+PING 10.224.22.74 (10.224.22.74) from 10.41.43.45: 56 data bytes
+
+--- 10.224.22.74 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ARA03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:45
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ARA03          26 BSU-0   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.34                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.34                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.22.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.22.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,0::PING:SRC="10.40.43.34",HOST="10.224.22.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:45
+
+PING, SENDING UNIT: BSU-0              
+
+PING 10.224.22.66 (10.224.22.66) from 10.40.43.34: 56 data bytes
+64 bytes from 10.224.22.66: icmp_seq=0 ttl=61 time=19.118 ms
+
+--- 10.224.22.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.118/19.118/19.118/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,0::PING:SRC="10.41.43.34",HOST="10.224.22.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:46
+
+PING, SENDING UNIT: BSU-0              
+
+PING 10.224.22.74 (10.224.22.74) from 10.41.43.34: 56 data bytes
+64 bytes from 10.224.22.74: icmp_seq=0 ttl=61 time=19.540 ms
+
+--- 10.224.22.74 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.540/19.540/19.540/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME01ARA04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:47
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME01ARA04          27 BSU-14  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.44                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.44                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.22.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.22.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,14::PING:SRC="10.40.43.44",HOST="10.224.22.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:48
+
+PING, SENDING UNIT: BSU-14             
+
+PING 10.224.22.66 (10.224.22.66) from 10.40.43.44: 56 data bytes
+64 bytes from 10.224.22.66: icmp_seq=0 ttl=61 time=7.865 ms
+
+--- 10.224.22.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 7.865/7.865/7.865/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,14::PING:SRC="10.41.43.44",HOST="10.224.22.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:39:49
+
+PING, SENDING UNIT: BSU-14             
+
+PING 10.224.22.74 (10.224.22.74) from 10.41.43.44: 56 data bytes
+
+--- 10.224.22.74 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME02TRI01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:00
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME02TRI01          28 BSU-6   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.46                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.46                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.25.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.25.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,6::PING:SRC="10.40.43.46",HOST="10.224.25.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:01
+
+PING, SENDING UNIT: BSU-6              
+
+PING 10.224.25.66 (10.224.25.66) from 10.40.43.46: 56 data bytes
+64 bytes from 10.224.25.66: icmp_seq=0 ttl=61 time=9.346 ms
+
+--- 10.224.25.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.346/9.346/9.346/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,6::PING:SRC="10.41.43.46",HOST="10.224.25.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:02
+
+PING, SENDING UNIT: BSU-6              
+
+PING 10.224.25.74 (10.224.25.74) from 10.41.43.46: 56 data bytes
+64 bytes from 10.224.25.74: icmp_seq=0 ttl=61 time=9.536 ms
+
+--- 10.224.25.74 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.536/9.536/9.536/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME02TRI02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:03
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME02TRI02          29 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.43                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.43                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.25.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.25.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,13::PING:SRC="10.40.43.43",HOST="10.224.25.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:03
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.224.25.66 (10.224.25.66) from 10.40.43.43: 56 data bytes
+64 bytes from 10.224.25.66: icmp_seq=0 ttl=61 time=9.356 ms
+
+--- 10.224.25.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.356/9.356/9.356/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,13::PING:SRC="10.41.43.43",HOST="10.224.25.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:04
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.224.25.74 (10.224.25.74) from 10.41.43.43: 56 data bytes
+
+--- 10.224.25.74 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME02TRI03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:16
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME02TRI03          30 BSU-3   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.39                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.39                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.25.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.25.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,3::PING:SRC="10.40.43.39",HOST="10.224.25.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:16
+
+PING, SENDING UNIT: BSU-3              
+
+PING 10.224.25.66 (10.224.25.66) from 10.40.43.39: 56 data bytes
+64 bytes from 10.224.25.66: icmp_seq=0 ttl=61 time=9.323 ms
+
+--- 10.224.25.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.323/9.323/9.323/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,3::PING:SRC="10.41.43.39",HOST="10.224.25.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:17
+
+PING, SENDING UNIT: BSU-3              
+
+PING 10.224.25.74 (10.224.25.74) from 10.41.43.39: 56 data bytes
+64 bytes from 10.224.25.74: icmp_seq=0 ttl=61 time=9.394 ms
+
+--- 10.224.25.74 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.394/9.394/9.394/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=MME02TRI04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:18
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+MME02TRI04          31 BSU-12  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.35                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.35                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.224.25.66                               
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.224.25.74                               
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,12::PING:SRC="10.40.43.35",HOST="10.224.25.66",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:19
+
+PING, SENDING UNIT: BSU-12             
+
+PING 10.224.25.66 (10.224.25.66) from 10.40.43.35: 56 data bytes
+64 bytes from 10.224.25.66: icmp_seq=0 ttl=61 time=9.245 ms
+
+--- 10.224.25.66 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.245/9.245/9.245/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,12::PING:SRC="10.41.43.35",HOST="10.224.25.74",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:20
+
+PING, SENDING UNIT: BSU-12             
+
+PING 10.224.25.74 (10.224.25.74) from 10.41.43.35: 56 data bytes
+
+--- 10.224.25.74 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM01ALK01:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:31
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM01ALK01          32 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.33                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.33                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.224.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.225.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,2::PING:SRC="10.40.43.33",HOST="10.229.224.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:32
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.229.224.165 (10.229.224.165) from 10.40.43.33: 56 data bytes
+64 bytes from 10.229.224.165: icmp_seq=0 ttl=59 time=18.806 ms
+
+--- 10.229.224.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 18.806/18.806/18.806/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,2::PING:SRC="10.41.43.33",HOST="10.229.225.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:33
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.229.225.165 (10.229.225.165) from 10.41.43.33: 56 data bytes
+64 bytes from 10.229.225.165: icmp_seq=0 ttl=59 time=19.645 ms
+
+--- 10.229.225.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.645/19.645/19.645/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM01ALK02:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:33
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM01ALK02          33 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.36                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.36                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.224.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.225.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,5::PING:SRC="10.41.43.36",HOST="10.229.224.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:34
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.229.224.165 (10.229.224.165) from 10.41.43.36: 56 data bytes
+64 bytes from 10.229.224.165: icmp_seq=0 ttl=59 time=19.050 ms
+
+--- 10.229.224.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.050/19.050/19.050/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,5::PING:SRC="10.40.43.36",HOST="10.229.225.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:35
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.229.225.165 (10.229.225.165) from 10.40.43.36: 56 data bytes
+64 bytes from 10.229.225.165: icmp_seq=0 ttl=59 time=18.853 ms
+
+--- 10.229.225.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 18.853/18.853/18.853/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM01ALK03:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:36
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM01ALK03          34 BSU-9   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.42                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.42                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.224.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.225.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,9::PING:SRC="10.41.43.42",HOST="10.229.224.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:36
+
+PING, SENDING UNIT: BSU-9              
+
+PING 10.229.224.165 (10.229.224.165) from 10.41.43.42: 56 data bytes
+64 bytes from 10.229.224.165: icmp_seq=0 ttl=59 time=19.637 ms
+
+--- 10.229.224.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 19.637/19.637/19.637/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,9::PING:SRC="10.40.43.42",HOST="10.229.225.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:37
+
+PING, SENDING UNIT: BSU-9              
+
+PING 10.229.225.165 (10.229.225.165) from 10.40.43.42: 56 data bytes
+64 bytes from 10.229.225.165: icmp_seq=0 ttl=59 time=18.876 ms
+
+--- 10.229.225.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 18.876/18.876/18.876/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM01ALK04:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:38
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM01ALK04          35 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.43                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.43                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.224.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.225.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,13::PING:SRC="10.40.43.43",HOST="10.229.224.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:39
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.229.224.165 (10.229.224.165) from 10.40.43.43: 56 data bytes
+64 bytes from 10.229.224.165: icmp_seq=0 ttl=59 time=16.561 ms
+
+--- 10.229.224.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 16.561/16.561/16.561/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,13::PING:SRC="10.41.43.43",HOST="10.229.225.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:40
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.229.225.165 (10.229.225.165) from 10.41.43.43: 56 data bytes
+
+--- 10.229.225.165 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM03TRI1:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:51
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM03TRI1           36 BSU-2   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.33                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.33                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.234.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.235.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,2::PING:SRC="10.40.43.33",HOST="10.229.234.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:52
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.229.234.165 (10.229.234.165) from 10.40.43.33: 56 data bytes
+64 bytes from 10.229.234.165: icmp_seq=0 ttl=59 time=9.642 ms
+
+--- 10.229.234.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.642/9.642/9.642/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,2::PING:SRC="10.41.43.33",HOST="10.229.235.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:53
+
+PING, SENDING UNIT: BSU-2              
+
+PING 10.229.235.165 (10.229.235.165) from 10.41.43.33: 56 data bytes
+64 bytes from 10.229.235.165: icmp_seq=0 ttl=59 time=9.599 ms
+
+--- 10.229.235.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.599/9.599/9.599/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM03TRI2:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:54
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM03TRI2           37 BSU-5   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.36                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.36                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.234.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.235.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,5::PING:SRC="10.41.43.36",HOST="10.229.234.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:55
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.229.234.165 (10.229.234.165) from 10.41.43.36: 56 data bytes
+64 bytes from 10.229.234.165: icmp_seq=0 ttl=59 time=10.144 ms
+
+--- 10.229.234.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 10.144/10.144/10.144/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,5::PING:SRC="10.40.43.36",HOST="10.229.235.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:56
+
+PING, SENDING UNIT: BSU-5              
+
+PING 10.229.235.165 (10.229.235.165) from 10.40.43.36: 56 data bytes
+64 bytes from 10.229.235.165: icmp_seq=0 ttl=59 time=9.742 ms
+
+--- 10.229.235.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.742/9.742/9.742/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM03TRI3:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:56
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM03TRI3           38 BSU-9   SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.41.43.42                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.40.43.42                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.234.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.235.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,9::PING:SRC="10.41.43.42",HOST="10.229.234.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:57
+
+PING, SENDING UNIT: BSU-9              
+
+PING 10.229.234.165 (10.229.234.165) from 10.41.43.42: 56 data bytes
+64 bytes from 10.229.234.165: icmp_seq=0 ttl=59 time=9.558 ms
+
+--- 10.229.234.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.558/9.558/9.558/nan ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,9::PING:SRC="10.40.43.42",HOST="10.229.235.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:58
+
+PING, SENDING UNIT: BSU-9              
+
+PING 10.229.235.165 (10.229.235.165) from 10.40.43.42: 56 data bytes
+64 bytes from 10.229.235.165: icmp_seq=0 ttl=59 time=9.949 ms
+
+--- 10.229.235.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.949/9.949/9.949/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZOYV:SGSAP:NAME=CMM03TRI4:A;
+
+LOADING PROGRAM VERSION 9.52-0
+
+MSCi      MSS04CAL                  2023-11-23  12:40:59
+
+INTERROGATING SCTP ASSOCIATION DATA
+
+SCTP ASSOCIATION ASSOC         SCTP         PARAMETER SET
+NAME             IND   UNIT    USER  ROLE   NAME             STATE
+---------------- ----- ------- ----- ------ ---------------- -------------
+CMM03TRI4           39 BSU-13  SGSAP SERVER SGS              ASP-ACTIVE    
+
+    SOURCE IPV4 ADDRESS 1  . . . . : 10.40.43.43                                
+    SOURCE IPV6 ADDRESS 1  . . . . :                                            
+    SOURCE IPV4 ADDRESS 2  . . . . : 10.41.43.43                                
+    SOURCE IPV6 ADDRESS 2  . . . . :                                            
+    SOURCE PORT  . . . . . . . . . : 29118
+    PRIMARY DEST. IPV4 ADDRESS . . : 10.229.234.165                             
+    PRIMARY DEST. IPV6 ADDRESS . . :                                            
+    SECONDARY DEST. IPV4 ADDRESS . : 10.229.235.165                             
+    SECONDARY DEST. IPV6 ADDRESS . :                                            
+    DESTINATION PORT . . . . . . . : EPHEMERAL
+
+    MAX. DATA STREAM COUNT . . . . : 16
+    SPECIFICATION VERSION  . . . . : 1               
+
+COMMAND EXECUTED
+
+
+SCTP CONFIGURATION HANDLING COMMAND <OY_>
+<  ZQRX:BSU,13::PING:SRC="10.40.43.43",HOST="10.229.234.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:41:00
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.229.234.165 (10.229.234.165) from 10.40.43.43: 56 data bytes
+64 bytes from 10.229.234.165: icmp_seq=0 ttl=59 time=9.755 ms
+
+--- 10.229.234.165 ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 9.755/9.755/9.755/0.000 ms
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  ZQRX:BSU,13::PING:SRC="10.41.43.43",HOST="10.229.235.165",;
+
+LOADING PROGRAM VERSION 27.90-0
+
+MSCi      MSS04CAL                  2023-11-23  12:41:00
+
+PING, SENDING UNIT: BSU-13             
+
+PING 10.229.235.165 (10.229.235.165) from 10.41.43.43: 56 data bytes
+
+--- 10.229.235.165 ping statistics ---
+1 packets transmitted, 0 packets received, 100% packet loss
+COMMAND EXECUTED
+
+
+TCP/IP STACK DATA HANDLING COMMAND <QR_>
+<  

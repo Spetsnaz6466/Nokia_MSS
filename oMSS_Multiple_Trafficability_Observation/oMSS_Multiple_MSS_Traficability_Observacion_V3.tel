@@ -1,0 +1,42 @@
+function oMSS_Multiple_Traficability_Observation()
+  string filename,PCTime,Tel[],A,B,line,CG2,CG3,CG4,CG5,Temp[];
+  string LLAMADAS,PORCENTAJE,HORA;
+  integer handle,m,n;
+ 
+  // Esta macro pertenece a Juan Castillo, solicitar su uso 
+  
+  //cantidad de MSS a revisar
+  m=3;
+  
+  // Listado de todos los posibles MSS a monitorear
+  Tel[1]="MSSMGA02";  Tel[2]="MSS05MED";  Tel[3]="MSS03MED";  
+  Tel[4]="MSS03MED";  Tel[5]="MSSMGA01";  Tel[6]="MSSTRI02";  
+  Tel[7]="MSS06VEN";  Tel[8]="MSS04VEN";
+  
+  //pause(0,"Before executing this macro Login in");
+  //ask(m,"Ingrese cuantos MSS a monitorear ? ");
+  //for(n=1; n<=m; n++) ask(Tel[n],"INGRESE ssh oMSS ? "); Tel[n]=strupper(Tel[n]); endfor
+  
+  PCTime = getpctime(1); strscan(PCTime,"%s %s",A,B);  print("HORA DE INICIO DE MACRO: %s\n",PCTime); 
+  B=strreplace(B,":","-"); PCTime = A + "_" + B;   
+  filename= "oMSS_MULTIPLE_TRAFICABILITY_" + PCTime + "_.TXT" ; 
+  handle = fileopen(filename,NEW); fileclose(handle); logenable(LOG_ENABLE_ALL); logset(filename,APPEND); 
+  
+  while(1) 
+   for(n=1; n<=m; n++)  
+    device(Tel[n]); 
+    tx("ZTUT:CLR;"); tx("ZTUT:TRF;"); 
+    if(getline(line," '%s' ",Tel[n])) strscan(line,"%s %s %s %s",HORA,HORA,HORA,HORA); endif 
+    if(getline(line," 'CLEAR CODE GROUP 1' ")) 
+      strscan(line,"%s %s",LLAMADAS,PORCENTAJE); Temp[n]=HORA+" " + Tel[n] + " CC-GRP1 " + PORCENTAJE + " CALLS " +LLAMADAS;  endif     
+    if(getline(line," 'CLEAR CODE GROUP 2' ")) strscan(line,"%s %s",CG2,CG2); Temp[n]= Temp[n] + " CC-GRP2 " + CG2; endif 
+    if(getline(line," 'CLEAR CODE GROUP 3' ")) strscan(line,"%s %s",CG3,CG3); Temp[n]= Temp[n] + " CC-GRP3 " + CG3; endif 
+    if(getline(line," 'CLEAR CODE GROUP 4' ")) strscan(line,"%s %s",CG4,CG4); Temp[n]= Temp[n] + " CC-GRP4 " + CG4;  endif 
+    if(getline(line," 'CLEAR CODE GROUP 5' ")) strscan(line,"%s %s",CG5,CG5); Temp[n]= Temp[n] + " CC-GRP5 " + CG5;  endif 
+   endfor
+   for(n=1; n<=m; n++) print("%s\n",Temp[n]); endfor
+   pause(600);
+  endwhile
+ 
+
+endfunction
